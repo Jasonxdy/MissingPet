@@ -280,9 +280,6 @@ public class FreeController extends HttpServlet {
 	    	  String searchKey = request.getParameter("searchKey");
 	    	  String searchValue = request.getParameter("searchValue");
 	    	  
-	            System.out.println("선택 옵션 : " + searchKey);
-	            System.out.println("검색 내용 : " + searchValue);
-	    	  
 	    	  try {
 	    		  
 	    		  List<BoardEH>blist = FreeService.searchFree(searchKey,searchValue);

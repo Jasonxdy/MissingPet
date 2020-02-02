@@ -5,8 +5,8 @@
       <%@page import="com.kh.semiproject.free.model.vo.Free"%>
     <%@page import="com.kh.semiproject.board.model.vo.Img"%>
     
+    
  <%
-	
  	BoardEH board = (BoardEH)request.getAttribute("board");
  	Free free = (Free)request.getAttribute("free");
  	Member member = (Member)request.getAttribute("member");
@@ -27,13 +27,10 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/copy5.css">
 
     
-    <!--  -->
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" 
+    crossorigin="anonymous"></script>
     
-
-
-
-
-
     
 </head>
 <body>

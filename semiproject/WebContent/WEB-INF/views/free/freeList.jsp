@@ -94,12 +94,12 @@ int endPage = pInf.getEndPage();
                           </thead>
                           <tbody>
                             <tr>
-                              <th scope="row">104</th>
-                              <td>공지</td>
-                              <td>미씽펫 오픈했습니다</td>
-                              <td>관리자</td>
-                              <td>1000</td>
-                              <td>2020-01-01</td>
+                              <td><b>104</b></td>
+                              <td><b>공지</b></td>
+                              <td><b>미씽펫 오픈했습니다</b></td>
+                              <td><b>관리자</b></td>
+                              <td><b>1000</b></td>
+                              <td><b>2020-01-01</b></td>
                             </tr>
                           
                            <% if(blist.isEmpty() && flist.isEmpty()) {%>
