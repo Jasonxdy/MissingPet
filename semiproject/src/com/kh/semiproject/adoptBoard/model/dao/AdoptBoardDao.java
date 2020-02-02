@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.semiproject.adoptBoard.model.vo.AdoptBoard;
+import com.kh.semiproject.board.model.vo.Animal;
 import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 
 public class AdoptBoardDao {
@@ -139,6 +140,34 @@ public class AdoptBoardDao {
 		}
 		
 		return adoptBoard;
+	}
+
+	/** 분양합니다 동물 수정용 Dao
+	 * @param conn
+	 * @param animal
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateAdoptAnimal(Connection conn, Animal animal, int boardNo) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateAdoptAnimal");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, animal.getAnimalGender());
+			pstmt.setString(2, animal.getAnimalType());
+			pstmt.setString(3, animal.getAnimalBreed());
+			pstmt.setInt(4, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
