@@ -409,6 +409,35 @@ public class ReviewDAO {
 		}
 		return result;
 	}
+
+	public String[] checkTell(Connection conn, String boardWriter) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String[] tell = new String[2];
+		
+		String query = prop.getProperty("checkTell");
+		
+		try {
+			
+			pstmt = conn.prepareCall(query);
+			pstmt.setString(1, boardWriter);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				tell[0] = rset.getString(1);
+				tell[1] = rset.getString(2);
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return tell;
+	}
 }
 
 

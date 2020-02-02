@@ -183,6 +183,9 @@
 		var boardNo = <%= review.getBoardNo() %>;
 		var content = $("#commContent").val();
 		
+		// 댓글 등록 시 해당 글 작성자가 댓글 알림 설정했는지 확인
+		var boardWriter = <%= review.getMemberId() %>
+		
 		// 로그인 검사
 		<% if(loginMember == null){ %>
 			alert("로그인 후 이용해 주세요.");
@@ -194,7 +197,7 @@
 				url: "insertComment", // url은 필수 속성!!
 				type: "post",
 				data: {writer: writer, 	// key는 ""가 포함된 문자열
-					   content: content, boardNo: boardNo},
+					   content: content, boardNo: boardNo, boardWriter:boardWriter},
 				success: function(result){ // result에 서버의 응답이 담겨서 넘어온다
 					if(!content.trim().length == 0){
 						if(result>0){

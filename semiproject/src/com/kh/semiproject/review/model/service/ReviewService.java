@@ -219,6 +219,23 @@ public class ReviewService {
 		close(conn);
 		return result;
 	}
+
+	
+	
+	public int checkTell(String boardWriter) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		String[] checkYN = new ReviewDAO().checkTell(conn, boardWriter);
+		
+		int check = 0;
+		
+		if(checkYN[0] == "Y" && checkYN[1] == "Y") {
+			check = 1;
+		}
+				
+		return check;
+	}
 }
 
 
