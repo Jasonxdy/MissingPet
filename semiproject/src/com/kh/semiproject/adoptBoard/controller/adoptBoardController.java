@@ -260,6 +260,47 @@ public class adoptBoardController extends HttpServlet {
 				ExceptionForward.errorPage(request, response, "게시글 등록", e);
 			}
 		}
+		
+		else if(command.equals("/updateForm")) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			try {
+				BoardHJ board = boardService.updateForm(no);
+				
+				if(board != null) {
+					List<Attachment> files = boardService.selectFiles(no);
+					
+					AdoptBoard adoptBoard = adoptBoardService.selectAdoptBoard(no);
+					
+					int animalCode = adoptBoard.getAnimalCode();
+					
+					Animal animal = boardService.selectAnimal(animalCode);
+					
+					String memberId = board.getBoardWriter();
+					
+					Member member = memberService.selectMember(memberId);
+					
+					Map map = new MapService().selectMap(no);
+					
+					if(!files.isEmpty()) {
+						request.setAttribute("files", files);
+					}
+					request.setAttribute("adoptBoard", adoptBoard);
+					request.setAttribute("animal", animal);
+					request.setAttribute("board", board);
+					request.setAttribute("member", member);
+					request.setAttribute("map", map);
+					
+					path = "/WEB-INF/views/adoptBoard/adoptBoardUpdate.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				} else {
+					request.getSession().setAttribute("msg", "게시판 수정 화면 출력");
+				}
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시글 등록", e);
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

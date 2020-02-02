@@ -1,4 +1,3 @@
-<%@page import="com.kh.semiproject.board.model.vo.BoardHJ"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.kh.semiproject.board.model.vo.Attachment"%>
@@ -7,6 +6,7 @@
 <%@page import="com.kh.semiproject.seeBoard.model.vo.SeeBoard"%>
 <%@page import="com.kh.semiproject.member.model.vo.Member"%>
 <%@page import="com.kh.semiproject.map.model.vo.Map"%>
+<%@page import="com.kh.semiproject.board.model.vo.BoardHJ"%>
 
 <%
 	BoardHJ board = (BoardHJ)request.getAttribute("board");
