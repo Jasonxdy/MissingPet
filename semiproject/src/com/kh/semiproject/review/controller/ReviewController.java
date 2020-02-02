@@ -18,8 +18,12 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.semiproject.board.model.vo.Animal;
+import com.kh.semiproject.board.model.vo.Attachment;
+import com.kh.semiproject.board.model.vo.BoardHJ;
 import com.kh.semiproject.common.ExceptionForward;
 import com.kh.semiproject.common.proImgRenamePolicy;
+import com.kh.semiproject.findBoard.model.vo.FindBoard;
 import com.kh.semiproject.member.model.vo.Member;
 import com.kh.semiproject.review.model.service.ReviewService;
 import com.kh.semiproject.review.model.vo.Comment;
@@ -406,6 +410,72 @@ public class ReviewController extends HttpServlet {
 				ExceptionForward.errorPage(request, response, "신고하기", e);
 			}
 					
+		}
+		
+		else if(command.contentEquals("/searchList")) {
+			String searchKey = request.getParameter("searchKey");
+			String searchValue = request.getParameter("searchValue");
+
+			String condition = null;
+			
+			searchValue = "'%' || '" + searchValue + "' || '%' ";
+			
+			switch(searchKey) {
+			case "title": condition =  " BOARD_TITLE LIKE " + searchValue; break;
+			case "content": condition =  " BOARD_CONTENT LIKE " + searchValue; break;
+			case "titcont": condition =  " (BOARD_CONTENT LIKE" + searchValue + " OR BOARD_TITLE LIKE " + searchValue +")"; break;
+			case "writer" : condition = " MEM_NAME LIKE " + searchValue; break;
+			}
+			try {
+				int boardType = 4;
+				int listCount = reviewService.getListCount();
+				
+				int limit = 5;
+				int pagingBarSize = 5;
+				
+				int currentPage = 0;	
+				int maxPage = 0;		
+				int startPage = 0;		
+				int endPage = 0;
+				
+				if(request.getParameter("currentPage") == null) {
+					currentPage = 1;
+				} else {
+					currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				}
+				
+				int startRow = (currentPage -1) * limit + 1;
+				int endRow = startRow + limit -1;
+				
+				maxPage = (int)Math.ceil( ( (double)listCount / limit ) );
+				startPage = (currentPage -1) / pagingBarSize * pagingBarSize +1;
+				endPage = startPage + pagingBarSize - 1;
+				if(maxPage <= endPage) {
+					endPage = maxPage;
+				}
+				
+				PageInfo pInfo = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
+				
+				List<Review> rList = reviewService.searchReviewList(startRow, endRow, boardType, condition);
+//				
+//				List<Attachment> aList = boardService.searchAList(startRow, endRow, boardType, condition);
+//				
+//				List<Animal> animalList = boardService.searchAnimalList(startRow, endRow, boardType, condition);
+//				
+//				List<FindBoard> fList = findBoardService.searchFindList(startRow, endRow, boardType, condition);
+				
+				path = "/WEB-INF/views/findBoard/findBoardSearchList.jsp";
+//				request.setAttribute("pInf", pInfo);
+//				request.setAttribute("bList", bList);
+//				request.setAttribute("aList", aList);
+//				request.setAttribute("animalList", animalList);
+//				request.setAttribute("fList", fList);
+				
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시판 검색", e);
+			}
 		}
 	}
 

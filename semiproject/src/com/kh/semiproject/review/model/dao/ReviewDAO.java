@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -415,6 +416,42 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<Review> searchReviewList(Connection conn, int startRow, int endRow, int boardType, String condition) throws Exception {
+		PreparedStatement pstmt = null; 
+		ResultSet rset = null;
+		List<Review> rList = null;
+		
+		String query1 = prop.getProperty("searchReviewList1");
+		String query2 = prop.getProperty("searchReviewList2");
+		
+		try {
+			pstmt = conn.prepareStatement(query1+condition+query2);
+			pstmt.setInt(1, boardType);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			rList = new ArrayList<Review>();
+			Review review = null;
+			
+			while(rset.next()) {
+				review = new Review(rset.getInt("BOARD_NO"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getDate("BOARD_MODIFY_DT"),
+						rset.getInt("BOARD_COUNT"),
+						rset.getString("MEM_ID"),
+						rset.getInt("RNUM"));
+				rList.add(review);
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rList;
 	}
 }
 

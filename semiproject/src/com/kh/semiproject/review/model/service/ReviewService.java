@@ -1,7 +1,10 @@
 package com.kh.semiproject.review.model.service;
 
 
-import static com.kh.semiproject.common.JDBCTemplate.*;
+import static com.kh.semiproject.common.JDBCTemplate.close;
+import static com.kh.semiproject.common.JDBCTemplate.commit;
+import static com.kh.semiproject.common.JDBCTemplate.getConnection;
+import static com.kh.semiproject.common.JDBCTemplate.rollback;
 
 import java.io.File;
 import java.sql.Connection;
@@ -218,6 +221,16 @@ public class ReviewService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+
+	public List<Review> searchReviewList(int startRow, int endRow, int boardType, String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Review> rList = new ReviewDAO().searchReviewList(conn, startRow, endRow, boardType, condition);
+		
+		close(conn);
+		
+		return rList;
 	}
 }
 

@@ -143,13 +143,16 @@
 
                     <!--하단-->
                     <div id="bottom-bar">
-                      <select class="custom-select" style="font-size: 12px;">
-                        <option value="제목" selected>제목</option>
-                        <option value="글쓴이">글쓴이</option>
-                        <option value="말머리">말머리</option>
+                    <form class="input-group" method="GET" action="searchList" id="searchForm">
+                      <select class="custom-select" name="searchKey" style="font-size: 12px;">
+                        <option value="title" selected>제목</option>
+                        <option value="content">내용</option>
+                        <option value="titcont">제목+내용</option>
+                        <option value="writer">작성자</option>
                       </select>
-                      <input id="text-tt" type="text" name="text">
+                      <input id="text-tt" type="text" name="searchValue">
                       <button type="submit">검색</button>
+                      </form>
                       <div id="num">
                         <ul class="pagination">
                           <% if(currentPage > 1) { %>
