@@ -201,4 +201,55 @@ public class AdoptBoardService {
 		return result;
 	}
 
+	/** 분양합니다 게시글 삭제용 Service
+	 * @param no
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteAdoptBoard(int no) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(conn, no);
+		
+		if(result>0) {
+			result = 0;
+			
+			result = new BoardDao().deleteAttachment(conn, no);
+			if(result>0) {
+				result = 0;
+				
+				result = new AdoptBoardDao().adoptDeleteAnimal(conn, no);
+				if(result>0) {
+					commit(conn);
+				}
+			}
+		} else {
+			rollback(conn);
+		}
+			
+		close(conn);
+		return result;
+	}
+
+	public List<AdoptBoard> searchAdoptList(int startRow, int endRow, int boardType, String condition, String doneCheck1, String doneCheck2) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition2 = null;
+		
+		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
+			condition2 = "AND ANIMAL_STATUS='Y' OR ANIMAL_STATUS='N'";
+		} else if(doneCheck1.equals("Y") && doneCheck2.equals("N")) {
+			condition2 = "AND ANIMAL_STATUS='Y'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("Y")) {
+			condition2= "AND ANIMAL_STATUS='N'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("N")) {
+			condition2= "AND ANIMAL_STATUS='C'";
+		}
+		
+		ArrayList<AdoptBoard> adoptList = new AdoptBoardDao().searchFindList(conn, startRow, endRow, boardType, condition, condition2);
+		
+		close(conn);
+		return adoptList;
+	}
+
 }

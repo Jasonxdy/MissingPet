@@ -407,6 +407,98 @@ public class adoptBoardController extends HttpServlet {
 				ExceptionForward.errorPage(request, response, "게시글 수정", e);
 			}
 		}
+		
+		else if(command.equals("/delete")) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			
+			try {
+				int result = adoptBoardService.deleteAdoptBoard(no);
+				
+				if(result>0) {
+					msg = "게시글이 삭제되었습니다.";
+					path = "boardList";
+				}
+				else {
+					msg = "게시글 삭제 실패";
+					path = "detail?no="+no;
+				}
+				
+				request.getSession().setAttribute("msg", msg);
+				response.sendRedirect(path);
+				
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시글 수정", e);
+			}
+		}
+		
+		else if(command.contentEquals("/searchList")) {
+			String searchKey = request.getParameter("searchKey");
+			String searchValue = request.getParameter("searchValue");
+			String doneCheck1 = request.getParameter("doneCheck1");
+			String doneCheck2 = request.getParameter("doneCheck2");
+
+			String condition = null;
+			
+			searchValue = "'%' || '" + searchValue + "' || '%' ";
+			
+			switch(searchKey) {
+			case "title": condition =  " BOARD_TITLE LIKE " + searchValue; break;
+			case "content": condition =  " BOARD_CONTENT LIKE " + searchValue; break;
+			case "titcont": condition =  " (BOARD_CONTENT LIKE" + searchValue + " OR BOARD_TITLE LIKE " + searchValue +")"; break;
+			case "writer" : condition = " MEM_NAME LIKE " + searchValue; break;
+			}
+			try {
+				int boardType = 3;
+				int listCount = boardService.getSearchListCount(condition, boardType);
+				
+				int limit = 1;
+				int pagingBarSize = 10;
+				
+				int currentPage = 0;	
+				int maxPage = 0;		
+				int startPage = 0;		
+				int endPage = 0;
+				
+				if(request.getParameter("currentPage") == null) {
+					currentPage = 1;
+				} else {
+					currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				}
+				
+				int startRow = (currentPage -1) * limit + 1;
+				int endRow = startRow + limit -1;
+				
+				maxPage = (int)Math.ceil( ( (double)listCount / limit ) );
+				startPage = (currentPage -1) / pagingBarSize * pagingBarSize +1;
+				endPage = startPage + pagingBarSize - 1;
+				if(maxPage <= endPage) {
+					endPage = maxPage;
+				}
+				
+				PageInfo pInfo = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
+				
+				List<BoardHJ> bList = boardService.searchBoardList(startRow, endRow, boardType, condition);
+				
+				List<Attachment> aList = boardService.searchAList(startRow, endRow, boardType, condition);
+				
+				List<Animal> animalList = boardService.searchAnimalList(startRow, endRow, boardType, condition);
+				
+				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition, doneCheck1, doneCheck2);
+				
+				
+				path = "/WEB-INF/views/adoptBoard/adoptBoardSearchList.jsp";
+				request.setAttribute("pInf", pInfo);
+				request.setAttribute("bList", bList);
+				request.setAttribute("aList", aList);
+				request.setAttribute("animalList", animalList);
+				request.setAttribute("adoptList", adoptList);
+				
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시판 검색", e);
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

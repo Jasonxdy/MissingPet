@@ -1307,6 +1307,9 @@ public class BoardDao {
 			} else if(boardType==2) {
 				query1 = prop.getProperty("searchSeeAnimalList1");
 				query2 = prop.getProperty("searchSeeAnimalList2");
+			} else if(boardType==3) {
+				query1 = prop.getProperty("searchAdoptAnimalList1");
+				query2 = prop.getProperty("searchAdoptAnimalList2");
 			}
 			
 			try {

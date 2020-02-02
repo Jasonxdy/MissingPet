@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import com.kh.semiproject.adoptBoard.model.vo.AdoptBoard;
 import com.kh.semiproject.board.model.vo.Animal;
+import com.kh.semiproject.findBoard.model.vo.FindBoard;
 import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 
 public class AdoptBoardDao {
@@ -199,6 +200,75 @@ public class AdoptBoardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	/** 입양합니다 게시판 동물코드 삭제용 Dao
+	 * @param conn
+	 * @param no
+	 * @return result
+	 * @throws Exception
+	 */
+	public int adoptDeleteAnimal(Connection conn, int no) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteAdoptAnimal");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/** 분양합니다 게시글 검색용 Dao
+	 * @param conn
+	 * @param startRow
+	 * @param endRow
+	 * @param boardType
+	 * @param condition
+	 * @param condition2
+	 * @return adoptList
+	 * @throws Exception
+	 */
+	public ArrayList<AdoptBoard> searchFindList(Connection conn, int startRow, int endRow, int boardType, String condition, String condition2) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<AdoptBoard> adoptList = null;
+		
+		String query1 = prop.getProperty("searchAdoptList1");
+		String query2 = prop.getProperty("searchAdoptList2");
+		
+		try {
+			pstmt = conn.prepareStatement(query1+condition+condition2+query2);
+			
+			pstmt.setInt(1, boardType);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			adoptList = new ArrayList<AdoptBoard>();
+			AdoptBoard adoptBoard = null;
+			
+			while(rset.next()) {
+				adoptBoard = new AdoptBoard();
+				
+				//findBoard.setBoardNo(rset.getInt("BOARD_NO"));
+				//findBoard.setfBoardLocation(rset.getString("FIND_LOCATION"));
+				//findBoard.setfBoardDate(rset.getDate("FIND_DATE"));
+				//findBoard.setAnimalCode(rset.getInt("ANIMAL_CODE"));
+				
+				adoptList.add(adoptBoard);
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return adoptList;
 	}
 
 }
