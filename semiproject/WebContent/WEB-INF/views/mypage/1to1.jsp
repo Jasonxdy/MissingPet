@@ -83,15 +83,6 @@
                     
                      <% for (Ask ask : aList) { %>
                   	<tr>
-                  	<td style="display:none;">
-                  		<%= ask.getAskNo() %>
-                  	</td>
-                  	<td style="display:none;">
-                  		<%= ask.getAnswerContent() %>
-                  	</td>
-                  	<td style="display:none;">
-                  		<%= ask.getAnswerDate() %>
-                  	</td>
                   	<td>
                   		<%= ask.getAskTitle() %>
                    </td>
@@ -107,12 +98,22 @@
                             <%= ask.getAskModifyDt() %>
                           </span>
                    </td>
+                  	<td style="display:none; width:1%">
+                  		<%= ask.getAskNo() %>
+                  	</td>
+                  	<td style="display:none; width:1%">
+                  		<%= ask.getAnswerContent() %>
+                  	</td>
+                  	<td style="display:none; width:1%">
+                  		<%= ask.getAnswerDate() %>
+                  	</td>
+                   </tr>
                    
                   <% } %>
                   
                     </tbody>
                   </table>
-
+                  
                 <hr>
 
 
@@ -205,18 +206,22 @@
           
 		// 게시글 상세보기 기능 (jquery를 통해 작업)
 		$(function(){
+						
 			$("#list-table td").click(function(){
 				
 				// 답변 미완료인 경우 "답변이 완료되지 않았습니다" 출력
-				var askStatus = $(this).parent().children().eq(4).children().eq(0).text();
+				var askStatus = $(this).parent().children('td').eq(1).children().eq(0).text();
+				
 				
 				if(askStatus == "답변 대기중") {
 					alert("답변이 아직 작성되지 않았습니다.");
 				} else {
 					
-					var answerDate = $(this).parent().children().eq(2).text();
-					var answerContent = $(this).parent().children().eq(1).text();
+					var answerDate = $(this).parent().children().eq(5).text();
+					var answerContent = $(this).parent().children().eq(4).text();
 					
+					console.log(answerDate);
+					console.log(answerContent);
 					
 					
 					$("#answerCreateDate").html("답변 작성일 : " + answerDate);

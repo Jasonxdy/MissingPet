@@ -68,9 +68,9 @@
                 <table class="table table-hover table-striped" id="list-table">
                   <thead>
                     <tr>
-                      <th>게시판</th>
-                      <th>제목</th>
-                      <th>작성일</th>
+                      <th style="width:12%">게시판</th>
+                      <th style="width:73%">제목</th>
+                      <th style="width:15%">작성일</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -96,6 +96,9 @@
                    		<%= board.getBoardModifyDate() %>
                    		</span>
                    </td>
+                   
+                   <td style="display:none; width:1%"><%= board.getBoardNo() %></td>
+                   
                    </tr>
                   <% } %>
                   
@@ -171,9 +174,34 @@
 		// 게시글 상세보기 기능 (jquery를 통해 작업)
 		$(function(){
 			$("#list-table td").click(function(){
-				var boardNo = $(this).parent().children().eq(0).text();
-				// 쿼리스트링을 이용하여 get 방식으로 글 번호를 server로 전달
-				location.href="<%= request.getContextPath() %>/board/detail?no="+boardNo + "&currentPage=" + <%= currentPage %>;
+				
+				var boardType = $(this).parent().children().eq(0).children().eq(0).text();
+				
+				
+				// 게시판 종류에 따른 분류
+				switch (boardType) {
+				case "찾아요" : 
+					var boardNo = $(this).parent().children().eq(3).text();
+					location.href="<%= request.getContextPath() %>/findBoard/detail?no="+boardNo+"&currentPage=1";
+					break;
+				case "봤어요" : 
+					var boardNo = $(this).parent().children().eq(3).text();
+					location.href="<%= request.getContextPath() %>/seeBoard/detail?no="+boardNo+"&currentPage=1";
+					break;
+				case "분양합니다" : 
+					var boardNo = $(this).parent().children().eq(3).text();
+					location.href="<%= request.getContextPath() %>/adoptBoard/detail?no="+boardNo+"&currentPage=1";
+					break;
+				case "만남 그 후" : 
+					var boardNo = $(this).parent().children().eq(3).text();
+					location.href="<%= request.getContextPath() %>/review/reviewDetail?no="+boardNo+"&currentPage=1";
+					break;
+				case "자유게시판" : 
+					var boardNo = $(this).parent().children().eq(3).text();
+					location.href="<%= request.getContextPath() %>/free/view?no="+boardNo+"&currentPage=1";
+					break;
+				}
+				
 			
 			}).mouseenter(function(){
 				$(this).parent().css("cursor", "pointer");

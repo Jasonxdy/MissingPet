@@ -22,6 +22,15 @@ public class Member {
 		this.memberProImg = memberProImg;
 	}
 
+	public Member(String memberId, String memberName, String memberEmail, String memberPhone, String memberProImg) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberEmail = memberEmail;
+		this.memberPhone = memberPhone;
+		this.memberProImg = memberProImg;
+	}
+
 	private String memberGrade;
 	private Date memberSignUpDT;
 	private String memberProImg;
