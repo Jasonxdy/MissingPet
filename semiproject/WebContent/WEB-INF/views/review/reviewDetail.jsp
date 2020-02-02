@@ -41,16 +41,7 @@
                     <h2 id="title-top"><a href="#">만남 그 후</a></h2>
                     <hr>
                     <div class="col-md-12 col-md-offset-2" id="panelwrap">
-                      <div class="row">
-                        <div class="col-2">
-                          <button id="list" type="button" class="btn btn-secondary btn-sm mb-1">목록</button>
-                        </div>
-                        <div class="col-6"></div>
-                        <div class="col-4 text-center">
-                          <!-- <button id="previousBtn" type="button" class="btn btn-secondary btn-sm mb-1">이전글</button>
-                          <button id="nextBtn" type="button" class="btn btn-secondary btn-sm mb-1">다음글</button> -->
-                        </div>
-                      </div>
+                      
                       <div id="title" style="background-color: lightgray;">
                         
                         <p><span style="background-color: beige; height:100%; display:inline-block;">제목: &nbsp;&nbsp;</span><%= review.getBoardTitle() %></p>
@@ -62,6 +53,7 @@
                         조회 : <%= review.getBoardCount() %> &nbsp;&nbsp;&nbsp;&nbsp;
                         <% if( request.getSession().getAttribute("loginMember") != null ) { %>
                         <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-secondary btn-sm ml-5">신고하기</button>
+                        <button id="list" type="button" class="btn btn-secondary btn-sm float-right">목록</button>
 						<% } %>
 						<%-- 모달 시작 --%>
 						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

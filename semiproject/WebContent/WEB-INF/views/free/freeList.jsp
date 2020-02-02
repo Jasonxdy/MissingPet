@@ -38,7 +38,7 @@ int endPage = pInf.getEndPage();
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index_copy.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/copy2.css">
 
     
@@ -50,15 +50,17 @@ int endPage = pInf.getEndPage();
 
 
 	<div class="container-fluid">
-    <div class="row" id="row">
+    <section class="row">
     
     
      <%@ include file="../common/sidebar.jsp"%>
     
+          
+          <div id="demo" class="w-100">
     
     <!--contents 시작-->
 
-            <div class="col-md-10 mt-4" id="con">
+            <div class="col-md-12 mt-4" id="con">
           
             <div id="page-content-wrapper" >
               <div class="card bg-light shadow mb-5 ml-4 mt-5 ">
@@ -243,17 +245,19 @@ int endPage = pInf.getEndPage();
             <!--contents 종료-->
     
     
-    
-    <%@ include file="../common/header.jsp"%>
-    
-    
+     <%@ include file="../common/footer.jsp"%>
+    </div>
    
-     </div>   <!-- #row 종료-->
+   
      
      
-      <%@ include file="../common/footer.jsp"%>
+       <%@ include file="../common/header.jsp"%>
     
      
+     
+     
+     
+     </section>
      
      </div>  <!-- .container-fluid 종료 -->
      
