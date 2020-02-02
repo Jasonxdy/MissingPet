@@ -83,7 +83,7 @@
 						%>
                     <img src="<%= src %>"
                       class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar"
-                      id="imagePreview">
+                      id="imagePreview" accept="image/*">
                   </div>
                   <div class="d-flex justify-content-center col-md-2" id="profile-image-input">
                     <div class="btn btn-mdb-color btn-rounded float-left">
