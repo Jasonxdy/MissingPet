@@ -142,8 +142,8 @@ public int insertAnswer(Connection conn, int answerAskNo, String answerContent) 
 			
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1, answerAskNo);
-			pstmt.setString(2, answerContent);
+			pstmt.setString(1, answerContent);
+			pstmt.setInt(2, answerAskNo);
 			
 			result = pstmt.executeUpdate();
 			

@@ -93,7 +93,8 @@
                               </thead>
                               
                               <tbody>
-                               <% if (reportBoardList.isEmpty()) { %>
+                               <%	 String boardName = ""; 
+                               if (reportBoardList.isEmpty()) { %>
 									<tr>
 										<td colspan="5">존재하는 신고글이 없습니다.</td>
 									</tr>
@@ -101,12 +102,22 @@
 									
 									<% for (int i = 0; i < reportBoardList.size(); i++) { %>                               
                                 <tr>
-                                  <td><%= reportBoardList.get(i).getReportNo() %></td>
+                                  <td id="<%= reportBoardList.get(i).getBoardNo() %>"><%= reportBoardList.get(i).getReportNo() %></td>
+                                  
                                   <td><%= reportBoardList.get(i).getReportTitle() %></td>
                                   <td><%= reportBoardList.get(i).getReportContent() %></td>
                                   <td><%= reportBoardList.get(i).getmemberId() %></td>
                                   <td>
-                                        <button id="moveBoard">해당 글 이동</button>
+                                  		<%
+                                  		switch(reportBoardList.get(i).getBoardCode()) {
+                                  		case 1 : boardName = "/findBoard/detail"; break;
+                                  		case 2 : boardName = "/seeBoard/detail"; break;
+                                  		case 3 : boardName = "/adoptBoard/detail"; break;
+                                  		case 4 : boardName = "/review/reviewDetail"; break;
+                                  		case 5 : boardName = "/free/view"; break;
+                                  		}
+                                  		%>
+                                        <button id="moveBoard" value="<%=boardName%>">해당 글 이동</button>
                                   </td>
                                 </tr>
                                 	<% } %>
@@ -121,8 +132,7 @@
                           </div>
                   		</div>
                  	  </div>
-                    </div>
-                    
+                    </div>     
                 </div>              
                </div>
                 
@@ -133,9 +143,10 @@
 		// 게시글 상세보기 기능 (jquery를 통해 작업)
 		$(function(){
 			$(document).on("click", "#moveBoard", function(){
-				var boardNo = $(this).parent().parent().children().eq(0).text();
+				var boardNo = $(this).parent().parent().children().eq(0).prop("id");
 				// 쿼리스트링을 이용하여 get 방식으로 글 번호를 server로 전달
-				location.href="<%= request.getContextPath() %>/detail?no="+boardNo + "&currentPage=1";
+				var boardName = $(this).val();
+				location.href="<%= request.getContextPath() +boardName%>?no="+boardNo + "&currentPage=1";
 			
 			}).mouseenter(function(){
 				$(this).parent().css("cursor", "pointer");
