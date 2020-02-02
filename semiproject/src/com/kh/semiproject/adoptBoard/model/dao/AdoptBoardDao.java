@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.semiproject.adoptBoard.model.vo.AdoptBoard;
+import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 
 public class AdoptBoardDao {
 	
@@ -100,6 +101,44 @@ public class AdoptBoardDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	/** 입양합니다 게시글 조회용 dao
+	 * @param conn
+	 * @param boardNo
+	 * @return adoptBoard
+	 * @throws Exception
+	 */
+	public AdoptBoard selectAdoptBoard(Connection conn, int boardNo) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		AdoptBoard adoptBoard = null;
+		
+		String query = prop.getProperty("selectAdoptBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				adoptBoard = new AdoptBoard(rset.getInt(1),
+									rset.getString(2), 
+									rset.getInt(3), 
+									rset.getString(4), 
+									rset.getString(5),
+									rset.getString(6),
+									rset.getString(7),
+									rset.getString(8),
+									rset.getString(9),
+									rset.getInt(10));
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return adoptBoard;
 	}
 
 }

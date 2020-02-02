@@ -13,8 +13,6 @@ public class AdoptBoard {
 	private int animalCode;
 	
 	public AdoptBoard () {}
-
-	
 	
 	public AdoptBoard(String aBoardLocation, int aBoardCost, String aBoardPhone, String aBoardMap, String aBoardNeutral,
 			String aBoardVac, String aBoardHealth) {

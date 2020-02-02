@@ -44,7 +44,7 @@
               	<div class="justif-content-end align-items-center text-center">
               		<div>
 						<img src="<%= request.getContextPath() %>/resources/upProfileImage/<%= loginMember.getMemberProImg() %>"
-						style="width:50px; border-radius: 100%;">
+						style="width:50px; height:50px; border-radius: 100%;">
 					</div>
 				<%= loginMember.getMemberName() %>님 환영합니다. 
 				</div>
