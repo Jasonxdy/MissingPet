@@ -51,8 +51,33 @@
     
 }
 
-#sidebarAll a:hover{
-    background-color:khaki;
+#findhover:hover{
+    background-color:#dc3545;
+    color :white;
+}
+#seehover:hover{
+    background-color:#ffc107;
+    color :white;
+}
+#adopthover:hover{
+    background-color:#28a745;
+    color :white;
+}
+#reviewhover:hover{
+    background-color:#17a2b8;
+    color :white;
+}
+#freehover:hover{
+    background-color:#343a40;
+    color :white;
+}
+#askhover:hover{
+    background-color:red;
+    color :white;
+}
+#mypagehover:hover{
+    background-color:orange;
+    color :white;
 }
 
 #logo:hover{

@@ -63,37 +63,37 @@
               </li>
 
               <li class="nav-item mb-1">
-                <a class="nav-link active text-center mt-4 mb-1" href="<%=request.getContextPath() %>/findBoard/boardList">
+                <a class="nav-link active text-center mt-4 mb-1" href="<%=request.getContextPath() %>/findBoard/boardList" id="findhover">
                   찾아주세요
                 </a>
               </li>
 
               <li class="nav-item mb-1">
-                <a class="nav-link  text-center" href="<%=request.getContextPath() %>/seeBoard/boardList">
+                <a class="nav-link  text-center" href="<%=request.getContextPath() %>/seeBoard/boardList" id="seehover">
                   봤어요
                 </a>
               </li>
 
               <li class="nav-item mb-1">
-                <a class="nav-link  text-center" href="<%=request.getContextPath() %>/adoptBoard/boardList">
+                <a class="nav-link  text-center" href="<%=request.getContextPath() %>/adoptBoard/boardList" id="adopthover">
                   입양했어요
                 </a>
               </li>
 
               <li class="nav-item mb-1">
-                <a class="nav-link  text-center" href="<%= request.getContextPath() %>/review/reviewList">
+                <a class="nav-link  text-center" href="<%= request.getContextPath() %>/review/reviewList" id="reviewhover">
                   만남 그 후
                 </a>
               </li>
 
               <li class="nav-item mb-5">
-                <a class="nav-link  text-center" href="<%= request.getContextPath() %>/free/list">
+                <a class="nav-link  text-center" href="<%= request.getContextPath() %>/free/list" id="freehover">
                   자유게시판
                 </a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link  text-center" href="<%= request.getContextPath() %>/ask/main">
+                <a class="nav-link  text-center" href="<%= request.getContextPath() %>/ask/main" id="askhover">
                   Q&A
                 </a>
               </li>
@@ -103,12 +103,12 @@
               
                 <% if(loginMember == null) { %>
                 <a class="nav-link  text-center" 
-                href="<%= request.getContextPath() %>/member/loginPage">
+                href="<%= request.getContextPath() %>/member/loginPage" id="mypagehover">
                   마이페이지
                 </a>
 	              <% } else { %>
                 <a class="nav-link  text-center" 
-                href="<%= request.getContextPath() %>/mypage/main">
+                href="<%= request.getContextPath() %>/mypage/main" id="mypagehover">
                   마이페이지
                 </a>
                <% } %>

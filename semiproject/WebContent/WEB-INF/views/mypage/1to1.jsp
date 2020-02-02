@@ -74,9 +74,9 @@
                   <table class="table table-hover table-striped" id="list-table">
                     <thead>
                       <tr>
-                        <th>제목 </th>
-                        <th>상태</th>
-                        <th>작성일</th>
+                        <th style="width:12%">제목 </th>
+                        <th style="width:73%">상태</th>
+                        <th style="width:15%">작성일</th>
                       </tr>
                     </thead>
                     <tbody>
