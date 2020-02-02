@@ -166,7 +166,37 @@ public class AdoptBoardDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	/** 분양합니다 게시판 수정용 Dao
+	 * @param conn
+	 * @param adoptBoard
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateAdoptBoard(Connection conn, AdoptBoard adoptBoard) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateAdoptBoard");
 		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, seeBoard.getsBoardLocation());
+			pstmt.setString(2, seeBoard.getsBoardPhone());
+			pstmt.setDate(3, seeBoard.getsBoardDate());
+			pstmt.setString(4, seeBoard.getsBoardMap());
+			pstmt.setString(5, seeBoard.getsBoardLocationTell());
+			pstmt.setString(6, seeBoard.getsBoardBreedTell());
+			pstmt.setString(7, seeBoard.getsBoardCommentTell());
+			pstmt.setInt(8, seeBoard.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 
