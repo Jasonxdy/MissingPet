@@ -26,8 +26,11 @@ import com.kh.semiproject.common.ExceptionForward;
 import com.kh.semiproject.common.MyFileRenamePolicy;
 import com.kh.semiproject.findBoard.model.service.FindBoardService;
 import com.kh.semiproject.findBoard.model.vo.FindBoard;
+import com.kh.semiproject.map.model.service.MapService;
+import com.kh.semiproject.map.model.vo.Map;
 import com.kh.semiproject.member.model.service.MemberService;
 import com.kh.semiproject.member.model.vo.Member;
+import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 import com.oreilly.servlet.MultipartRequest;
 
 @WebServlet("/adoptBoard/*")
@@ -107,7 +110,7 @@ public class adoptBoardController extends HttpServlet {
 			view.forward(request, response);
 		}
 		
-else if(command.equals("/insert")) {
+		else if(command.equals("/insert")) {
 			
 			try {
 				if(ServletFileUpload.isMultipartContent(request)) {
@@ -209,6 +212,49 @@ else if(command.equals("/insert")) {
 					
 					request.getSession().setAttribute("msg", msg);
 					response.sendRedirect("boardList");
+				}
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시글 등록", e);
+			}
+		}
+		
+		else if(command.contentEquals("/detail")) {
+			int boardNo = Integer.parseInt(request.getParameter("no"));
+			
+			try {
+				BoardHJ board = boardService.selectBoard(boardNo);
+				
+				if(board != null) {
+					List<Attachment> files = boardService.selectFiles(boardNo);
+					
+					AdoptBoard adoptBoard = adoptBoardService.selectAdoptBoard(boardNo);
+					
+					int animalCode = adoptBoard.getAnimalCode();
+					
+					Animal animal = boardService.selectAnimal(animalCode);
+					
+					String memberId = board.getBoardWriter();
+					
+					Member member = memberService.selectMember(memberId);
+					
+					Map map = new MapService().selectMap(boardNo);
+					
+					if(!files.isEmpty()) {
+						request.setAttribute("files", files);
+					}
+					
+					request.setAttribute("adoptBoard", adoptBoard);
+					request.setAttribute("animal", animal);
+					request.setAttribute("board", board);
+					request.setAttribute("member", member);
+					request.setAttribute("map", map);
+					
+					path = "/WEB-INF/views/seeBoard/seeBoardDetail.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				} else {
+					request.getSession().setAttribute("msg", "게시글 상세 조회 실패");
+					response.sendRedirect("list");
 				}
 			} catch(Exception e) {
 				ExceptionForward.errorPage(request, response, "게시글 등록", e);

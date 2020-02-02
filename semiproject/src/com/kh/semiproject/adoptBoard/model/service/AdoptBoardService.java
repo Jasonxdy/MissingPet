@@ -15,6 +15,7 @@ import com.kh.semiproject.board.model.vo.Attachment;
 import com.kh.semiproject.board.model.vo.BoardHJ;
 import com.kh.semiproject.findBoard.model.dao.FindBoardDao;
 import com.kh.semiproject.findBoard.model.vo.FindBoard;
+import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 
 public class AdoptBoardService {
 
@@ -101,6 +102,20 @@ public class AdoptBoardService {
 		}
 		
 		return result;
+	}
+
+	/** 분양합니다 게시글  조회용 Service
+	 * @param boardNo
+	 * @return adoptBoard
+	 * @throws Exception
+	 */
+	public AdoptBoard selectAdoptBoard(int boardNo) throws Exception {
+		Connection conn = getConnection();
+		
+		AdoptBoard adoptBoard = new AdoptBoardDao().selectAdoptBoard(conn, boardNo);
+		
+		close(conn);
+		return adoptBoard;
 	}
 
 }
