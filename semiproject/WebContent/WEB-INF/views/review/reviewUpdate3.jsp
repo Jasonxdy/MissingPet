@@ -157,7 +157,7 @@
 	
 	// 아이디값으로 input 자리에 imgLevel로 배치
 	$(function () {
-		<% if(request.getSession().getAttribute("imgs") != null) { %>
+		<% if(request.getAttribute("imgs") != null) { %>
 			<% int i = 0; %>
 			<% for(Img img : imgs) { %>
 			<% 
