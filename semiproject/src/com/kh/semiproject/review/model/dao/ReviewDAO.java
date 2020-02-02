@@ -241,14 +241,21 @@ public class ReviewDAO {
 
 	public int reviewDelete(Connection conn, int boardNo) throws Exception {
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		int result = 0;
 		
 		String query = prop.getProperty("reviewDelete");
+		String query2 = prop.getProperty("commentDelete");
 		try {
+			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, boardNo);
 			result = pstmt.executeUpdate();
-			
+			if(result>0) {
+				pstmt2 = conn.prepareStatement(query2);
+				pstmt2.setInt(1, boardNo);
+				result += pstmt2.executeUpdate();
+			}
 			
 		}finally {
 			close(pstmt);
