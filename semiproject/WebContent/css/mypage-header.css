@@ -1,0 +1,93 @@
+  /* 영역 확인용 border */
+div {
+  /* border: 1px solid black; */
+}
+
+/* Header 최우선용 css */
+body {
+  z-index: 0;
+}
+
+
+@font-face{
+  font-family: 'Sunflower';
+  src:url("Sunflower-Medium.ttf");
+}
+
+@media(max-width: 1400px){
+  #sidebarAll div{
+  width: 200px;
+  }
+  #mypage-header{
+    left: 200px;
+  }
+  #mypage-wrapper, #mypage-wrapper>div{
+    min-width: 1400px;
+    margin-left: 200px;
+    /* min-height: 100vh; */
+  }
+}
+
+@media(min-width: 1400px){
+  #sidebarAll{
+    width: 300px;
+  }
+  #mypage-header{
+    left: 300px;
+  }
+  #mypage-wrapper, #mypage-wrapper>div{
+    max-width: 1600px;
+    margin-left: 300px;
+
+    /* height: 100vh; */
+  }
+}
+
+
+/* 마이페이지 css start */
+
+#mypage-wrapper{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding-left: 0;
+
+  z-index: 0px !important;
+
+  /* 폰트 적용 */
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#mypage-wrapper div{
+  width: 100%;    
+}
+
+/* 마이페이지 header */
+#mypage-header {
+  position: fixed;
+  padding-top: 70px;
+  height: 172px;
+  background-color: white !important;
+  z-index: 2000;
+  margin-left: 0px;
+}
+
+#mypage-nav{
+  border-bottom: 1px solid gray;
+  width: 80%;
+  height: 38px;
+}
+
+#mypage-nav li{
+  height: 37.5px;
+}
+
+#mypage-nav li :hover{
+  height: 37.5px;
+  border-bottom: 1px solid orangered;
+}
+
+#mypage-nav li a{
+  text-decoration: none;
+  color: black;
+}

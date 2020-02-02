@@ -1,0 +1,130 @@
+@charset "UTF-8";
+.container{margin-bottom: 20px;}
+	@media (min-width: 1200px){
+    	.container{
+     	 max-width:1500px;
+    	}
+    }
+    .content { min-width: 100%;}
+    .content h1 {
+        text-align: center;
+    }
+    .content .content-footer p {
+        color: #6d6d6d;
+        font-size: 12px;
+        text-align: center;
+    }
+    .content .content-footer p a {
+        color: inherit;
+        font-weight: bold;
+    }
+    #tb tr {border-bottom: 1px solid lightgray;}
+
+    #tb tr:last-child {border-bottom: none;}
+
+    #tb tr th{padding-top: 15px;
+        padding-bottom: 15px;
+        color: cornflowerblue;}
+
+    #tb tr td{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        width : 500px    }
+    #map {
+        width : 250px;
+        height: 250px;
+        background-color: lightpink;}
+    b {color:cornflowerblue;}
+    #yes{ background-color: #5cb85c;
+        border-radius: 3mm; 
+        width:100px;
+        margin-top: 5px;
+        margin-left: 25px; 
+        text-align: center;
+        color:white;}
+   #title-top{margin-bottom: 30px;}
+
+   #title-top a{ 
+        color: black;
+        text-decoration: none;
+        font-weight: bold;}
+    #panelwrap{
+    width: 100%;
+        float:left;}
+    #table-r{padding : 5px 5px 5px 5px;}
+	.custom-select{
+	    width : 80px;
+	    display: inline-block;
+	}
+	#text-tt{
+	    width: 150px;
+	    display: inline-block;
+	    margin-left: 10px; 
+	    height: 35px;
+	} 
+	#num {
+	    display: inline-block;
+	    margin-left: 50px;
+	}
+	#check {
+	    display: inline-block;
+	    margin-left: 80px;
+	}
+	#bt-bt{ 
+	     display: inline-block;
+	    margin-left: 30px;
+	}
+	#text{
+	    width: 500px;
+	    height: 100px;
+	    border: 1px solid lightgray;
+	}
+	#imgdiv1{
+	    display: block;
+	    float:left;
+	    margin-right: 30px;
+	    margin-left: 10px;
+	}
+	#imgdiv2{
+	    display: block;
+	    float:left;
+	    margin-right: 30px;
+	    margin-left: 10px;
+	    margin-top: 20px;
+	}
+	#textarea{
+	    display: block;
+	    float:left;
+	    margin-right: 30px;
+	    margin-top: 20px;
+	}
+	#bottom-bt{
+	    margin-top:32px;
+	    display: block;
+	    float:left;
+	}
+	#top-bt{
+	    margin-top:10px;
+	    margin-left:515px;
+	    display: block;
+	    float:left;
+	}
+	#com-top{
+	    height: 90px;
+	}
+	#com{
+	    display: block;
+	    float:left;
+	    height: 70px;
+	    padding : 10px;
+	    width : 800px;
+	    border: 1px solid lightgray;
+	    border-radius: 20px;
+	    margin-bottom: 20px;
+	}
+	#pic {
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	    width : 880px;
+	    height: 500px;
+	}

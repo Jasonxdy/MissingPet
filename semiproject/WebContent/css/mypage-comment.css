@@ -1,0 +1,27 @@
+#mypage-comment{
+  color: orangered !important;
+}
+
+#mypage-content-wrapper {
+  margin-top: 180px;
+}
+
+
+/* 작성한 댓글 CSS */
+
+#table-container{
+  margin-left: 0;
+}
+
+#list-table tr>td:first-child, thead>tr>th:first-child{
+  text-align: center;
+  width: 10%;
+}
+
+#my-reply{
+  margin-bottom: 0;
+}
+
+i{
+  padding-right: 5px;
+}

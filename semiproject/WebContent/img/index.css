@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+@font-face{
+  font-family: 'Sunflower';
+  src:url("Sunflower-Medium.ttf");
+}
+
+@media(max-width: 1400px){
+  #sidebarAll div{
+  width: 200px;
+  }
+  #dropdown-menu{
+    width: 270px !important;
+  }
+  #demo>div>div{
+    min-width: 1400px !important;
+  }
+  #demo{
+    margin-left: 200px !important;
+  }
+}
+
+@media(min-width: 1400px){
+  #sidebarAll{
+  width: 300px;
+  }
+  #demo>div{
+    max-width: 1600px;
+    min-width: 1400px !important;
+    /* height: 100vh; */
+  }
+}
+
+
+#demo{
+  /* position: absolute; */
+  margin-left: 300px;
+}
+
+#demo div{
+  width: 100%;
+}
+
+#sidebarAll a{
+    color: black;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+    font-size: larger;
+    
+}
+
+#sidebarAll a:hover{
+    background-color:khaki;
+}
+
+#logo:hover{
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+body{
+  height: 1000px;
+}
+
+
+/* container-fluid{
+  height: 100%;
+} */
+
+#sidebarAll{
+    background-color: white;
+    opacity: 0.9;
+    position: relative;
+    height: 80%;
+    position: fixed;
+}
+
+#header{
+  height: 10%;
+}
+
+.btn-secondary{
+  border-color: rgba(255, 255, 255, 0);
+}
+
+#content{
+  height: 100%;
+}
+
+#loginBtn{
+    margin : auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+}
+
+
+#footer{
+  height: 10%;
+  top: 90%
+}
+
+#footer1{
+  left: 0;
+   right: 0;
+   font-family: 'Sunflower', sans-serif;
+   font-size : larger;
+}
+
+#footer2{
+    /* float: right; */
+    clear: both;
+    font-family: 'Sunflower', sans-serif;
+    font-size: 15px;
+    color: gray ;
+}
+
+#footer2 a{
+    color: gray;
+}
+
+h6{ color: gray;}
+
+sidebar-heading{
+  margin: 0;
+}
+
+#dropdownMenuButton{
+  left: 85%;
+}
+
+#dropdown-menu{
+    opacity: 0.8;
+    size:10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 400px;
+}
+
+
+#dropdown-menu a{
+    color:black;
+}
+
+
+
+
+
+

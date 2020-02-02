@@ -1,0 +1,239 @@
+@font-face{
+  font-family: 'Sunflower';
+  src:url("Sunflower-Medium.ttf");
+}
+
+
+
+@media(max-width: 1400px){
+  #sidebarAll div{
+  width: 200px;
+  }
+  #dropdown-menu{
+    width: 270px !important;
+ }
+  #demo .carousel-inner{
+    min-width: 1400px !important;
+  }
+  #demo{
+    margin-left: 200px !important;
+  }
+}
+
+@media(min-width: 1400px){
+  #sidebarAll{
+  width: 300px;
+  }
+  /*02/01 div > .carousel-inner로 변경 */
+  #demo .carousel-inner{
+    max-width: 1600px;
+    min-width: 1400px !important;
+    /* height: 100vh; */
+  }
+}
+
+@media (min-width: 576px){
+
+  .col-md-2{
+    max-width: 30%;
+  
+  }
+
+}
+
+@media (max-width: 576px){
+
+  .col-md-2{
+    max-width: 80%;
+  
+  }
+
+}
+
+@media (min-width: 768px){
+
+  .col-md-2{
+    max-width: 30%;
+  
+  }
+
+}
+
+@media (min-width: 992px){
+
+  .col-md-2{
+    max-width: 30%;
+  
+  }
+
+}
+
+
+
+
+
+#row{flex-wrap: nowrap;}
+
+
+
+
+#sidebarAll {
+  float:left;
+}
+
+#sidebarAll a{
+    color: black;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+    font-size: larger;
+    
+}
+
+#sidebarAll a:hover{
+    background-color:khaki;
+}
+
+#logo:hover{
+  background-color: white !important;
+}
+
+
+body{
+  height: 1000px;
+}
+
+
+.container-fluid{
+  height: 100%;
+  padding-left:0px;
+}
+
+#sidebarAll{
+    opacity: 0.9;
+    position: relative;
+    height: 80%;
+}
+
+#header{
+  height: 10%;
+}
+
+.btn-secondary{
+  border-color: rgba(255, 255, 255, 0);
+}
+
+#content{
+  height: 100%;
+}
+
+#loginBtn{
+    margin : auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+}
+
+
+#footer{
+    position: relative;
+    height: 100px;
+    width : 100%;
+}
+
+#footer1{
+   float: left;
+   position: absolute;
+   margin: auto;
+   left: 0;
+   right: 0;
+   font-family: 'Sunflower', sans-serif;
+   font-size : larger;
+}
+
+#footer2{
+    float: right;
+    clear: both;
+    font-family: 'Sunflower', sans-serif;
+    font-size: 15px;
+    color: gray ;
+}
+
+#footer2 a{
+    color: gray;
+}
+
+h6{ color: gray;}
+
+sidebar-heading{
+  margin: 0;
+}
+
+#dropdown-menu{
+    opacity: 0.8;
+    size:10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 400px;
+}
+
+
+#dropdown-menu a{
+    color:black;
+}
+
+
+.container-fluid{
+  min-height: 100%;
+}
+
+/* .container{
+  width: 800px;
+  max-width: none !important;
+} */
+/* @media screen and (max-width: 768px) { 
+  body { background-color: lightgreen; } 
+} */
+
+
+#page-content-wrapper {
+ 
+  
+
+
+  /*min-height: 100vh;*/
+  min-height: 100%;
+  margin-bottom: 20px;
+}
+
+#con {
+  margin-left: 230px;
+}
+
+#demo{
+  /* position: absolute; */
+  margin-left: 300px;
+}
+
+#demo div{
+  width: 100%;
+}
+
+
+  
+
+#dropdownMenuButton{
+  left: 95%;
+}
+
+#dropdown-menu{
+    opacity: 0.8;
+    size:10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 400px;
+}
+
+
+#dropdown-menu a{
+    color:black;
+}

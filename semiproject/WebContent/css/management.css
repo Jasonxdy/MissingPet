@@ -1,0 +1,111 @@
+#sidebarAll a{
+    color: black;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+    font-size: larger;
+    
+}
+
+#sidebarAll a:hover{
+    background-color:khaki;
+}
+
+    
+    
+#sidebarAll{
+    background-color: white;
+    opacity: 0.9;
+    position: relative;
+    height: 80%;
+    position: fixed;
+}
+    
+    
+    
+    
+#content-container{
+  position: relative;
+}
+
+#content{
+  position: absolute;
+  margin:90px;
+  height: 80%;
+  width: 80%;
+  
+}
+
+#manageheader{
+    height: 80%;
+}
+
+#searchTab{
+    height: 15%;
+    position: relative;
+}
+
+#searchTab > form { 
+
+    position: absolute;
+    margin: auto;
+    padding-left: 170px;
+}    
+
+
+
+#page-content-wrapper {
+  position: absolute;
+  min-width: 100vw;
+  padding-left: 15rem;
+
+  /*min-height: 100vh;*/
+  min-height: 100%;
+  padding-bottom: 120px;
+}
+
+
+
+#modal-renew{
+    height: 700px;
+    width: 800px;
+  } 
+
+
+#QnA_Rewrite{
+  border: 1px solid darkgray;
+  height: 500px;
+  width: 700px;
+}
+
+#QnA_write{
+  border: 1px solid darkgray;
+  height: 500px;
+  width: 700px;
+}
+
+
+#recievedQuestion{
+  border: 1px solid darkgray;
+  height: 250px;
+  width: 700px;
+}
+
+#sendAnswer{
+  border: 1px solid darkgray;
+  height: 250px;
+  width: 700px;
+}
+
+#manage_table{
+  height: 700px;
+  width: 1000px;
+}
+
+#ContentLength {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+  height: 20px;
+}

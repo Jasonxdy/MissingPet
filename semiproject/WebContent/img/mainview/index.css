@@ -1,0 +1,157 @@
+@font-face{
+  font-family: 'Sunflower';
+  src:url("Sunflower-Medium.ttf");
+}
+
+@media(max-width: 1400px){
+  #sidebarAll div{
+  width: 200px;
+  }
+  #demo div{
+    min-width: 1400px;
+    /* min-height: 100vh; */
+  }
+ 
+
+}
+
+@media(min-width: 1400px){
+  #sidebarAll{
+  width: 300px;
+  }
+  #demo{
+    max-width: 1600px;
+    /* height: 100vh; */
+  }
+}
+
+#demo{
+  position: absolute;
+}
+
+#demo div{
+  width: 100%;
+}
+
+#sidebarAll a{
+    color: black;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+    font-size: larger;
+    
+}
+
+#sidebarAll a:hover{
+    background-color:khaki;
+}
+
+#logo:hover{
+  background-color: white !important;
+}
+
+body{
+  height: 1000px;
+}
+
+
+container-fluid{
+  height: 100%;
+}
+
+#sidebarAll{
+    opacity: 0.9;
+    position: relative;
+    height: 80%;
+}
+
+#header{
+  height: 10%;
+}
+
+.btn-secondary{
+  border-color: rgba(255, 255, 255, 0);
+}
+
+#content{
+  height: 100%;
+}
+
+#loginBtn{
+    margin : auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+    font-family: 'Sunflower', sans-serif;
+    font-weight: bold;
+}
+
+
+footer{
+    position: relative;
+    height: 10%;
+}
+
+#footer1{
+   float: left;
+   position: absolute;
+   margin: auto;
+   left: 0;
+   right: 0;
+   font-family: 'Sunflower', sans-serif;
+   font-size : larger;
+}
+
+#footer2{
+    float: right;
+    clear: both;
+    font-family: 'Sunflower', sans-serif;
+    font-size: 15px;
+    color: gray ;
+}
+
+#footer2 a{
+    color: gray;
+}
+
+h6{ color: gray;}
+
+sidebar-heading{
+  margin: 0;
+}
+
+#dropdown-menu{
+    opacity: 0.8;
+    size:10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 400px;
+}
+
+
+#dropdown-menu a{
+    color:black;
+}
+
+
+/* .container{
+  width: 800px;
+  max-width: none !important;
+} */
+/* @media screen and (max-width: 768px) { 
+  body { background-color: lightgreen; } 
+} */
+
+
+#page-content-wrapper {
+  position: absolute;
+  min-width: 100vw;
+  padding-left: 15rem;
+
+  /*min-height: 100vh;*/
+  min-height: 100%;
+  padding-bottom: 120px;
+
+
+}
+
+
+
