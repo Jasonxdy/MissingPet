@@ -184,14 +184,15 @@ public class AdoptBoardDao {
 			
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setString(1, seeBoard.getsBoardLocation());
-			pstmt.setString(2, seeBoard.getsBoardPhone());
-			pstmt.setDate(3, seeBoard.getsBoardDate());
-			pstmt.setString(4, seeBoard.getsBoardMap());
-			pstmt.setString(5, seeBoard.getsBoardLocationTell());
-			pstmt.setString(6, seeBoard.getsBoardBreedTell());
-			pstmt.setString(7, seeBoard.getsBoardCommentTell());
-			pstmt.setInt(8, seeBoard.getBoardNo());
+			/*
+			 * pstmt.setString(1, adoptBoard.getsBoardLocation()); pstmt.setString(2,
+			 * adoptBoard.getsBoardPhone()); pstmt.setDate(3, adoptBoard.getsBoardDate());
+			 * pstmt.setString(4, adoptBoard.getsBoardMap()); pstmt.setString(5,
+			 * adoptBoard.getsBoardLocationTell()); pstmt.setString(6,
+			 * adoptBoard.getsBoardBreedTell()); pstmt.setString(7,
+			 * adoptBoard.getsBoardCommentTell());
+			 */
+			pstmt.setInt(8, adoptBoard.getBoardNo());
 			
 			result = pstmt.executeUpdate();
 		} finally {

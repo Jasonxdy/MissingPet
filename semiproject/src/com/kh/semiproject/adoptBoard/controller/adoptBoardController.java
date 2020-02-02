@@ -356,8 +356,9 @@ public class adoptBoardController extends HttpServlet {
 					String aBoardNeutral = multiRequest.getParameter("neutral");
 					String aBoardVac = multiRequest.getParameter("vac");
 					String aBoardHealth = multiRequest.getParameter("health");
+					String aBoardDone = multiRequest.getParameter("done");
  					
-					AdoptBoard adoptBoard = new AdoptBoard(aBoardLocation, aBoardCost, aBoardPhone, aBoardMap, aBoardNeutral, aBoardVac, aBoardHealth);
+					AdoptBoard adoptBoard = new AdoptBoard(aBoardLocation, aBoardCost, aBoardPhone, aBoardMap, aBoardNeutral, aBoardVac, aBoardHealth, aBoardDone);
 					
 					String animalGender = multiRequest.getParameter("gender");
 					String animalType = multiRequest.getParameter("breed1");
