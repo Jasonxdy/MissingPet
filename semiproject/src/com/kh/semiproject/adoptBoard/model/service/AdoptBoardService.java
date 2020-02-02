@@ -15,6 +15,8 @@ import com.kh.semiproject.board.model.vo.Attachment;
 import com.kh.semiproject.board.model.vo.BoardHJ;
 import com.kh.semiproject.findBoard.model.dao.FindBoardDao;
 import com.kh.semiproject.findBoard.model.vo.FindBoard;
+import com.kh.semiproject.map.model.DAO.MapDAO;
+import com.kh.semiproject.seeBoard.model.dao.SeeBoardDao;
 import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 
 public class AdoptBoardService {
@@ -116,6 +118,138 @@ public class AdoptBoardService {
 		
 		close(conn);
 		return adoptBoard;
+	}
+	
+	/** 분양합니다 게시판 수정용 Service
+	 * @param board
+	 * @param adoptBoard
+	 * @param animal
+	 * @param fList
+	 * @return result
+	 * @throws Exception
+	 */
+	public static int updateAdoptBoard(BoardHJ board, AdoptBoard adoptBoard, Animal animal, ArrayList<Attachment> fList) throws Exception {
+		Connection conn = getConnection();
+		
+		AdoptBoardDao adoptBoardDao = new AdoptBoardDao();
+		BoardDao boardDao = new BoardDao();
+		
+		board.setBoardContent(board.getBoardContent().replace("\r\n", "<br>"));
+		
+		int result = boardDao.updateBoard(conn, board);
+		if(result>0) {
+			result = 0;
+			int boardNo = board.getBoardNo();
+			
+			adoptBoard.setBoardNo(boardNo);
+			result = adoptBoardDao.updateAdoptBoard(conn, adoptBoard);
+			if(result>0) {
+				result = adoptBoardDao.updateAdoptAnimal(conn, animal, boardNo);
+				if(result>0) {
+					// 지도 업데이트
+					// result=0;
+					//map.setBoardNo(boardNo);
+					//result = new MapDAO().updateMap(conn, map);
+					if(result>0) {
+						if(!fList.isEmpty()) {
+							result = 0;
+							
+							for(Attachment file : fList) {
+								file.setBoardNo(boardNo);
+								
+								if(file.getFileLevel()==0) {
+									
+									result = boardDao.deleteThumbnail(conn, boardNo);
+									
+									if(result==0) {
+										break;
+									}
+								}
+								
+								result = boardDao.insertAttachment(conn, file);
+								
+								if(result ==0) {
+									break;
+								}
+							}
+							int count = boardDao.countAttachment(conn, boardNo);
+							
+							if(count>4) {
+								int over = count-4;
+								result = boardDao.deleteImg(conn, boardNo, over);
+							}
+						}
+						
+						if(result >0) {
+							commit(conn);
+						} else {
+							for(Attachment file : fList) {
+								String path = file.getFilePath();
+								String saveFile = file.getFileChangeName();
+								
+								File failedFile = new File(path + saveFile);
+								
+								failedFile.delete();
+							}
+							rollback(conn);
+						}
+						close(conn);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	/** 분양합니다 게시글 삭제용 Service
+	 * @param no
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteAdoptBoard(int no) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(conn, no);
+		
+		if(result>0) {
+			result = 0;
+			
+			result = new BoardDao().deleteAttachment(conn, no);
+			if(result>0) {
+				result = 0;
+				
+				result = new AdoptBoardDao().adoptDeleteAnimal(conn, no);
+				if(result>0) {
+					commit(conn);
+				}
+			}
+		} else {
+			rollback(conn);
+		}
+			
+		close(conn);
+		return result;
+	}
+
+	public List<AdoptBoard> searchAdoptList(int startRow, int endRow, int boardType, String condition, String doneCheck1, String doneCheck2) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition2 = null;
+		
+		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
+			condition2 = "AND ANIMAL_STATUS='Y' OR ANIMAL_STATUS='N'";
+		} else if(doneCheck1.equals("Y") && doneCheck2.equals("N")) {
+			condition2 = "AND ANIMAL_STATUS='Y'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("Y")) {
+			condition2= "AND ANIMAL_STATUS='N'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("N")) {
+			condition2= "AND ANIMAL_STATUS='C'";
+		}
+		
+		ArrayList<AdoptBoard> adoptList = new AdoptBoardDao().searchFindList(conn, startRow, endRow, boardType, condition, condition2);
+		
+		close(conn);
+		return adoptList;
 	}
 
 }

@@ -68,6 +68,35 @@
                             </thead>
              			</table>
             
+                <!-- 검색창-->
+                           
+                        
+                       
+                       
+                          <form class="col" method="POST" action="searchSeeBoard">
+                              <div class="form-row align-items-center" >
+                                <div class="col-auto my-5">
+                                  <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                                  <select name="searchKey" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                    <option value="title" selected>제목</option>
+                                    <option value="content">내용</option>
+                                    <option value="memberId">작성자</option>
+
+                                  </select>
+                                </div>
+
+                                <div class="col-md-9">
+                                  <input name="searchValue" type="text" class=" form-control mr-sm-2" placeholder="검색어를 입력하세요.">
+                                </div>
+                                <div class="col">
+                                  <button type="submit">검색</button>
+                                </div>
+ 								</div>
+                              </form>
+                                
+                         
+            
+            
                             <table class="row-md-10 table" style="height: 15px;">
 
                    
@@ -96,7 +125,7 @@
                                       <td><span class="ContentLength"><%= SeeBoardList.get(i).getBoardContent() %></span></td>
                                       <td><%= SeeBoardList.get(i).getMemberId() %></td>
                                       <td><%= SeeBoardList.get(i).getBoardCreateDt() %></td>
-                                      <td><button onclick="">해당 글 이동</button></td>
+                                      <td><button id="moveBoard">해당 글 이동</button></td>
                                   </tr>
                                   	<% } %>
 								<% } %>
@@ -104,33 +133,7 @@
                           </table>
                           </div>
                        
-                            <!-- 검색창-->
-                           
                         
-                       
-                        <div id="searchTab">
-                          <form class="col mt-3 " method="POST" action="searchSeeBoard">
-                              <div class="form-row align-items-center" >
-                                <div class="col-auto my-5">
-                                  <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                                  <select name="searchKey" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                    <option value="title" selected>제목</option>
-                                    <option value="content">내용</option>
-                                    <option value="memberId">작성자</option>
-                                    <option value="createDt">등록일</option>
-                                  </select>
-                                </div>
-
-                                <div class="col">
-                                  <input name="searchValue" type="text" class=" form-control mr-sm-2" placeholder="검색어를 입력하세요.">
-                                </div>
-                                <div class="col">
-                                  <button type="submit">검색</button>
-                                </div>
- 								</div>
-                              </form>
-                                
-                          </div>
                         </div>
                           
                        
@@ -149,5 +152,22 @@
 
 	<%@ include file="../common/footer.jsp" %>
 
+	<script>
+		// 게시글 상세보기 기능 (jquery를 통해 작업)
+		$(function(){
+			$(document).on("click", "#moveBoard", function(){
+				var boardNo = $(this).parent().parent().children().eq(0).text();
+				// 쿼리스트링을 이용하여 get 방식으로 글 번호를 server로 전달
+				location.href="<%= request.getContextPath() %>/seeBoard/detail?no="+boardNo + "&currentPage=1";
+			
+			}).mouseenter(function(){
+				$(this).parent().css("cursor", "pointer");
+			
+			});
+			
+		});
+		
+		
+	</script>
     </body>
 </html>

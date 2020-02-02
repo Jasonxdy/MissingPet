@@ -60,7 +60,31 @@
 								</thead>
 							</table>
 
+					<!-- 검색창-->
 
+				
+								<form class="col" method="POST" action="searchMember">
+									<div class="form-row align-items-center">
+										<div class="row-md-2 my-5">
+											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
+											<select name="searchKey" class="custom-select mr-sm-2"
+												id="inlineFormCustomSelect">
+												<option value="memberId" selected>ID</option>
+												<option value="memberName">회원이름</option>
+												<option value="memberEmail">이메일</option>
+											</select>
+										</div>
+
+										<div class="col-md-9">
+											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
+												placeholder="검색어를 입력하세요.">
+										</div>
+										<div>
+											<button type="submit" class="btn btn-sm btn-outline-secondary">검색</button>
+										</div>
+									</div>
+								</form>
+						
 
 
 
@@ -175,31 +199,7 @@
 						</table>
 						</div>
 
-						<!-- 검색창-->
-
-							<div id="searchTab"  >
-								<form class="col mb-5" method="POST" action="searchMember">
-									<div class="form-row align-items-center">
-										<div class="row-md-2 my-5">
-											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
-											<select name="searchKey" class="custom-select mr-sm-2"
-												id="inlineFormCustomSelect">
-												<option value="memberId" selected>ID</option>
-												<option value="memberName">회원이름</option>
-												<option value="memberEmail">이메일</option>
-											</select>
-										</div>
-
-										<div class="col-md-6">
-											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
-												placeholder="검색어를 입력하세요.">
-										</div>
-										<div>
-											<button type="submit" class="btn btn-sm btn-outline-secondary">검색</button>
-										</div>
-									</div>
-								</form>
-							</div> <!--  검색창 div END -->
+						
 
 							
 							

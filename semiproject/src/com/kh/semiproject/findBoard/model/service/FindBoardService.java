@@ -190,6 +190,7 @@ public class FindBoardService {
 				result = findBoardDao.updateFindAnimal(conn, animal, boardNo);
 				if(result>0) {
 					// 지도 업데이트
+					result=0;
 					map.setBoardNo(boardNo);
 					result = new MapDAO().updateMap(conn, map);
 					if(result > 0) {

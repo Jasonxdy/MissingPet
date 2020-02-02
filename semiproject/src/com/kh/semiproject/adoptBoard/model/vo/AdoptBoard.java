@@ -14,6 +14,23 @@ public class AdoptBoard {
 	
 	public AdoptBoard () {}
 	
+	
+	
+	public AdoptBoard(String aBoardLocation, int aBoardCost, String aBoardPhone, String aBoardMap, String aBoardNeutral,
+			String aBoardVac, String aBoardHealth, String aBoardDone) {
+		super();
+		this.aBoardLocation = aBoardLocation;
+		this.aBoardCost = aBoardCost;
+		this.aBoardPhone = aBoardPhone;
+		this.aBoardMap = aBoardMap;
+		this.aBoardNeutral = aBoardNeutral;
+		this.aBoardVac = aBoardVac;
+		this.aBoardHealth = aBoardHealth;
+		this.aBoardDone = aBoardDone;
+	}
+
+
+
 	public AdoptBoard(String aBoardLocation, int aBoardCost, String aBoardPhone, String aBoardMap, String aBoardNeutral,
 			String aBoardVac, String aBoardHealth) {
 		super();

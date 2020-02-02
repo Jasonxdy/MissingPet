@@ -54,7 +54,9 @@ public class ReportDao {
 				report = new Report(rset.getInt("REPORT_NO"),
 									rset.getString("REPORT_TITLE"),
 									rset.getString("REPORT_CONTENT"),
-									rset.getString("MEM_ID"));
+									rset.getString("MEM_ID"),
+									rset.getInt("BOARD_NO"),
+									rset.getInt("BOARD_CODE"));
 					
 				
 				reportBoardList.add(report);
@@ -104,7 +106,9 @@ public class ReportDao {
 				report = new Report(rset.getInt("REPORT_NO"),
 						rset.getString("REPORT_TITLE"),
 						rset.getString("REPORT_CONTENT"),
-						rset.getString("MEM_ID"));
+						rset.getString("MEM_ID"),
+						rset.getInt("BOARD_NO"),
+						rset.getInt("BOARD_CODE"));
 		
 	
 				searchReport.add(report);

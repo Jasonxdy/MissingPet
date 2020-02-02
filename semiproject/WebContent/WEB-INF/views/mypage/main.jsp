@@ -28,29 +28,6 @@
 <body>
 
 
-  <!-- ---
-        layout: examples
-        title: Dashboard Template
-        extra_css: "dashboard.css"
-        extra_js:
-          - "https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"
-          - "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"
-          - "dashboard.js"
-        --- -->
-
-  <!-- <div class="navbar navbar-white fixed-top bg-white flex-md-nowrap p-0 shadow bg-transparent">
-            <ul class="navbar-nav px-3">
-              <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">
-                    <img src="img/alert_icon.png" width="5%" height="10%">
-                </a>
-              </li>
-            </ul>
-          </div>
-         -->
-
-
-
 
 
 
@@ -143,7 +120,7 @@
                 <h5>
                   <b><%= member.getMemberEmail() %></b>
                 </h5>
-                <p>인증된 이메일입니다. <a href="#" style="color: purple;">이메일 변경하기</a></p>
+                <p>인증된 이메일입니다. <a href="#" style="color: purple; text-decoration:none;" id="updateEmail">이메일 변경하기</a></p>
               </div>
 
 
