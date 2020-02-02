@@ -237,7 +237,7 @@ public class adoptBoardController extends HttpServlet {
 					
 					Member member = memberService.selectMember(memberId);
 					
-					Map map = new MapService().selectMap(boardNo);
+					//Map map = new MapService().selectMap(boardNo);
 					
 					if(!files.isEmpty()) {
 						request.setAttribute("files", files);
@@ -247,9 +247,9 @@ public class adoptBoardController extends HttpServlet {
 					request.setAttribute("animal", animal);
 					request.setAttribute("board", board);
 					request.setAttribute("member", member);
-					request.setAttribute("map", map);
+					//request.setAttribute("map", map);
 					
-					path = "/WEB-INF/views/seeBoard/seeBoardDetail.jsp";
+					path = "/WEB-INF/views/adoptBoard/adoptBoardDetail.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
 				} else {
