@@ -1207,9 +1207,6 @@ public class BoardDao {
 				pstmt = conn.prepareStatement(query1+condition+query2);
 				
 				System.out.println(query1+condition+query2);
-				System.out.println(boardType);
-				System.out.println(startRow);
-				System.out.println(endRow);
 				
 				pstmt.setInt(1, boardType);
 				pstmt.setInt(2, startRow);

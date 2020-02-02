@@ -30,6 +30,7 @@ import com.kh.semiproject.map.model.service.MapService;
 import com.kh.semiproject.map.model.vo.Map;
 import com.kh.semiproject.member.model.service.MemberService;
 import com.kh.semiproject.member.model.vo.Member;
+import com.kh.semiproject.seeBoard.model.service.SeeBoardService;
 import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -154,7 +155,9 @@ public class adoptBoardController extends HttpServlet {
 					String aBoardLocation = multiRequest.getParameter("place1")
 											+ "," + multiRequest.getParameter("place2")
 											+ "," + multiRequest.getParameter("place3");
+					
 					int aBoardCost = Integer.parseInt(multiRequest.getParameter("cost"));
+					
 					String aBoardPhone = multiRequest.getParameter("phone1")
 										+ "-" + multiRequest.getParameter("phone2")
 										+ "-" + multiRequest.getParameter("phone3");
@@ -204,7 +207,6 @@ public class adoptBoardController extends HttpServlet {
 					int result = AdoptBoardService.insertAdoptBoard(board,adoptBoard,animal,fList);
 					
 					if(result>0) {
-						//result = new FindBoardService().sendFindAlram(board.getBoardTitle(), adoptBoard.getaBoardLocation(), animal.getAnimalBreed());
 						msg = "게시글 등록 성공";
 						
 					}
@@ -299,6 +301,110 @@ public class adoptBoardController extends HttpServlet {
 				}
 			} catch(Exception e) {
 				ExceptionForward.errorPage(request, response, "게시글 등록", e);
+			}
+		}
+		
+		else if(command.contentEquals("/update")) {
+			try {
+				if(ServletFileUpload.isMultipartContent(request)) {
+					int maxSize = 10 * 1024 * 1024;
+					
+					String root = request.getSession().getServletContext().getRealPath("/");
+				
+					String savePath =  root + "resources/uploadImages/";
+					
+					MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+				
+					ArrayList<String> saveFiles = new ArrayList<String>();
+					
+					ArrayList<String> originFiles = new ArrayList<String>();
+					
+					Enumeration<String> files = multiRequest.getFileNames();
+					
+					while(files.hasMoreElements()) {
+						
+						// 업로드된 파일은 역순으로 전달됨
+						String name = files.nextElement();
+						
+						if(multiRequest.getFilesystemName(name) != null) {
+							// getFilesystemName(key) : rename된 파일명 얻어오기
+							saveFiles.add(multiRequest.getFilesystemName(name));
+							
+							originFiles.add(multiRequest.getOriginalFileName(name));
+						}
+					}
+					
+					int boardNo = Integer.parseInt(request.getParameter("no"));
+					String boardTitle = multiRequest.getParameter("title");
+					String boardContent = multiRequest.getParameter("content");
+					String boardURL = multiRequest.getParameter("videoURL");
+					
+					BoardHJ board = new BoardHJ(boardNo, boardTitle, boardContent, boardURL);
+					
+					String aBoardLocation = multiRequest.getParameter("place1")
+							+ "," + multiRequest.getParameter("place2")
+							+ "," + multiRequest.getParameter("place3");
+					
+					int aBoardCost = Integer.parseInt(multiRequest.getParameter("cost"));
+					
+					String aBoardPhone = multiRequest.getParameter("phone1")
+										+ "-" + multiRequest.getParameter("phone2")
+										+ "-" + multiRequest.getParameter("phone3");
+					
+					String aBoardMap = multiRequest.getParameter("spot");
+					
+					String aBoardNeutral = multiRequest.getParameter("neutral");
+					String aBoardVac = multiRequest.getParameter("vac");
+					String aBoardHealth = multiRequest.getParameter("health");
+					String aBoardDone = multiRequest.getParameter("done");
+ 					
+					AdoptBoard adoptBoard = new AdoptBoard(aBoardLocation, aBoardCost, aBoardPhone, aBoardMap, aBoardNeutral, aBoardVac, aBoardHealth, aBoardDone);
+					
+					String animalGender = multiRequest.getParameter("gender");
+					String animalType = multiRequest.getParameter("breed1");
+					String animalBreed = multiRequest.getParameter("breed2");
+					
+					Animal animal = new Animal(animalGender, animalType, animalBreed);
+					
+					ArrayList<Attachment> fList = new ArrayList<Attachment>();
+					
+					/*
+					 * // map 정보 가저오기 Double mapLatitude =
+					 * Double.parseDouble(multiRequest.getParameter("latitude")); Double
+					 * mapLongitude = Double.parseDouble(multiRequest.getParameter("longitude"));
+					 * String mapAddress = multiRequest.getParameter("mapAddress"); Map map = new
+					 * Map(mapLatitude, mapLongitude, mapAddress);
+					 */
+					
+					
+					for(int i = originFiles.size()-1 ; i >=0 ; i--) {
+						Attachment file = new Attachment();
+						file.setFilePath(savePath);
+						file.setFileOriginName(originFiles.get(i));
+						file.setFileChangeName(saveFiles.get(i));
+						
+						// 썸네일 이미지는 fileLevel 0으로 나머지 이미지에는 fileLevel 1 부여
+						if( (i == originFiles.size()-1) && multiRequest.getFilesystemName("img1") != null) {
+							file.setFileLevel(0);
+						} else {
+							file.setFileLevel(1);
+						}
+						
+						fList.add(file);
+					}
+					
+					int result = AdoptBoardService.updateAdoptBoard(board,adoptBoard,animal,fList);
+					
+					if(result>0) {
+						msg = "게시글 수정 성공";
+					}
+					else		 msg = "게시글 수정 실패";
+					
+					request.getSession().setAttribute("msg", msg);
+					response.sendRedirect("boardList");
+				}
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시글 수정", e);
 			}
 		}
 	}

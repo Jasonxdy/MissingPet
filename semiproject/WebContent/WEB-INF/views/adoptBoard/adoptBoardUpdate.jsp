@@ -287,6 +287,14 @@ input::-webkit-inner-spin-button {
                               <input type="number" name="cost" id="cost" size="1" value="<%= adoptBoard.getaBoardCost() %>"> 만원
                             </td>
                           </tr>
+                          
+                          <tr>
+                            <th>분양완료 여부</th>
+                            <td>
+                              	<input type="hidden" name="done" value="N">
+                      			<input type="checkbox" name="done" id="done"value="Y"> 분양 완료&nbsp;
+                            </td>
+                          </tr>
 
 
 
@@ -638,6 +646,10 @@ $(function () {
 	}
 	if('<%= adoptBoard.getaBoardVac() %>' == 'Y'){
 		$("#vac").attr("checked",true);
+	}
+	
+	if('<%= adoptBoard.getaBoardDone() %>' == 'Y'){
+		$("#done").attr("checked",true);
 	}
 	
 	// 파일 선택 버튼이 있는 영역을 보이지 않게함

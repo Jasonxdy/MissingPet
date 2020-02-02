@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.semiproject.adoptBoard.model.vo.AdoptBoard;
+import com.kh.semiproject.board.model.vo.Animal;
 import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 
 public class AdoptBoardDao {
@@ -139,6 +140,65 @@ public class AdoptBoardDao {
 		}
 		
 		return adoptBoard;
+	}
+
+	/** 분양합니다 동물 수정용 Dao
+	 * @param conn
+	 * @param animal
+	 * @param boardNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateAdoptAnimal(Connection conn, Animal animal, int boardNo) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateAdoptAnimal");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, animal.getAnimalGender());
+			pstmt.setString(2, animal.getAnimalType());
+			pstmt.setString(3, animal.getAnimalBreed());
+			pstmt.setInt(4, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/** 분양합니다 게시판 수정용 Dao
+	 * @param conn
+	 * @param adoptBoard
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateAdoptBoard(Connection conn, AdoptBoard adoptBoard) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateAdoptBoard");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, adoptBoard.getaBoardLocation()); 
+			pstmt.setInt(2,adoptBoard.getaBoardCost()); 
+			pstmt.setString(3, adoptBoard.getaBoardPhone());
+			pstmt.setString(4, adoptBoard.getaBoardMap());
+			pstmt.setString(5, adoptBoard.getaBoardNeutral());
+			pstmt.setString(6, adoptBoard.getaBoardVac());
+			pstmt.setString(7, adoptBoard.getaBoardHealth());
+			pstmt.setString(8, adoptBoard.getaBoardDone());
+			pstmt.setInt(9, adoptBoard.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
