@@ -17,6 +17,7 @@ import com.kh.semiproject.board.model.vo.Img;
 import com.kh.semiproject.board.model.vo.M_Comment;
 import com.kh.semiproject.board.model.vo.PageInfo;
 import com.kh.semiproject.free.model.vo.Free;
+import com.kh.semiproject.review.model.vo.Comment;
 
 public class FreeDao {
 	
@@ -408,7 +409,7 @@ public class FreeDao {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertComm(Connection conn, M_Comment comm, String memId) throws Exception{
+	public int insertComm(Connection conn, Comment comm, String commentWriter) throws Exception{
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -417,9 +418,9 @@ public class FreeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, comm.getCommContent());
-			pstmt.setInt(2, comm.getBoardNo());
-			pstmt.setString(3, memId);
+			pstmt.setString(1, comm.getCommentContent());
+			pstmt.setString(2, commentWriter);
+			pstmt.setInt(3, comm.getBoardNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -431,11 +432,11 @@ public class FreeDao {
 
 
 
-	public List<M_Comment> selectCommList(Connection conn, int boardNo) throws Exception {
+	public List<Comment> selectCommList(Connection conn, int boardNo) throws Exception {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<M_Comment> mlist = null;
+		List<Comment> mlist = null;
 		 
 		String query = prop.getProperty("selectCommList");
 		
@@ -447,18 +448,18 @@ public class FreeDao {
 			
 			rset = pstmt.executeQuery();
 			
-			mlist =  new ArrayList<M_Comment>();
+			mlist =  new ArrayList<Comment>();
 			
-			M_Comment mcomm = null;
+			Comment mcomm = null;
 			
 			while(rset.next()) {
 				
-				mcomm = new M_Comment(rset.getInt("COMM_NO"), 
-						rset.getString("COMM_CONTENT"), 
-						rset.getTimestamp("COMM_CREATE_DT"), 
-						rset.getString("MEM_ID"), 
-						rset.getInt("BOARD_NO")
-						);
+				mcomm = new Comment(
+						rset.getInt("COMM_NO"),
+						rset.getString("COMM_CONTENT"),
+						rset.getString("COMM_MODIFY_DT"),
+						rset.getString("MEM_ID"),
+						rset.getString("MEM_PRO_IMG"));
 				
 				mlist.add(mcomm);
 			}
@@ -471,6 +472,49 @@ public class FreeDao {
 		return mlist;
 	}
 
+	
+	public int updateComment(Connection conn, Comment comment) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, comment.getCommentContent());
+			pstmt.setInt(2, comment.getCommentNo());
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteComment(Connection conn, int commentNo) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteComment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, commentNo);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
 
 
 	public int deleteFree(Connection conn, int no) throws Exception{
@@ -772,6 +816,7 @@ public class FreeDao {
 		      }
 		      return result;
 	}
+
 
 
 

@@ -29,40 +29,26 @@ String currentPage = request.getParameter("currentPage");
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index_copy.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/copy6.css">
 
-    <style>
-    
-    .rWriter{ margin-right: 15px;}
-	.rDate{
-		font-size: 0.8em;
-		color : gray;
-	}
-	
-	#commListArea{
-		list-style-type: none;
-	}
-	
-	</style>
 
     
 </head>
 <body>
 
-
-<div class="container-fluid">
-    <div class="row" id="row">
+	<div class="container-fluid">
+    <section class="row">
     
     
      <%@ include file="../common/sidebar.jsp"%>
-     
-     
-     
-     
-     
-       <!--contents 시작-->
+    
+          
+          <div id="demo" class="w-100">
+    
+    <!--contents 시작-->
 
+            <div class="col-md-12 mt-4" id="con">
             <div class="container-fluid mt-5 pl-5 pr-5 pb-3">
               <div class="row card bg-light" id="con">
                   <div class="col-md-12">
@@ -94,7 +80,49 @@ String currentPage = request.getParameter("currentPage");
                               &nbsp;&nbsp; 
                           	    조회 : <%=board.getBoardCount() %>
                           	  &nbsp;&nbsp;
-                                  <button class="flot-right" type="button">신고하기</button>
+                                 <% if( request.getSession().getAttribute("loginMember") != null ) { %>
+                      			  <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-secondary btn-sm ml-5">신고하기</button>
+								 <% } %>
+                             <%-- 모달 시작 --%>
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			                <div class="modal-dialog modal-dialog-centered" role="document">
+			                  <div class="modal-content">
+			                    <div class="modal-header">
+			                      <h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
+			                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                        <span aria-hidden="true">&times;</span>
+			                      </button>
+			                    </div>
+		                        <form action="<%= request.getContextPath()%>/review/report" method="post">
+			                    	<div class="modal-body">
+			                            <div class="form-group">
+			                              <label for="recipient-name" class="col-form-label">제목</label>
+			                              <input type="text" class="form-control" id="reportTitle" name="reportTitle">
+			                              <% if( request.getSession().getAttribute("loginMember") != null ) { %>
+			                              <input type="text" name="reportMemberId" value="<%= loginMember.getMemberId() %>" hidden>
+			                              <% } %>
+			                              <input type="text" name="reportBoardNo" value="<%= board.getBoardNo() %>" hidden>
+			                            </div>
+			                            <div class="form-group">
+			                              <label for="message-text" class="col-form-label">내용</label>
+			                              <textarea class="form-control" id="reportContent" name="reportContent"></textarea>
+			                            </div>
+			                    	</div>
+				                    <div class="modal-footer">
+				                      <button type="submit" class="btn btn-primary" onclick="return reportVil()">작성</button>
+				                      <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				                    </div>
+		                    	</form>
+			                  </div>
+			                </div>
+			              </div>
+						<%-- 모달 끝 --%>
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
                               </span>
                           </div>
                       </div>
@@ -175,29 +203,28 @@ String currentPage = request.getParameter("currentPage");
                                   </div>
                                 </div>
 
-
-           <!-- #con 종료-->
+                 </div> <!-- #con 종료-->
 
             <!--contents 종료-->
-
-
-
-
     
-
- <%@ include file="../common/header.jsp"%>
     
+    
+  
+     <%@ include file="../common/footer.jsp"%>
+    </div>
    
-     </div>   <!-- #row 종료-->
+   
      
      
-      <%@ include file="../common/footer.jsp"%>
+       <%@ include file="../common/header.jsp"%>
     
      
+     
+     
+     
+     </section>
      
      </div>  <!-- .container-fluid 종료 -->
-     
-     
      
      
      
@@ -275,7 +302,7 @@ String currentPage = request.getParameter("currentPage");
 									url: "commentUpdate",
 									type: "POST",
 									dataType: "json",
-									data: {commentNo: commentNo, commCreateContent: commCreateContent},
+									data: {commentNo: commentNo, commModifyContent: commModifyContent},
 									success: function(result){
 										if(result>0){
 											selectcList();
@@ -314,7 +341,7 @@ String currentPage = request.getParameter("currentPage");
 						//$div.append($cWriter).append($cDate).append($cContent);
 						
 						// append안에 append 사용
-						if($ != null){
+						if($loadId!= null){
 							if(cList[i].memberId == $loadId){
 								$div.append($divImgWriter1.append($img)).append($divImgWriter2.append($cWriter).append("<br>").append($cDate))
 								.append($divContent.append($cContent)).append($divButton.append($uButton).append("<br>").append($dButton));;

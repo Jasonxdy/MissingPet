@@ -88,15 +88,15 @@
 							<!-- multiple 속성
 								- input 요소 하나에 둘 이상의 값을 입력할 수 있음을 명시
 							 -->
-							<input type="file" id="img1"
+							<input type="file" id="img1" accept="image/*"
 								name="img1" onchange="LoadImg(this,1)"> 
-							<input type="file" id="img2"
+							<input type="file" id="img2" accept="image/*"
 								name="img2" onchange="LoadImg(this,2)">
-							<input type="file" id="img3"
+							<input type="file" id="img3" accept="image/*"
 								name="img3" onchange="LoadImg(this,3)">
-							<input type="file" id="img4"
+							<input type="file" id="img4" accept="image/*"
 								name="img4" onchange="LoadImg(this,4)">
-								<input type="file" id="img5"
+								<input type="file" id="img5" accept="image/*"
 								name="img5" onchange="LoadImg(this,5)">
 						</div>
                       </div>

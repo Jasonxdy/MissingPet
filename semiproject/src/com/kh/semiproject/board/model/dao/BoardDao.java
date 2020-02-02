@@ -1207,9 +1207,6 @@ public class BoardDao {
 				pstmt = conn.prepareStatement(query1+condition+query2);
 				
 				System.out.println(query1+condition+query2);
-				System.out.println(boardType);
-				System.out.println(startRow);
-				System.out.println(endRow);
 				
 				pstmt.setInt(1, boardType);
 				pstmt.setInt(2, startRow);
@@ -1310,6 +1307,9 @@ public class BoardDao {
 			} else if(boardType==2) {
 				query1 = prop.getProperty("searchSeeAnimalList1");
 				query2 = prop.getProperty("searchSeeAnimalList2");
+			} else if(boardType==3) {
+				query1 = prop.getProperty("searchAdoptAnimalList1");
+				query2 = prop.getProperty("searchAdoptAnimalList2");
 			}
 			
 			try {

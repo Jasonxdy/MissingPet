@@ -26,6 +26,7 @@ import com.kh.semiproject.common.MyFileRenamePolicy;
 import com.kh.semiproject.free.model.service.FreeService;
 import com.kh.semiproject.free.model.vo.Free;
 import com.kh.semiproject.member.model.vo.Member;
+import com.kh.semiproject.review.model.vo.Comment;
 import com.oreilly.servlet.MultipartRequest;
 
 
@@ -304,15 +305,15 @@ public class FreeController extends HttpServlet {
 		// 댓글 등록용 Controller
 			else if(command.equals("/insertComment")) {
 				
-				String memId = request.getParameter("writer");
+				String commentWriter = request.getParameter("writer");
 				int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-				String commContent = request.getParameter("content");
+				String commentContent = request.getParameter("content");
 				
-				M_Comment comm = new M_Comment(commContent, boardNo);
+				Comment comm = new Comment(commentContent, boardNo);
 				
 				try {
 					
-					int result = FreeService.insertComm(comm,memId);
+					int result = freeService.insertComm(comm,commentWriter);
 					
 					response.getWriter().print(result);
 					// 문자를 내보내는 스트림
@@ -335,7 +336,7 @@ public class FreeController extends HttpServlet {
 				
 				try {
 					
-					List<M_Comment> rList = FreeService.selectCommList(boardNo);
+					List<Comment> rList = freeService.selectCommList(boardNo);
 					
 					response.setCharacterEncoding("UTF-8");
 					
@@ -350,6 +351,47 @@ public class FreeController extends HttpServlet {
 		
 				
 			}
+		
+		
+		// 댓글 리스트 수정용 controller
+			else if(command.equals("/commentUpdate")) {
+				int commentNo = Integer.parseInt(request.getParameter("commentNo")); // ajax 키값을 받아옴
+				String commentContent = request.getParameter("commModifyContent");
+				//Reply reply = new Reply(replyContent, boardId);
+				Comment comment = new Comment(commentNo, commentContent);
+				
+				try {
+					int result = freeService.updateComment(comment);
+					
+					// getWriter(): response에 문자열을 포함시키는 객체
+					response.getWriter().print(result);
+					
+				}catch (Exception e) {
+					ExceptionForward.errorPage(request, response, "댓글 수정", e);
+				}
+				
+			}
+			
+		
+		// 댓글 리스트 삭제용 controller
+			else if(command.equals("/commentDelete")) {
+				int commentNo = Integer.parseInt(request.getParameter("commentNo")); // ajax 키값을 받아옴
+				//Reply reply = new Reply(replyContent, boardId);
+				
+				try {
+					int result = freeService.deleteComment(commentNo);
+					
+					// getWriter(): response에 문자열을 포함시키는 객체
+					response.getWriter().print(result);
+					
+				}catch (Exception e) {
+					ExceptionForward.errorPage(request, response, "댓글 수정", e);
+				}
+				
+			}
+		
+		
+		
 		
 		
 		  // 공지사항 삭제 controller

@@ -14,7 +14,7 @@
 <script src="<%= request.getContextPath() %>/daumeditor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
  
   
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index_copy.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/copy5.css">
 
     
@@ -29,19 +29,19 @@
 </head>
 <body>
 
+
 <div class="container-fluid">
-    <div class="row" id="row">
+    <section class="row">
     
     
      <%@ include file="../common/sidebar.jsp"%>
     
-    
-    
-    
+          
+          <div id="demo" class="w-100">
     
     <!--contents 시작-->
 
-            <div class="col-md-10 mt-4" id="con">
+            <div class="col-md-12 mt-4" id="con">
           
             <div id="page-content-wrapper" >
               <div class="card bg-light shadow mb-5 ml-4 mt-5 ">
@@ -179,21 +179,25 @@
 
 
           
-          </div> <!-- #con 종료-->
+                 
+             </div> <!-- #con 종료-->
 
             <!--contents 종료-->
     
     
-    <%@ include file="../common/header.jsp"%>
-    
-    
+     <%@ include file="../common/footer.jsp"%>
+    </div>
    
-     </div>   <!-- #row 종료-->
+   
      
      
-      <%@ include file="../common/footer.jsp"%>
+       <%@ include file="../common/header.jsp"%>
     
      
+     
+     
+     
+     </section>
      
      </div>  <!-- .container-fluid 종료 -->
      

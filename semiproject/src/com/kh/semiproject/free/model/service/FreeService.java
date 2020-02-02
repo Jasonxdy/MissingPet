@@ -13,6 +13,7 @@ import com.kh.semiproject.board.model.vo.M_Comment;
 import com.kh.semiproject.board.model.vo.PageInfo;
 import com.kh.semiproject.free.model.dao.FreeDao;
 import com.kh.semiproject.free.model.vo.Free;
+import com.kh.semiproject.review.model.vo.Comment;
 
 public class FreeService {
 	
@@ -151,11 +152,11 @@ public class FreeService {
 	}
 
 
-	public static int insertComm(M_Comment comm, String memId)throws Exception {
+	public int insertComm(Comment comm, String commentWriter)throws Exception {
 		
 		Connection conn = getConnection();
 		
-		int result = new FreeDao().insertComm(conn,comm,memId);
+		int result = new FreeDao().insertComm(conn,comm,commentWriter);
 
 		if(result>0) commit(conn);
 		else		 rollback(conn);
@@ -165,14 +166,14 @@ public class FreeService {
 	}
 
 
-	public static List<M_Comment> selectCommList(int boardNo)throws Exception{
+	public List<Comment> selectCommList(int boardNo)throws Exception{
 		
 		Connection conn = getConnection();
 
-		List<M_Comment> mcomm = new FreeDao().selectCommList(conn,boardNo);
+		List<Comment> comm = new FreeDao().selectCommList(conn,boardNo);
 		
 		close(conn);
-		return mcomm;
+		return comm;
 	}
 
 
@@ -383,6 +384,35 @@ public class FreeService {
 
 		return result;
 		
+	}
+
+
+	public int updateComment(Comment comment) throws Exception {
+
+		Connection conn = getConnection();
+		FreeDao freeDao = new FreeDao();
+		int result = freeDao.updateComment(conn,comment);
+		
+		if(result>0) commit(conn);
+		else        rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+
+
+	public int deleteComment(int commentNo) throws Exception {
+
+		Connection conn = getConnection();
+		FreeDao freeDao = new FreeDao();
+		
+		int result = freeDao.deleteComment(conn,commentNo);
+		
+		if(result>0) commit(conn);
+		else        rollback(conn);
+		
+		close(conn);
+		return result;
 	}
 	
 	

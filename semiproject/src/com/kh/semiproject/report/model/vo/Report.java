@@ -10,18 +10,21 @@ public class Report {
 	   private Date reportCreateDt;
 	   private String memberId;
 	   private int boardNo;
+	   private int boardCode;
 	   
 	   public Report() {}
 
 	   
 	   
 	   
-	   public Report(int reportNo, String reportTitle, String reportContent, String memberId) {
+	   public Report(int reportNo, String reportTitle, String reportContent, String memberId, int boardNo, int boardCode) {
 		super();
 		this.reportNo = reportNo;
 		this.reportTitle = reportTitle;
 		this.reportContent = reportContent;
 		this.memberId = memberId;
+		this.boardNo = boardNo;
+		this.boardCode = boardCode;
 	}
 
 
@@ -93,13 +96,49 @@ public class Report {
 	   public void setBoardNo(int boardNo) {
 	      this.boardNo = boardNo;
 	   }
-
-	   @Override
-	   public String toString() {
-	      return "Report [reportNo=" + reportNo + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent
-	            + ", reportCreateDt=" + reportCreateDt + ", memberId=" + memberId + ", boardNo=" + boardNo + "]";
-	   }
 	   
+	   
+
+	   public String getMemberId() {
+		return memberId;
+	}
+
+
+
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+
+
+
+	public int getBoardCode() {
+		return boardCode;
+	}
+
+
+
+
+	public void setBoardCode(int boardCode) {
+		this.boardCode = boardCode;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Report [reportNo=" + reportNo + ", reportTitle=" + reportTitle + ", reportContent=" + reportContent
+				+ ", reportCreateDt=" + reportCreateDt + ", memberId=" + memberId + ", boardNo=" + boardNo
+				+ ", boardCode=" + boardCode + "]";
+	}
+
+
+
+
+
+	
 
 	
 }

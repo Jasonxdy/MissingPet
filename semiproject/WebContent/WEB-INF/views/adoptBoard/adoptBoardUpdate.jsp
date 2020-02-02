@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kh.semiproject.board.model.vo.Attachment"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.semiproject.board.model.vo.Animal"%>
+<%@page import="com.kh.semiproject.adoptBoard.model.vo.AdoptBoard"%>
+<%@page import="com.kh.semiproject.member.model.vo.Member"%>
+<%@page import="com.kh.semiproject.map.model.vo.Map"%>
+<%@page import="com.kh.semiproject.board.model.vo.BoardHJ"%>
+
+<%
+	BoardHJ board = (BoardHJ)request.getAttribute("board");
+	AdoptBoard adoptBoard = (AdoptBoard)request.getAttribute("adoptBoard");
+	Animal animal = (Animal)request.getAttribute("animal");
+	Member member = (Member)request.getAttribute("member");
+	ArrayList<Attachment> files = (ArrayList<Attachment>)request.getAttribute("files");
+	Map map = (Map)request.getAttribute("map");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,7 +164,6 @@ input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
-
 </style>
 </head>
 <body>
@@ -163,7 +178,7 @@ input::-webkit-inner-spin-button {
           <div class="card bg-light shadow mb-5 ml-4 mt-5 ">
             <div class="card-body">
 
-
+<!--  -->
               <!-- 이 안에다가 작성하세요!!!!!!!! -->
 
 
@@ -172,9 +187,9 @@ input::-webkit-inner-spin-button {
 
                   <section class="content">
                   
-                    <h2 id="title-top"><a href="#">분양합니다 글쓰기</a></h2>
+                    <h2 id="title-top"><a href="#">봤어요 글수정</a></h2>
                     <hr>
-                    <form action="<%=request.getContextPath()%>/adoptBoard/insert" method="post" 
+                    <form action="update?no=<%= board.getBoardNo() %>" method="post" 
 				  			enctype="multipart/form-data" role="form" onsubmit="return validate();">
                     <div class="col-md-8 col-md-offset-2" id="panelwrap">
 
@@ -183,16 +198,16 @@ input::-webkit-inner-spin-button {
                         <table id="tb">
                           <tr>
                             <th width="130px"><label>등록인</label></th>
-                            <td><input type="text" size="14" value="<%= loginMember.getMemberName() %>" name="writer" disabled></td>
+                            <td><input type="text" size="14" value="<%= member.getMemberId() %>" name="writer" disabled></td>
                           </tr>
 
                           <tr>
                             <th width="130px"><label>제목</label></th>
-                            <td><input type="text" size="60" name="title" id="title" maxlength="100"></td>
+                            <td><input type="text" size="60" name="title" id="title" maxlength="100" value="<%= board.getBoardTitle() %>"></td>
                           </tr>
                           
                           <%
-                          	String phone[] = loginMember.getMemberPhone().split("-");                 
+                          	String phone[] = adoptBoard.getaBoardPhone().split("-");               
                           %>
 
                           <tr>
@@ -206,9 +221,13 @@ input::-webkit-inner-spin-button {
 
                           <tr>
                             <th><label>E-mail</label></th>
-                            <td><input type="email" size="24" value="<%= loginMember.getMemberEmail() %>" name="email" disabled></td>
+                            <td><input type="email" size="24" value="<%= member.getMemberEmail() %>" name="email" disabled></td>
                           </tr>
 
+							<%
+								String place[] = adoptBoard.getaBoardLocation().split(",");
+							%>
+							
                           <tr>
                             <th><label>분양장소</label></th>
                             <td>
@@ -216,7 +235,7 @@ input::-webkit-inner-spin-button {
                               &nbsp;
 							  <select name="place2" id="place2"></select>
 							  <br><br>
-							  <input type="text" size="40" name="place3" id="place3" maxlength="80">
+							  <input type="text" size="40" name="place3" id="place3" maxlength="80" value="<%= place[2] %>">
                             </td>
 
                           </tr>
@@ -245,6 +264,7 @@ input::-webkit-inner-spin-button {
                               &nbsp;&nbsp;
                               <input type="radio" value="N" name="gender" id="gender">
                               <label for="중">중성화</label>
+                              
                             </td>
                           </tr>
                           
@@ -252,20 +272,27 @@ input::-webkit-inner-spin-button {
                           	<th>건강정보</th>
                           	<td>
                           		<input type="hidden" name="neutral" value="N">
-                      			<input type="checkbox" name="neutral" value="Y"> 중성화 여부&nbsp;
+                      			<input type="checkbox" name="neutral" id="neutral"value="Y"> 중성화 여부&nbsp;
                           		<input type="hidden" name="vac" value="N">
-                      			<input type="checkbox" name="vac" value="Y"> 예방접종 여부
+                      			<input type="checkbox" name="vac" id="vac" value="Y"> 예방접종 여부
                       			<br>
                       			<label>건강상태</label>
-                      			<input type="text" name="health" id="health" maxlength="30" size="60">
+                      			<input type="text" name="health" id="health" maxlength="30" size="60" value="<%= adoptBoard.getaBoardHealth() %>">
                           	</td>
-                          
                           </tr>
-
+                          
                           <tr>
                             <th>분양비</th>
                             <td>
-                              <input type="number" name="cost" id="cost" size="1" value="0"> 만원
+                              <input type="number" name="cost" id="cost" size="1" value="<%= adoptBoard.getaBoardCost() %>"> 만원
+                            </td>
+                          </tr>
+                          
+                          <tr>
+                            <th>분양완료 여부</th>
+                            <td>
+                              	<input type="hidden" name="done" value="N">
+                      			<input type="checkbox" name="done" id="done"value="Y"> 분양 완료&nbsp;
                             </td>
                           </tr>
 
@@ -273,7 +300,7 @@ input::-webkit-inner-spin-button {
 
                         </table>
                         <br>
-                        <textarea cols="85" rows="8" name="content" id="content"></textarea>
+                        <textarea cols="85" rows="8" name="content" id="content"><%= board.getBoardContent() %></textarea>
 
 
 
@@ -281,19 +308,9 @@ input::-webkit-inner-spin-button {
 
                     <!--오른쪽 배너-->
                     <div class="col-md-4" id="right-ban">
-                      <!-- <label><b>알림 설정</b></label>
-                      <br>
-                      <input type="hidden" name="locationTell" value="N">
-                      <input type="checkbox" name="locationTell" value="Y"> 장소&nbsp;
-                      <input type="hidden" name="breedTell" value="N">
-                      <input type="checkbox" name="breedTell" value="Y"> 품종&nbsp;
-                      <input type="hidden" name="commentTell" value="N">
-                      <input type="checkbox" name="commentTell" value="Y"> 댓글&nbsp;
-                      <br>
-                      <br> -->
                       <label><b>영상 첨부</b></label>
                       <br>
-                      <input type="text" size="30" name="videoURL" id="videoURL" value="URL">
+                      <input type="text" size="30" name="videoURL" id="videoURL" value="<%= board.getBoardURL() %>">
                       <br><br>
                       <!-- <label><b>사진 첨부</b></label>
 
@@ -333,14 +350,21 @@ input::-webkit-inner-spin-button {
 						<input type="file" id="img5" name="img5" onchange="LoadImg(this,5)">
 						</div>
 						
-                      <br><br>
+                      <%-- <br><br>
                       <label><b>지도표시(임시)</b></label>
-                      <input type="text" size="10" name="spot" id="spot" value="no">
-                      <div id="map"></div>
+                      <input type="text" size="10" name="spot" value="<%= seeBoard.getsBoardMap() %>">
+                      <% if(request.getAttribute("map") != null) { %>
+							<input id="latitude" name="latitude" style="display:none;" value="<%=map.getMapLatitude()%>">
+							<input id="longitude" name="longitude" style="display:none;" value="<%=map.getMapLongitude()%>">
+							<input id="mapAddress" type="textarea" name="mapAddress" value="<%=map.getMapAddress() %>" style="display:none;">
+					  <% } %>
+                      <div id="map">
+                        <%@ include file="/WEB-INF/views/map/updateMap.jsp"%>
+                      </div> --%>
                       <br>
                       <div id="bottom-bt">
-                        <button type="submit" class="btn btn-primary m-2">등록하기</button>
-                        <button type="submit" class="btn btn-primary m-2">취소</button>
+                        <button type="submit" class="btn btn-primary mb-3">등록하기</button>
+                        <a href="detail?no=<%= adoptBoard.getBoardNo() %>" class="btn btn-primary">취소</a>
                         
                         
                       </div>
@@ -362,14 +386,7 @@ input::-webkit-inner-spin-button {
             </div>
           </div>
         </div>
-
-
-
       </div>
-    
-    
-    
-    
     
     
     
@@ -379,23 +396,9 @@ input::-webkit-inner-spin-button {
 	<%@ include file="../common/footer.jsp"%>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
-
 <script>
-$(document).ready(function() {
-	
+$('document').ready(function() {
  var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
   var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
    var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
@@ -419,17 +422,31 @@ $(document).ready(function() {
    var breed2 = ["노르웨이 숲","데본 렉스"];
    var breed3 = ["기타"];
 
- 
+   
  // 시/도 선택 박스 초기화
 
- $("#place1").each(function() {
-  $selsido = $(this);
-  $.each(eval(area0), function() {
-   $selsido.append("<option value='"+this+"'>"+this+"</option>");
+$("#place1").each(function() {	
+  	$selsido = $(this);
+  	$.each(eval(area0), function() {
+		if('<%= place[0] %>' == this){
+			$selsido.append("<option value='"+this+"' selected>"+this+"</option>");			
+		} else{
+			$selsido.append("<option value='"+this+"'>"+this+"</option>");
+		}
   });
-  $selsido.next().append("<option value=''>구/군 선택</option>");
+  	var area = "area"+$("option",$(this)).index($("option:selected",$(this)));
+    var $gugun = $(this).next();
+    
+    $.each(eval(area), function() {
+    	if('<%= place[1] %>' == this){
+        	$gugun.append("<option value='"+this+"' selected>"+this+"</option>");
+    	} else{
+    		$gugun.append("<option value='"+this+"'>"+this+"</option>");
+    	}
+    });
  });
-
+ 
+ 
  // 시/도 선택시 구/군 설정
 
  $("#place1").change(function() {
@@ -448,15 +465,41 @@ $(document).ready(function() {
  
  // 품종 선택
  
- 	$("#breed1").each(function() {
+ $("#breed1").each(function() {
 	  $selanimal = $(this);
 	  $.each(eval(breed0), function() {
-	   $selanimal.append("<option value='"+this+"'>"+this+"</option>");
+		  if('<%= animal.getAnimalType() %>' == this){
+				$selanimal.append("<option value='"+this+"' selected>"+this+"</option>");			
+			} else{
+				$selanimal.append("<option value='"+this+"'>"+this+"</option>");
+			}
 	  });
-	  $selanimal.next().append("<option value=''>품종 선택</option>");
-	 });
+	  var breed = "breed"+$("option",$(this)).index($("option:selected",$(this)));
+	  var $jong = $(this).next();
+	  
+	  if("<%=animal.getAnimalType() %>"=="기타"){
+		  $.each(eval(breed), function() {
+			  if(this=="기타"){
+				  $jong.append("<option value='"+this+"' selected>"+this+"</option>");
+			  } else{
+				  $jong.append("<option value='"+this+"'>"+this+"</option>");
+			  }
+			  $("#breed4").css("display","inline-block");
+			  $("#breed4").val("<%= animal.getAnimalBreed() %>");
+		  });
+	  } else {
+		  $.each(eval(breed), function() {
+			  	if('<%= animal.getAnimalBreed() %>' == this){
+			  		$jong.append("<option value='"+this+"' selected>"+this+"</option>");
+			  	} else{
+			  		$jong.append("<option value='"+this+"'>"+this+"</option>");
+			   	}
+		});  
+	  }
+});
  
-	 $("#breed1").change(function() {
+ 
+ $("#breed1").change(function() {
 	  var breed = "breed"+$("option",$(this)).index($("option:selected",$(this)));
 	  var $jong = $(this).next(); 
 	  $("option",$jong).remove(); 
@@ -474,25 +517,49 @@ $(document).ready(function() {
 		} else{
 			$("#breed4").css("display","none");
 		}
-	});
-	 
-	$("#phone1").on("input",function(){
-			if ($(this).val().length > $(this).prop("maxLength")){
-	            $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
-			}
-	});
-	$("#phone2").on("input",function(){
-		if ($(this).val().length > $(this).prop("maxLength")){
-            $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
-		}
-	});
-	$("#phone3").on("input",function(){
-		if ($(this).val().length > $(this).prop("maxLength")){
-            $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
-		}
-	});
-	
 });
+ 
+ $("#phone1").on("input",function(){
+		if ($(this).val().length > $(this).prop("maxLength")){
+         $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
+		}
+});
+$("#phone2").on("input",function(){
+	if ($(this).val().length > $(this).prop("maxLength")){
+     $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
+	}
+});
+$("#phone3").on("input",function(){
+	if ($(this).val().length > $(this).prop("maxLength")){
+     $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
+	}
+});
+});
+
+
+
+
+$(function(){
+	<%
+	if(files!=null){
+		int i = 1;
+		String src = null;
+		for(Attachment file : files){
+			src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();%>
+			
+			<% if(file.getFileLevel() == 0){
+				i--;%>
+			
+				$("#titleImg").attr("src", "<%= src %>");
+			<% }else{ %>
+				$("#contentImg"+<%=i%>).attr("src", "<%= src %>");
+			<% } %>
+		<%i++;
+		} 
+	}%>
+});
+
+
 
 function validate() {
 	if ($("#title").val().trim().length == 0) {
@@ -569,10 +636,22 @@ function validate() {
 		$("#spot").focus();
 		return false;
 	}
-	
 }
 
 $(function () {
+	$("#gender[value = '<%= animal.getAnimalGender() %>']").attr("checked",true);
+	
+	if('<%= adoptBoard.getaBoardNeutral() %>' == 'Y'){
+		$("#neutral").attr("checked",true);
+	}
+	if('<%= adoptBoard.getaBoardVac() %>' == 'Y'){
+		$("#vac").attr("checked",true);
+	}
+	
+	if('<%= adoptBoard.getaBoardDone() %>' == 'Y'){
+		$("#done").attr("checked",true);
+	}
+	
 	// 파일 선택 버튼이 있는 영역을 보이지 않게함
 	$("#fileArea").hide();
 	
@@ -619,5 +698,4 @@ function LoadImg(value, num) {
 }
 
 </script>
-
 </html>
