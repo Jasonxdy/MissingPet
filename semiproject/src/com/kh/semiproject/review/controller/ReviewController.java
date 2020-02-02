@@ -334,7 +334,7 @@ public class ReviewController extends HttpServlet {
 				
 				// 댓글 등록 시 게시글 작성자가 알림 설정한 경우 알림 board에 값 추가
 				if(result > 0) {
-					int checkNo = reviewService.checkTell(boardWriter);
+//					int checkNo = reviewService.checkTell(boardWriter);
 				}
 				
 				response.getWriter().print(result);
@@ -433,10 +433,9 @@ public class ReviewController extends HttpServlet {
 			case "title": condition =  " BOARD_TITLE LIKE " + searchValue; break;
 			case "content": condition =  " BOARD_CONTENT LIKE " + searchValue; break;
 			case "titcont": condition =  " (BOARD_CONTENT LIKE" + searchValue + " OR BOARD_TITLE LIKE " + searchValue +")"; break;
-			case "writer" : condition = " MEM_NAME LIKE " + searchValue; break;
+			case "writer" : condition = " MEM_ID LIKE " + searchValue; break;
 			}
 			try {
-				int boardType = 4;
 				int listCount = reviewService.getListCount();
 				
 				int limit = 5;
@@ -463,23 +462,15 @@ public class ReviewController extends HttpServlet {
 					endPage = maxPage;
 				}
 				
-				PageInfo pInfo = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
+				PageInfo pInf = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
 				
-				List<Review> rList = reviewService.searchReviewList(startRow, endRow, boardType, condition);
-//				
-//				List<Attachment> aList = boardService.searchAList(startRow, endRow, boardType, condition);
-//				
-//				List<Animal> animalList = boardService.searchAnimalList(startRow, endRow, boardType, condition);
-//				
-//				List<FindBoard> fList = findBoardService.searchFindList(startRow, endRow, boardType, condition);
+				List<Review> rList = reviewService.searchReviewList(startRow, endRow, condition);
+				List<Img> iList = reviewService.searchRImgList(startRow, endRow, condition);
 				
-				path = "/WEB-INF/views/findBoard/findBoardSearchList.jsp";
-//				request.setAttribute("pInf", pInfo);
-//				request.setAttribute("bList", bList);
-//				request.setAttribute("aList", aList);
-//				request.setAttribute("animalList", animalList);
-//				request.setAttribute("fList", fList);
-				
+				path = "/WEB-INF/views/review/reviewSearchList.jsp";
+				request.setAttribute("rList", rList);
+				request.setAttribute("pInf", pInf);
+				request.setAttribute("iList", iList);
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			} catch(Exception e) {

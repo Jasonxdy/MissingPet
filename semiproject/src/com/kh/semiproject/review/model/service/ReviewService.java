@@ -223,14 +223,37 @@ public class ReviewService {
 		return result;
 	}
 
-	public List<Review> searchReviewList(int startRow, int endRow, int boardType, String condition) throws Exception {
+	/** Review 검색 리스트 Service
+	 * @param startRow
+	 * @param endRow
+	 * @param condition
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Review> searchReviewList(int startRow, int endRow, String condition) throws Exception {
 		Connection conn = getConnection();
 		
-		List<Review> rList = new ReviewDAO().searchReviewList(conn, startRow, endRow, boardType, condition);
+		List<Review> rList = new ReviewDAO().searchReviewList(conn, startRow, endRow, condition);
 		
 		close(conn);
 		
 		return rList;
+	}
+
+	/** Img 검색 리스트 Service
+	 * @param startRow
+	 * @param endRow
+	 * @param condition
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Img> searchRImgList(int startRow, int endRow, String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Img> iList = new ReviewDAO().searchRImgList(conn, startRow, endRow, condition);
+		
+		close(conn);
+		return iList;
 	}
 }
 

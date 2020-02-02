@@ -144,8 +144,7 @@
 	    height: 35px;
 	} 
 	#num {
-	    display: inline-block;
-	    margin-left: 50px;
+	    /* display: inline-block; */
 	}
 	#check {
 	    display: inline-block;

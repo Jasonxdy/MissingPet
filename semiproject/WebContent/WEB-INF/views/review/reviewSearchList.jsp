@@ -143,25 +143,26 @@
 
                     <!--하단-->
                     <div id="bottom-bar" class="row">
-                      <form class="col-4 text-center" method="GET" action="searchList" id="searchForm">
-	                      <select class="custom-select" name="searchKey" style="font-size: 12px;">
-	                        <option value="title" selected>제목</option>
-	                        <option value="content">내용</option>
-	                        <option value="titcont">제목+내용</option>
-	                        <option value="writer">작성자</option>
-	                      </select>
-                      	<input id="text-tt" type="text" name="searchValue">
-                      	<button type="submit">검색</button>
+                    <form class="col-4 text-center" method="GET" action="searchList" id="searchForm">
+                      <select class="custom-select" name="searchKey" style="font-size: 12px;">
+                        <option value="title" selected>제목</option>
+                        <option value="content">내용</option>
+                        <option value="titcont">제목+내용</option>
+                        <option value="writer">작성자</option>
+                      </select>
+                      <input id="text-tt" type="text" name="searchValue">
+                      <button type="submit">검색</button>
                       </form>
                       <div id="num" class="col-3">
                         <ul class="pagination">
                           <% if(currentPage > 1) { %>
                          	 <li class="page-item">
-                          	  	<a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=1">&laquo;</a>
+                          	  	<%-- <a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=1">&laquo;</a> --%>
+                          	  	<a class="page-link" href="<%= request.getContextPath() %>/review/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=1">&laquo;</a>
                         	 </li>
 	                		<!-- 이전으로(<) -->
 	                         <li class="page-item">
-	                   			<a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= currentPage-1 %>">&lt;</a>
+	                   			<a class="page-link" href="<%= request.getContextPath() %>/reivew/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= currentPage-1 %>">&lt;</a>
 		                	 </li>
 	                	   <% } %>
 	                	   
@@ -173,17 +174,18 @@
 	                          </li>
 	                        <% } else { %>
 	                          <li class="page-item">
-	                            <a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= p %>"><%= p %></a>
+	                            <a class="page-link" href="<%= request.getContextPath() %>/review/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= p %>"><%= p %></a>
 	                          </li>
 	                        <% } %>
 	                      <% } %>
                           
                           <% if(currentPage < maxPage) { %>
                          	 <li class="page-item">
-	                   	 		<a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= currentPage+1 %>">&gt;</a>
+	                   	 		<a class="page-link" href="<%= request.getContextPath() %>/review/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= currentPage+1 %>">&gt;</a>
 	               			 </li>
                           <li class="page-item">
-                            <a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= maxPage %>">&raquo;</a>
+                            <%-- <a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= maxPage %>">&raquo;</a> --%>
+                            <a class="page-link" href="<%= request.getContextPath() %>/review/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= maxPage %>">&raquo;</a>
                           </li>
                           <% } %>
                         </ul>

@@ -418,7 +418,7 @@ public class ReviewDAO {
 		return result;
 	}
 
-	public List<Review> searchReviewList(Connection conn, int startRow, int endRow, int boardType, String condition) throws Exception {
+	public List<Review> searchReviewList(Connection conn, int startRow, int endRow, String condition) throws Exception {
 		PreparedStatement pstmt = null; 
 		ResultSet rset = null;
 		List<Review> rList = null;
@@ -428,9 +428,8 @@ public class ReviewDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query1+condition+query2);
-			pstmt.setInt(1, boardType);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -452,6 +451,38 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 		return rList;
+	}
+
+	public List<Img> searchRImgList(Connection conn, int startRow, int endRow, String condition) throws Exception {
+		PreparedStatement pstmt = null; 
+		ResultSet rset = null;
+		List<Img> iList = null;
+		
+		String query1 = prop.getProperty("searchRImgList1");
+		String query2 = prop.getProperty("searchRImgList2");
+		
+		try {
+			pstmt = conn.prepareStatement(query1+condition+query2);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			iList = new ArrayList<Img>();
+			Img img = null;
+			
+			while(rset.next()) {
+				img = new Img(
+						rset.getInt("IMG_NO"), 
+						rset.getString("IMG_CHANGE_NAME"),
+						rset.getInt("BOARD_NO"));
+				iList.add(img);
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return iList;
 	}
 }
 
