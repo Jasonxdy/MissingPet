@@ -75,7 +75,76 @@
 									</tr>
 								</thead>
 							</table>
+						<!-- 검색창-->
+							<div id="searchTab" style="display:inline-block">
+							<div style="display:inline-block" class="pl-5">
+								<form class="col mb-5" method="POST" action="searchQnA">
+									<div class="form-row align-items-center">
+										<div class="row-md-2 my-5">
+											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
+											<select name="searchKey" class="custom-select mr-sm-2"
+												id="inlineFormCustomSelect">
+												<option value="SearchQnATitle" selected>제목</option>
+												<option value="SearchQnAContent">내용</option>
+												<option value="SearchQnAModifyDt">등록일</option>
+											</select>
+										</div>
 
+										<div class="col-md-6" style="width: 950px;">
+											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
+												placeholder="검색어를 입력하세요.">
+										</div>
+										<div>
+											<button type="submit" class="btn btn-sm btn-outline-secondary">검색</button>
+										</div>
+									</div>
+								</form>
+								</div>
+								
+							
+							
+									<!-- 글 등록  -->
+									<div style="display:inline-block" style="width: 100px;">
+											<a id="modal-QnAwrite" href="#modal-container-QnAwrite"
+												role="button" class="btn btn-sm btn-outline-secondary"
+												data-toggle="modal">글 등록</a>
+
+											<div class="modal fade" id="modal-container-QnAwrite"
+												role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content" id="modal-renew">
+														<div class="modal-header">
+															<h5 class="modal-title" id="myModalLabel">QnA 등록</h5>
+															<button type="button" class="close" data-dismiss="modal">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+														
+														<div class="modal-body">
+																<form method="POST" action="<%= request.getContextPath() %>/Management/insertQnA">
+																	<div>
+																		<div>
+																			 <input type="text" name="QnATitle" placeholder="제목 입력" style="width:100%">
+																			 <textArea name="QnAContent" cols="106" rows="20" style="resize:none">등록할 내용을 작성해주세요.</textArea>
+																		</div>
+																	</div>
+																<div class="modal-footer">
+																	<button class="btn btn-outline-primary" type="submit">등록</button>
+																	<button type="button" class="btn btn-outline-secondary"
+																data-dismiss="modal">Close</button>
+																</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div> <!--  글 등록 div END -->
+										</div>
+									
+
+
+
+									
 							<table class="row-md-10 table" style="height: 15px;">
 
 								<thead>
@@ -192,76 +261,7 @@
 
 									
 
-						<!-- 검색창-->
-							<div id="searchTab" style="display:inline-block">
-							<div style="display:inline-block" class="pl-5">
-								<form class="col mb-5" method="POST" action="searchQnA">
-									<div class="form-row align-items-center">
-										<div class="row-md-2 my-5">
-											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
-											<select name="searchKey" class="custom-select mr-sm-2"
-												id="inlineFormCustomSelect">
-												<option value="SearchQnATitle" selected>제목</option>
-												<option value="SearchQnAContent">내용</option>
-												<option value="SearchQnAModifyDt">등록일</option>
-											</select>
-										</div>
 
-										<div class="col-md-6" style="width: 950px;">
-											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
-												placeholder="검색어를 입력하세요.">
-										</div>
-										<div>
-											<button type="submit" class="btn btn-sm btn-outline-secondary">검색</button>
-										</div>
-									</div>
-								</form>
-								</div>
-								
-							
-							
-									<!-- 글 등록  -->
-									<div style="display:inline-block" style="width: 100px;">
-											<a id="modal-QnAwrite" href="#modal-container-QnAwrite"
-												role="button" class="btn btn-sm btn-outline-secondary"
-												data-toggle="modal">글 등록</a>
-
-											<div class="modal fade" id="modal-container-QnAwrite"
-												role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-												<div class="modal-dialog" role="document">
-													<div class="modal-content" id="modal-renew">
-														<div class="modal-header">
-															<h5 class="modal-title" id="myModalLabel">QnA 등록</h5>
-															<button type="button" class="close" data-dismiss="modal">
-																<span aria-hidden="true">×</span>
-															</button>
-														</div>
-														
-														<div class="modal-body">
-																<form method="POST" action="<%= request.getContextPath() %>/Management/insertQnA">
-																	<div>
-																		<div>
-																			 <input type="text" name="QnATitle" placeholder="제목 입력" style="width:100%">
-																			 <textArea name="QnAContent" cols="106" rows="20" style="resize:none">등록할 내용을 작성해주세요.</textArea>
-																		</div>
-																	</div>
-																<div class="modal-footer">
-																	<button class="btn btn-outline-primary" type="submit">등록</button>
-																	<button type="button" class="btn btn-outline-secondary"
-																data-dismiss="modal">Close</button>
-																</div>
-																</form>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div> <!--  글 등록 div END -->
-										</div>
-									
-
-
-
-									
 											</div>
 										</div>
 									</div>

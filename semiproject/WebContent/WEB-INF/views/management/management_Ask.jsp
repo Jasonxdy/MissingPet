@@ -39,9 +39,9 @@
 
                   <!-- Content -->
                   
-                  <div class="container-fluid row-md-10 mr-5 mt-5" style="width: 80%;">
-	                <div id="page-content-wrapper mb-5 mt-5">
-	                  <div class="card bg-light shadow ml-5 mt-5 mr-5 mb-5">
+                  <div class="container-fluid row-md-10 mr-5" style="width: 80%;">
+	                <div id="page-content-wrapper mb-5">
+	                  <div class="card bg-light shadow ml-5 mr-5">
 	                    <div class="card-body">
                           <h5>&nbsp;&nbsp;&nbsp;관리자 페이지</h5>
 
@@ -49,7 +49,7 @@
                                  <!-- Content -->
                        <div class="row-md-12" id="manageheader" style="width:100%; height:850px; overflow:auto">
                         <div class="row-md-10" style="height: 720px;">
-                        <table class="table" >
+                        <table class="table" style="mb-0" >
 
                               <thead>
                                 <tr>
@@ -62,7 +62,33 @@
                               </thead>
                             </table>
             
-                            <table class="row-md-10 table" style="height: 15px;">
+            		
+           				 <!-- 검색창-->
+							
+								<form class="col" method="POST" action="searchAsk">
+									<div class="form-row align-items-center">
+										<div class="row-md-2 my-5">
+											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
+											<select name="searchKey" class="custom-select mr-sm-2"
+												id="inlineFormCustomSelect">
+												<option value="SearchAskTitle" selected>제목</option>
+												<option value="SearchAskContent">내용</option>
+											</select>
+										</div>
+
+										<div class="col-md-9" >
+											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
+												placeholder="검색어를 입력하세요.">
+										</div>
+										<div>
+											<button type="submit" class="btn btn-sm btn-outline-secondary">검색</button>
+										</div>
+									</div>
+								</form>
+                           
+                              
+                              
+                            <table class="row-md-10 table">
 
                               <thead>
                                 <tr>
@@ -162,30 +188,7 @@
                     </table>
                     </div>
                     
-						<!-- 검색창-->
-							<div id="searchTab" style="display:inline-block">
-							<div style="display:inline-block" class="pl-5">
-								<form class="col mb-5" method="POST" action="searchAsk">
-									<div class="form-row align-items-center">
-										<div class="row-md-2 my-5">
-											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
-											<select name="searchKey" class="custom-select mr-sm-2"
-												id="inlineFormCustomSelect">
-												<option value="SearchAskTitle" selected>제목</option>
-												<option value="SearchAskContent">내용</option>
-											</select>
-										</div>
-
-										<div class="col-md-6" style="width: 950px;">
-											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
-												placeholder="검색어를 입력하세요.">
-										</div>
-										<div>
-											<button type="submit" class="btn btn-sm btn-outline-secondary">검색</button>
-										</div>
-									</div>
-								</form>
-								</div>
+				
                               </div>
                               </div>
                               </div>
