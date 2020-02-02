@@ -202,7 +202,7 @@ public class ReviewController extends HttpServlet {
 				Member member = (Member)session.getAttribute("loginMember");
 				String lgMemberId = member.getMemberId();
 				String writer = request.getParameter("memid");
-				if(lgMemberId.equals(writer)) {
+				if(lgMemberId.equals(writer) || member.getMemberGrade().equals("Y")) {
 					int result = reviewService.reviewDelete(boardNo);
 					if(result>0) {
 						request.getSession().setAttribute("msg", "게시글 삭제 성공");
