@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.semiproject.board.model.vo.Board;
+import com.kh.semiproject.common.alert.model.vo.Alert;
 import com.kh.semiproject.review.model.dao.ReviewDAO;
 import com.kh.semiproject.review.model.vo.Comment;
 import com.kh.semiproject.review.model.vo.Img;
@@ -254,6 +256,47 @@ public class ReviewService {
 		
 		close(conn);
 		return iList;
+	}
+
+	
+	
+	
+	
+	
+	/**
+	 * 댓글 알림 확인 및 등록용 Service
+	 * @param boardWriter
+	 * @return tell : String[]
+	 * @throws Exception
+	 */
+	public String[] checkTell(String boardWriter) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		String tell[] =  new ReviewDAO().checkTell(conn, boardWriter);
+		
+		
+		
+		return tell;
+		
+	}
+
+	/**
+	 * 댓글 알림 정보 등록용 service
+	 * @param alert
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertTell(Alert alert) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReviewDAO().insertTell(conn, alert);
+		
+		if(result > 0) commit(conn);
+		else			rollback(conn);
+		
+		return result;
 	}
 }
 
