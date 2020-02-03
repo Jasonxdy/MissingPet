@@ -61,7 +61,7 @@ public class seeBoardController extends HttpServlet {
 				int boardType = 2;
 				int listCount = boardService.getListCount(boardType);
 				
-				int limit = 1;
+				int limit = 8;
 				int pagingBarSize = 10;
 				
 				int currentPage = 0;	
@@ -448,7 +448,7 @@ public class seeBoardController extends HttpServlet {
 				int boardType = 2;
 				int listCount = boardService.getSearchListCount(condition, boardType);
 				
-				int limit = 1;
+				int limit = 8;
 				int pagingBarSize = 10;
 				
 				int currentPage = 0;	
