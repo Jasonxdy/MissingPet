@@ -19,7 +19,18 @@ import javax.servlet.http.HttpSession;
 		"/adoptBoard/*", "/ask/*", "/Board/*", "/findBoard/*",
 		"/free/*", "/Management/*", "/mypage/*", "/qaBoard/*",
 		"/seeBoard/*"})*/
-@WebFilter(filterName="sessionRunout", urlPatterns = {"/mypage/*"})
+@WebFilter(filterName="sessionRunout", urlPatterns = {"/mypage/*",
+		"/Management/*",
+		"/findBoard/insertForm", "/findBoard/insert",
+		"/findBoard/updateForm", "/findBoard/update",
+		"/findBoard/delete",
+		"/free/writeForm", "/free/write", "/free/delete",
+		"/free/updateForm", "/free/update",
+		"/review/reviewInsert", "/review/insert", "/review/reviewDelete",
+		"/review/reviewUpdate", "/review/update", "/review/report",
+		"/seeBoard/insertForm", "/seeBoard/insert", "/seeBoard/delete",
+		"/seeBoard/updateForm", "/seeBoard/update"
+		})
 public class SessionCheck implements Filter {
 	public SessionCheck() {
 		// TODO Auto-generated constructor stub
