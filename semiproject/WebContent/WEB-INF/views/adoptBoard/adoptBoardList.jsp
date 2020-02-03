@@ -180,9 +180,9 @@
                             <input type="text" name="searchValue">
                             <input type="hidden" name="doneCheck1" value="N">
                             <button class="btn btn-primary">검색</button>
-                            <!-- <input type="hidden" name="doneCheck1" value="N"> -->
+                            <input type="hidden" name="doneCheck1" value="N">
                             <input type="checkbox" name="doneCheck1" value="Y">분양중
-                            <!-- <input type="hidden" name="doneCheck2" value="N"> -->
+                            <input type="hidden" name="doneCheck2" value="N">
                             <input type="checkbox" name="doneCheck2" value="Y">분양완료
                            <!--  <input type="text" name="doneCheck1">
                             <input type="text" name="doneCheck2"> -->
