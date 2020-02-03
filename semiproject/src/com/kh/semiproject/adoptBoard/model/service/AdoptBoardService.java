@@ -237,13 +237,13 @@ public class AdoptBoardService {
 		String condition2 = null;
 		
 		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
-			condition2 = "AND ANIMAL_STATUS='Y' OR ANIMAL_STATUS='N'";
+			condition2 = " AND ADOPT_DONE='Y' OR ADOPT_DONE='N'";
 		} else if(doneCheck1.equals("Y") && doneCheck2.equals("N")) {
-			condition2 = "AND ANIMAL_STATUS='Y'";
+			condition2 = " AND ADOPT_DONE='Y'";
 		} else if(doneCheck1.equals("N") && doneCheck2.equals("Y")) {
-			condition2= "AND ANIMAL_STATUS='N'";
+			condition2= " AND ADOPT_DONE='N'";
 		} else if(doneCheck1.equals("N") && doneCheck2.equals("N")) {
-			condition2= "AND ANIMAL_STATUS='C'";
+			condition2= " AND ADOPT_DONE='C'";
 		}
 		
 		ArrayList<AdoptBoard> adoptList = new AdoptBoardDao().searchFindList(conn, startRow, endRow, boardType, condition, condition2);
