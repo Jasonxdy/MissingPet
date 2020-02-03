@@ -328,13 +328,11 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="float-right">
-								<% if(loginMember != null && (board.getBoardWriter().equals(loginMember.getMemberId()))){ %>
+								<% if(loginMember != null && (board.getBoardWriter().equals(loginMember.getMemberId())) || loginMember.getMemberGrade().equals("Y") ){ %>
 						
 								<a href="updateForm?no=<%=board.getBoardNo() %>" class="btn btn-primary m-3">수정</a>
 								<button type="button" class="btn btn-primary m-3" id="deleteBtn">삭제</button>
 								<% } %>
-								<button type="button" class="btn btn-primary m-3">이전 글</button>
-								<button type="button" class="btn btn-primary m-3">다음 글</button>
 							</div>
 						</div>
 					</div>
@@ -434,7 +432,7 @@
 								</tr>
 								<tr>
 									<th>이메일</th>
-									<td><%= member.getMemberEmail() %></td>
+									<td><%= member.getMemberPwd() %></td>
 								</tr>
 								<tr>
 									<th>실종장소</th>
