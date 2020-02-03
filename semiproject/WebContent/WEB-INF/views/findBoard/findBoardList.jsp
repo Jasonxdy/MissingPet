@@ -290,7 +290,6 @@
 			
 		});
 		
-		
 		$(function(){
     		var searchKey = "<%= searchKey %>";
     		var searchValue = "<%= searchValue %>";
@@ -308,6 +307,7 @@
     			
     		} 
     	});
+		
 		
 </script>
 
