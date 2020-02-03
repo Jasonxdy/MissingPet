@@ -1,30 +1,20 @@
-#sidebarAll a{
-    color: black;
-    font-family: 'Sunflower', sans-serif;
-    font-weight: bold;
-    font-size: larger;
-    
+.table tr th a {
+	color : black;
 }
 
-#sidebarAll a:hover{
-    background-color:khaki;
+.table tr th:hover {
+	font-weight : bold;
+	font-size : 20px;
 }
 
-    
-    
-#sidebarAll{
-    background-color: white;
-    opacity: 0.9;
-    position: relative;
-    height: 80%;
-    position: fixed;
+#boardList  a{
+	color : black;
 }
-    
-    
-    
-    
+
+
+
 #content-container{
-  position: relative;
+	color:black;
 }
 
 #content{
