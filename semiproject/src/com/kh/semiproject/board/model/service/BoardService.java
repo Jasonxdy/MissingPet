@@ -321,6 +321,8 @@ public class BoardService {
 		
 		BoardHJ board = boardDao.selectboard(conn, boardNo);
 		
+		System.out.println(board);
+		
 		if(board != null) {
 			int result = boardDao.increaseCount(conn, boardNo);
 			
@@ -333,6 +335,8 @@ public class BoardService {
 				board=null;
 			}
 		}
+		
+		
 		
 		close(conn);
 		

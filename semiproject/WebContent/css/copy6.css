@@ -245,13 +245,13 @@
 }
 
 
-#pic {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width : 880px;
-    height: 500px;
-    background-color: lightskyblue;
-}
+	#pic {
+	    margin-top: 20px;
+	    margin-bottom: 20px;
+	    min-height: 500px;
+	}
+
+
 
 #commContent{
 	margin-left: 100px;
