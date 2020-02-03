@@ -160,10 +160,10 @@
                             </select>
                             <input type="text" name="searchValue">
                             <button class="btn btn-primary">검색</button>
-                            <input type="hidden" name="doneCheck1" value="N">
-                            <input type="checkbox" name="doneCheck1" id="doneCheck1" value="Y" checked>분양중
-                            <input type="hidden" name="doneCheck2" value="N">
-                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="Y" checked>분양완료
+                            <!-- <input type="hidden" name="doneCheck1" value="N"> -->
+                            <input type="checkbox" name="doneCheck1" value="Y">분양중
+                            <!-- <input type="hidden" name="doneCheck2" value="N"> -->
+                            <input type="checkbox" name="doneCheck2" value="Y">분양완료
                         </form>
                     </div>
                     
