@@ -14,9 +14,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+    
 
 </head>
 <body>
+
+
 
 	<% if(alertList == null) { %>
 		<button class="btn btn-secondary dropdown-toggle btn-sm bg-transparent fixed-top" type="button"
@@ -68,12 +71,13 @@
 				<div class="media border p-3">
 					<div class="media-body">
 					<% if(alert.getAlertType().equals("B")) { %>
-						<a href="<%= alert.getAlertURL() %>" style="text-decoration: none; color: orange;">
+						<a style="text-decoration: none; color: orange; cursor:pointer;" onclick="deleteAlert('<%= alert.getAlertURL() %>');">
 						<b><%= alert.getAlertContent() %></b></a> 게시글에 댓글이 달렸습니다.
 					<% } else { %>
-						<a href="<%= request.getContextPath() %>/mypage/askList" style="text-decoration: none; color: orange;">
+						<a href="<%= request.getContextPath() %>/mypage/askList" style="text-decoration: none; color: orange;" onclick="deleteAlert();">
 						<b>작성하신 1:1 문의에 답변이 작성되었습니다.</b></a>
 					<% } %>
+						<a href="#" style="display:none"><%= alert.getAlertNo() %></a>
 					</div>
 				</div>
 			</div>
@@ -82,6 +86,43 @@
 	          
 	        </div>
 	        </div>
+	        
+	        
+	        <script>
+	        	function deleteAlert(alertUrl) {
+	        		var alertNo = $(this).next().text();
+	        		var deleteNo = "<%= request.getContextPath()%>" + "/review/deleteAlert";
+	        		
+	        		console.log(deleteNo);
+	        		console.log(alertUrl);
+	        		
+	        		$.ajax({
+	    	        	url : deleteNo,
+	    	        	type : "GET",
+	    	        	data : {
+	    	        		alertNo : alertNo
+	    	        	},
+	    	        	
+	    	        	success : function(result) {
+	    	        		if(result > 0) { 
+	    	        			location.href = alertUrl;
+	    	        		}
+	    	        	},
+	    	        	
+	    	        	error : function (){
+	    	        		
+	    	        		console.log("ajax 통신 실패");
+	    	        	}
+	            	
+	            	});
+	        		
+	        		return false;
+	        		
+	        		
+	        	}
+	        	
+	        
+	        </script>
 	
 	
 	<% } %>
@@ -116,13 +157,6 @@
         <a href="#"><b>&lt;미씽펫&gt;</b></a>문의사항에 답변이 달렸습니다.<br>
       </div> -->
       
-      
-      
-      <script>
-      	
-      
-      
-      </script>
 
 </body>
 </html>

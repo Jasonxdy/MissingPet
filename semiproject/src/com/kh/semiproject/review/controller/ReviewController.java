@@ -493,6 +493,23 @@ public class ReviewController extends HttpServlet {
 				ExceptionForward.errorPage(request, response, "게시판 검색", e);
 			}
 		}
+		
+		else if (command.equals("/deleteAlert")) {
+			
+			int alertNo = Integer.parseInt(request.getParameter("alertNo"));
+			
+			try {
+				
+				int result = reviewService.deleteAlert(alertNo);
+				
+				response.getWriter().print(result);
+				
+			} catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "알림 삭제", e);
+			}
+		}
+		
+		
 	}
 	//
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
