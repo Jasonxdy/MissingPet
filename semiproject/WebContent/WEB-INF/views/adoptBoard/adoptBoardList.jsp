@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>분양합니다</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/ReviewList.css" type="text/css"/>
 </head>
 <body>
@@ -52,14 +52,14 @@
               <!-- 이 안에다가 작성하세요!!!!!!!! -->
 
 
-              <div class="container" style="margin-left:20rem;">
+              <div class="container">
                 <div class="row">
 
                   <section class="content">
                     <h2 id="title-top"><a href="#">분양합니다</a></h2>
                     <hr>
                     <div class="col-md-12 col-md-offset-2" id="panelwrap">
-                      <div class="panel panel-default">
+                      <div class="panel panel-default" style="min-height:600px;">
                         <div class="panel-body">
 
 
@@ -72,8 +72,9 @@
                               		<td> <h2>존재하는 게시글이 없습니다.</h2>
                               	</tr>
                               <% } else {
+                            	  int rCount = 0;
                             	for(BoardHJ board : bList){
-                              	 int rCount = 0; %>
+                              	  %>
                               	   
                               	   
                                 <tr>
@@ -101,8 +102,26 @@
                                       <div class="media-body">
                                       	<% for(AdoptBoard adoptBoard : adoptList) { 
                                       			if(adoptBoard.getBoardNo() == board.getBoardNo()) {%>
-                                       	<div> <%= adoptBoard.getaBoardDone()   %> </div>
-                                       	<div> <%= adoptBoard.getaBoardLocation() %></div>
+                                      			
+                                      			
+                                       	<div> 
+                                       	<% switch(adoptBoard.getaBoardDone().charAt(0)){ 
+                                       	case 'Y' : %><span class="badge badge-pill badge-dark">분양 완료</span><% break;
+                                       	case 'N' : %><span class="badge badge-pill badge-info">분양 중</span><% break;
+                                       	}%>
+                                       	
+                                       	<% 
+                                    		String location[] = adoptBoard.getaBoardLocation().split(",");
+                                       	%>
+                                       	
+                                       	<span>[<%= location[0] %>]</span>
+                                       	
+                                       	
+                                       	</div>
+                                       	
+                                       	
+                                       	
+                                       	
                                        	<% }
                                       		}%>
                                           <h4 class="title">
@@ -159,6 +178,7 @@
                                 <option value="writer">작성자</option>
                             </select>
                             <input type="text" name="searchValue">
+                            <input type="hidden" name="doneCheck1" value="N">
                             <button class="btn btn-primary">검색</button>
                             <!-- <input type="hidden" name="doneCheck1" value="N"> -->
                             <input type="checkbox" name="doneCheck1" value="Y">분양중
@@ -168,33 +188,14 @@
                             <input type="text" name="doneCheck2"> -->
                             <!-- <input type="hidden" name="doneCheck1" value="N">
                             <input type="checkbox" name="doneCheck1" id="doneCheck1" value="N">분양중
+                            <input type="hidden" name="doneCheck1" value="N">
+                            <input type="checkbox" name="doneCheck1" id="doneCheck1" value="Y">분양중
                             <input type="hidden" name="doneCheck2" value="N">
-                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="N">분양완료 -->
-                          	<input type="text" name="doneCheck1">
-                            <input type="text" name="doneCheck2">
+                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="Y">분양완료
+                          	<!-- <input type="text" name="doneCheck1">
+                            <input type="text" name="doneCheck2"> -->
                         </form>
                     </div>
-                    
-                    <script>
-	                    $(function(){
-		            		var searchKey = "<%= searchKey %>";
-		            		var searchValue = "<%= searchValue %>";
-		            		
-		            		if(searchKey != "null" && searchValue != "null"){
-		            			// 검색한 경우
-		            			
-		            			$.each( $("select[name=searchKey] > option") , function(index, item){
-		            					// $(item) : 현재 접근 요소
-		            				if( $(item).val() == searchKey ){
-		            					$(item).prop("seleted", "true");
-		            				}
-		            			});
-		            			$("input[name=searchValue]").val(searchValue);
-		            			
-		            		} 
-		            	});
-                    </script>
-    
                     
                     <% if(loginMember != null) {%>
                     <div class="float-right m-2">

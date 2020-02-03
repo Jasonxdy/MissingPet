@@ -17,13 +17,14 @@ import com.kh.semiproject.AskBoard.model.vo.AskBoard;
 import com.kh.semiproject.board.model.service.BoardService;
 import com.kh.semiproject.board.model.vo.Board;
 import com.kh.semiproject.common.ExceptionForward;
-
+import com.kh.semiproject.common.alert.model.vo.Alert;
 import com.kh.semiproject.member.model.service.MemberService;
 import com.kh.semiproject.member.model.vo.Member;
 import com.kh.semiproject.qaBoard.model.service.QnABoardService;
 import com.kh.semiproject.qaBoard.model.vo.QnABoard;
 import com.kh.semiproject.report.model.service.ReportService;
 import com.kh.semiproject.report.model.vo.Report;
+import com.kh.semiproject.review.model.service.ReviewService;
 
 import sun.misc.Perf.GetPerfAction;
 
@@ -617,11 +618,33 @@ public class ManagementController extends HttpServlet {
 					
 					path = "management_Ask";
 					
-					System.out.println("ASK 답변 등록 완료");
+					// ---- By DY ----
+					// 1:1 문의 답변 등록 시 원글 작성자가 1:1 문의 알림을 받기로 했는지 체크
+					String memberId = request.getParameter("checkMemberId");
+					String alertContent = "1:1 문의에 답변이 등록되었습니다";
+					String alertURL = request.getContextPath() + "/mypage/askList";
+//					System.out.println(memberId);
+					if(result > 0) {
 						
+							String[] tell = new ReviewService().checkAskTell(memberId);
+						
+							if(tell[0].equals("Y") && tell[1].equals("Y")) { // 글 작성자가 댓글 알림을 켜둔 경우
+							
+							// 알림 테이블에 알림 정보 등록
+							Alert alert = new Alert(memberId, alertContent, alertURL);
+							
+							result = new ReviewService().insertAskTell(alert);
+						}
+					}
+						
+					System.out.println("ASK 답변 등록 완료");
+					
 					response.sendRedirect(path);
 					//view = request.getRequestDispatcher(path);
 					//view.forward(request, response);
+				
+					
+					
 					
 				} catch(Exception e){
 					
@@ -629,11 +652,12 @@ public class ManagementController extends HttpServlet {
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
 				
-				}
+				
 				
 				
 					
-					} else if (command.equals("/searchAsk")) {
+					}
+				} else if (command.equals("/searchAsk")) {
 					
 					String searchKey = request.getParameter("searchKey");
 					String searchValue = request.getParameter("searchValue");

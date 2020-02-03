@@ -76,7 +76,7 @@
 
               <li class="nav-item mb-1">
                 <a class="nav-link  text-center" href="<%=request.getContextPath() %>/adoptBoard/boardList" id="adopthover">
-                  입양했어요
+                  분양합니다
                 </a>
               </li>
 

@@ -152,8 +152,15 @@ public class FindBoardService {
 				
 				result = new FindBoardDao().deleteFindAnimal(conn, no);
 				if(result>0) {
-					commit(conn);
-				}
+					result = 0;
+					
+					result = new BoardDao().deleteComment(conn, no);
+					
+					if(result > 0) {
+						commit(conn);
+					}
+				} 
+				
 			}
 		} else {
 			rollback(conn);

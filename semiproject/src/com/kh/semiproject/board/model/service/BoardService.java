@@ -321,6 +321,19 @@ public class BoardService {
 		
 		BoardHJ board = boardDao.selectboard(conn, boardNo);
 		
+		if(board != null) {
+			int result = boardDao.increaseCount(conn, boardNo);
+			
+			if(result>0) {
+				commit(conn);
+				
+				board.setBoardCount(board.getBoardCount()+1);
+			} else {
+				rollback(conn);
+				board=null;
+			}
+		}
+		
 		close(conn);
 		
 		return board;
@@ -453,12 +466,12 @@ public class BoardService {
 			Session session = Session.getInstance(props, new Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("monit1902@gmail.com", "비밀번호");
+					return new PasswordAuthentication("missingpetkh@gmail.com", "ehdgus12");
 					//return new PasswordAuthentication("발신gmail계정주소", "앱비밀번호");
 				}
 			});
 			
-			InternetAddress from = new InternetAddress("monit1902@gmail.com");
+			InternetAddress from = new InternetAddress("missingpetkh@gmail.com");
 			//InternetAddress from = new InternetAddress("발신gmail계정주소", "표시할발신자명");
 			
 			Message message = new MimeMessage(session);
@@ -473,6 +486,20 @@ public class BoardService {
 		} finally {
 			
 		}
+	}
+
+	/** 댓글 이메일 알림용 Service
+	 * @param commentWriter
+	 * @param commentContent
+	 * @param email
+	 * @throws Exception
+	 */
+	public void sendCommentAlram(String commentWriter, String commentContent, String title, String email) throws Exception {
+		String boardTitle = null;
+		
+		boardTitle = commentWriter+"님이 "+title +"글에 댓글을 달았습니다. 내용 : commentContent";
+		
+		new BoardService().sendMail(boardTitle, email);
 	}
 
 

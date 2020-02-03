@@ -568,6 +568,109 @@ public class ReviewDAO {
 		}
 		return result;
 	}
+
+	
+	
+	
+	
+	
+	/**
+	 * 1:1  문의 알림 등록용 DAO
+	 * @param conn
+	 * @param alert
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int insertAskTell(Connection conn, Alert alert) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertAskTell");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, alert.getMemberId());
+			pstmt.setString(2, alert.getAlertContent());
+			pstmt.setString(3, alert.getAlertURL());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	/**
+	 * 1:1 문의 알림 조회
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 * @throws Exception
+	 */
+	public String[] checkAskTell(Connection conn, String memberId) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String[] tell = new String[2];
+		
+		String query = prop.getProperty("checkAskTell");
+		
+		try {
+			
+			pstmt = conn.prepareCall(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				tell[0] = rset.getString(1);
+				tell[1] = rset.getString(2);
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return tell;
+	}
+
+	
+	
+	
+	
+	/**
+	 * 알림 삭제용 DAO
+	 * 
+	 * @param conn
+	 * @param alertNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteAlert(Connection conn, int alertNo) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteAlert");
+		
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, alertNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
 
 

@@ -310,7 +310,7 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+		System.out.println(member);
 		return member;
 	}
 	
