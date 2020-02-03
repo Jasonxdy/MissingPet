@@ -451,6 +451,15 @@ public class adoptBoardController extends HttpServlet {
 			case "writer" : condition = " MEM_NAME LIKE " + searchValue; break;
 			}
 			try {
+				if(doneCheck1==null) {
+					doneCheck1 = "N";
+					request.setAttribute("doneCheck1", doneCheck1);
+				}
+				if(doneCheck2==null) {
+					doneCheck2 = "N";
+					request.setAttribute("doneCheck2", doneCheck2);
+				}
+				
 				int boardType = 3;
 				int listCount = adoptBoardService.getAdoptSearchListCount(condition, boardType, doneCheck1, doneCheck2);
 				

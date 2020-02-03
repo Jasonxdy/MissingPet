@@ -254,14 +254,12 @@ public class AdoptBoardService {
 		
 		String condition2 = null;
 		
-		System.out.println(doneCheck1 + "||" + doneCheck2);
-		
 		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
 			condition2 = " ";
 		} else if(doneCheck1.equals("Y") && doneCheck2.equals("N")) {
-			condition2 = " AND ADOPT_DONE='Y'";
+			condition2 = " AND ADOPT_DONE='N'";
 		} else if(doneCheck1.equals("N") && doneCheck2.equals("Y")) {
-			condition2= " AND ADOPT_DONE='N'";
+			condition2= " AND ADOPT_DONE='Y'";
 		} else if(doneCheck1.equals("N") && doneCheck2.equals("N")) {
 			condition2= " AND ADOPT_DONE='C'";
 		}
