@@ -80,7 +80,7 @@
                               </form>
                                  
             
-                            <table class="row-md-10 table" style="height: 15px;">
+                            <table class="row-md-10 table">
 
                               <thead>
                                 <tr>

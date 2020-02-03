@@ -152,7 +152,7 @@
                       <div class="col-md-12">
                     <div class="float-left m-2">
                         <form class="input-group" method="GET" action="searchList" id="searchForm">
-                            <select class="form-control label" name="searchKey" onsubmit="return validate();">
+                            <select class="form-control label" name="searchKey">
                                 <option value="title">제목</option>
                                 <option value="content">내용</option>
                                 <option value="titcont">제목+내용</option>
@@ -160,12 +160,12 @@
                             </select>
                             <input type="text" name="searchValue">
                             <button class="btn btn-primary">검색</button>
-                           <!--  <input type="hidden" name="doneCheck1" value="N">
+                            <input type="hidden" name="doneCheck1" value="N">
                             <input type="checkbox" name="doneCheck1" id="doneCheck1" value="Y">분양중
                             <input type="hidden" name="doneCheck2" value="N">
-                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="Y">분양완료 -->
-                            <input type="text" name="doneCheck1">
-                            <input type="text" name="doneCheck2">
+                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="Y">분양완료
+                            <!-- <input type="text" name="doneCheck1">
+                            <input type="text" name="doneCheck2"> -->
                         </form>
                     </div>
                     

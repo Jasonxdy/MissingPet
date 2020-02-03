@@ -1348,6 +1348,58 @@ public class BoardDao {
 		}
 
 
+
+
+		/** 게시글 조회수 증가용 Dao
+		 * @param conn
+		 * @param boardNo
+		 * @return result
+		 * @throws Exception
+		 */
+		public int increaseCount(Connection conn, int boardNo) throws Exception {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("increaseCount");
+			
+			try {
+				pstmt = conn.prepareStatement(query);		
+				pstmt.setInt(1, boardNo);
+				
+				result = pstmt.executeUpdate();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+
+
+
+		/** 게시글 댓글 삭제용 Dao
+		 * @param conn
+		 * @param no
+		 * @return result
+		 * @throws Exception
+		 */
+		public int deleteComment(Connection conn, int no) throws Exception {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("deleteComment");
+			
+			try {
+				pstmt = conn.prepareStatement(query);		
+				pstmt.setInt(1, no);
+				
+				result = pstmt.executeUpdate();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+
 		
 		
 		

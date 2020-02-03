@@ -165,6 +165,7 @@
 													%>
                                                    <textArea name="answerContent" cols="97" rows="10" style="resize:none"><%= answerContent %></textArea>
                                                 </div>
+                                                <input type="text" value= "<%= AskBoardList.get(i).getMemberId() %>" style="display:none" name="checkMemberId" id="checkMemberId">
                                              
                                                 
 								

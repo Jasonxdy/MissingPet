@@ -229,8 +229,14 @@ public class SeeBoardService {
 				
 				result = new SeeBoardDao().seeDeleteAnimal(conn, no);
 				if(result>0) {
-					commit(conn);
-				}
+					result = 0;
+					
+					result = new BoardDao().deleteComment(conn, no);
+					
+					if(result > 0) {
+						commit(conn);
+					}
+				} 
 			}
 		} else {
 			rollback(conn);

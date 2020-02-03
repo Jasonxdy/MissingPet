@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.semiproject.board.model.vo.Board;
+import com.kh.semiproject.common.alert.model.vo.Alert;
 import com.kh.semiproject.review.model.vo.Comment;
 import com.kh.semiproject.review.model.vo.Img;
 import com.kh.semiproject.review.model.vo.Report;
@@ -484,6 +486,73 @@ public class ReviewDAO {
 		}
 		return iList;
 	}
+	
+	
+	
+	
+
+	public String[] checkTell(Connection conn, String boardWriter) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String[] tell = new String[2];
+		
+		String query = prop.getProperty("checkTell");
+		
+		try {
+			
+			pstmt = conn.prepareCall(query);
+			pstmt.setString(1, boardWriter);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				tell[0] = rset.getString(1);
+				tell[1] = rset.getString(2);
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return tell;
+	}
+	
+	
+	/**
+	 * 알림 정보 등록용 dao
+	 * @param conn
+	 * @param alert
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertTell(Connection conn, Alert alert) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertTell");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, alert.getMemberId());
+			pstmt.setString(2, alert.getAlertContent());
+			pstmt.setString(3, alert.getAlertURL());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
+	
+	
 
 	public int getSearchListCount(Connection conn, String condition) throws Exception {
 		Statement stmt = null; 
@@ -497,6 +566,109 @@ public class ReviewDAO {
 		}finally {
 			close(stmt);
 		}
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	/**
+	 * 1:1  문의 알림 등록용 DAO
+	 * @param conn
+	 * @param alert
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int insertAskTell(Connection conn, Alert alert) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertAskTell");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, alert.getMemberId());
+			pstmt.setString(2, alert.getAlertContent());
+			pstmt.setString(3, alert.getAlertURL());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	/**
+	 * 1:1 문의 알림 조회
+	 * @param conn
+	 * @param memberId
+	 * @return
+	 * @throws Exception
+	 */
+	public String[] checkAskTell(Connection conn, String memberId) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String[] tell = new String[2];
+		
+		String query = prop.getProperty("checkAskTell");
+		
+		try {
+			
+			pstmt = conn.prepareCall(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				tell[0] = rset.getString(1);
+				tell[1] = rset.getString(2);
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return tell;
+	}
+
+	
+	
+	
+	
+	/**
+	 * 알림 삭제용 DAO
+	 * 
+	 * @param conn
+	 * @param alertNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteAlert(Connection conn, int alertNo) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteAlert");
+		
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, alertNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 }

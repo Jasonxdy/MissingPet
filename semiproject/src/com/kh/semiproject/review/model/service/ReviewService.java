@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.semiproject.board.model.vo.Board;
+import com.kh.semiproject.common.alert.model.vo.Alert;
 import com.kh.semiproject.review.model.dao.ReviewDAO;
 import com.kh.semiproject.review.model.vo.Comment;
 import com.kh.semiproject.review.model.vo.Img;
@@ -256,11 +258,109 @@ public class ReviewService {
 		return iList;
 	}
 
+	
+	
+	
+	
+	
+	/**
+	 * 댓글 알림 확인 및 등록용 Service
+	 * @param boardWriter
+	 * @return tell : String[]
+	 * @throws Exception
+	 */
+	public String[] checkTell(String boardWriter) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		String tell[] =  new ReviewDAO().checkTell(conn, boardWriter);
+		
+		
+		
+		return tell;
+		
+	}
+
+	/**
+	 * 댓글 알림 정보 등록용 service
+	 * @param alert
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertTell(Alert alert) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		int result = new ReviewDAO().insertTell(conn, alert);
+		
+		if(result > 0) commit(conn);
+		else			rollback(conn);
+
+		return result;
+	}
+		
 	public int getSearchListCount(String condition) throws Exception {
 		Connection conn = getConnection();
 		
 		int result = new ReviewDAO().getSearchListCount(conn, condition);
 		close(conn);
+		return result;
+	}
+
+	
+	
+	/**
+	 * 1:1 문의 등록시 알림 테이블 값 입력
+	 * @param alert
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int insertAskTell(Alert alert) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new ReviewDAO().insertAskTell(conn, alert);
+		
+		if(result > 0) commit(conn);
+		else			rollback(conn);
+
+		return result;
+	}
+
+	
+	/**
+	 * 1:1 문의 답변 시 알림 설정 조회
+	 * @param memberId
+	 * @return
+	 * @throws Exception
+	 */
+	public String[] checkAskTell(String memberId) throws Exception {
+		Connection conn = getConnection();
+		
+		String tell[] =  new ReviewDAO().checkAskTell(conn, memberId);
+		
+		
+		
+		return tell;
+	}
+
+	
+	
+	/**
+	 * 알림 삭제용 Service
+	 * @param alertNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteAlert(int alertNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		
+		int result = new ReviewDAO().deleteAlert(conn, alertNo);
+		
+		if(result > 0) commit(conn);
+		else			rollback (conn);
+		
 		return result;
 	}
 }
