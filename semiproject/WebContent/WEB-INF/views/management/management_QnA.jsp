@@ -39,6 +39,23 @@
   height: 20px;
 }
 
+#modal-QnAwrite{
+	color : black;
+}
+
+.table tr th a {
+	color : white;
+	font-size: 20px;
+	font-family: 'Sunflower', sans-serif;
+
+}
+
+
+
+h5{
+	font-family: 'Sunflower', sans-serif;
+}
+
 </style>
 </head>
 <body>
@@ -61,24 +78,18 @@
 
 								<thead>
 									<tr>
-										<th scope="col"><a
-											href="<%=request.getContextPath()%>/Management/management_Member">회원관리</a></th>
-										<th scope="col"><a
-											href="<%=request.getContextPath()%>/Management/management_Board">게시판관리</a></th>
-										<th scope="col"><a
-											href="<%=request.getContextPath()%>/Management/management_QnA">QnA등록</a></th>
-										<th scope="col"><a
-											href="<%=request.getContextPath()%>/Management/management_Ask">1:1문의</a></th>
-										<th scope="col"><a
-											href="<%=request.getContextPath()%>/Management/management_Report">신고
-												관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-danger" href="<%=request.getContextPath()%>/Management/management_Member">회원관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-warning" href="<%=request.getContextPath()%>/Management/management_Board">게시판관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-success" href="<%=request.getContextPath()%>/Management/management_QnA">QnA등록</a></th>
+										<th scope="col"><a class="badge badge-pill badge-info" href="<%=request.getContextPath()%>/Management/management_Ask">1:1문의</a></th>
+										<th scope="col"><a class="badge badge-pill badge-primary" href="<%=request.getContextPath()%>/Management/management_Report">신고관리</a></th>
 									</tr>
 								</thead>
 							</table>
 						<!-- 검색창-->
 							
-								<form class="col" method="POST" action="searchQnA">
-									<div class="form-row align-items-center">
+								<form class="col" method="POST" action="searchQnA" style="border: 1px solid yellowgreen;">
+									<div class="ml-5 form-row align-items-center">
 										<div class="row-md-2 my-5">
 											<label class="mr-sm-2 sr-only" for="inlineFormCusto
 											mSelect"></label>
@@ -112,16 +123,17 @@
 
 								<thead>
 									<tr>
-										<th scope="col">글번호</th>
+										<th scope="col">글 번호 </th>
 										<th scope="col">&nbsp;&nbsp;제목</th>
 										<th scope="col">&nbsp;내용</th>
-										<th scope="col">&nbsp;&nbsp;등록일</th>
+										<th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;등록일</th>
 										<th scope="col">
+									
 										<!--  글 등록  -->
-														<div style="display:inline-block" style="width: 100px;">
+										<div>
 											<a id="modal-QnAwrite" href="#modal-container-QnAwrite"
-												role="button" class="btn btn-sm btn-outline-primary"
-												data-toggle="modal">Q&A 글 등록</a>
+												role="button" class="btn btn-sm btn-outline-warning"
+												data-toggle="modal">&nbsp;글 등록&nbsp;</a>
 
 											<div class="modal fade" id="modal-container-QnAwrite"
 												role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -138,12 +150,12 @@
 																<form method="POST" action="<%= request.getContextPath() %>/Management/insertQnA">
 																	<div>
 																		<div>
-																			 <input type="text" name="QnATitle" placeholder="제목 입력" style="width:100%">
+																			 <input type="text" name="QnATitle" placeholder="제목을 입력해주세요." style="width:100%">
 																			 <textArea name="QnAContent" cols="106" rows="20" style="resize:none">등록할 내용을 작성해주세요.</textArea>
 																		</div>
 																	</div>
 																<div class="modal-footer">
-																	<button class="btn btn-outline-primary" type="submit">등록</button>
+																	<button class="btn btn-outline-danger" type="submit">등록하기</button>
 																	<button type="button" class="btn btn-outline-secondary"
 																data-dismiss="modal">Close</button>
 																</div>
@@ -184,28 +196,30 @@
 													aria-hidden="true">
 													<div class="modal-dialog" role="document">
 														<div class="modal-content" id="modal-renew">
+														<form method="POST" action="<%= request.getContextPath() %>/Management/updateQnA">
 															<div class="modal-header">
-																<h5 class="modal-title" id="myModalLabel">QnA 수정</h5>
+																<h5 class="modal-title" id="myModalLabel">QnA 수정 |
+																현재 선택한 글 번호는 <input type="text" name="UpdateQnANo" style="width:7%" value="<%= qaBoardList.get(i).getQaNo() %>" readonly> 번 입니다.<br> </h5>
 																<button type="button" class="close" data-dismiss="modal">
 																	<span aria-hidden="true">×</span>
 																</button>
 															</div>
 															<div class="modal-body">
-																<form method="POST" action="<%= request.getContextPath() %>/Management/updateQnA">
+																
 																	<div>
 																		<div>
-																			현재 선택한 글 번호는 <input name="UpdateQnANo" style="width:4%" value="<%= qaBoardList.get(i).getQaNo() %>" readonly> 번 입니다.<br>
+																	
 																			<input type="text" name="UpdateQnATitle" style="width:100%" value="<%= qaBoardList.get(i).getQaTitle() %>">
 																			 <textArea name="UpdateQnAContent" cols="106" rows="20" style="resize:none"><%= qaBoardList.get(i).getQaContent() %></textArea>
 																		</div>
 																	</div>
 															<div class="modal-footer">
-																<button class="btn btn-primary " type="submit">수정</button>
-																<button type="button" class="btn btn-secondary"
+																<button class="btn btn-outline-danger " type="submit">수정하기</button>
+																<button type="button" class="btn btn-outline-secondary"
 																	data-dismiss="modal">Close</button>
 															</div>
-															</form>
 															</div>
+															</form>
 
 														</div>
 													</div>
@@ -223,26 +237,23 @@
 												aria-hidden="true">
 												<div class="modal-dialog" role="document">
 													<div class="modal-content">
+														<form class="form-signin" method="POST" action="deleteQnA">
 														<div class="modal-header">
-															<h5 class="modal-title" id="myModalLabel">QnA 글 삭제</h5>
+															<h5 class="modal-title" id="myModalLabel">QnA 글 삭제 | 현재 선택한 글 번호는 <input name="DeleteQnANo" style="width:8%" value="<%= qaBoardList.get(i).getQaNo() %>" readonly> 번 입니다.<br></h5>
 															<button type="button" class="close" data-dismiss="modal">
 																<span aria-hidden="true">×</span>
 															</button>
 														</div>
 														<div class="modal-body">
-															<form class="form-signin" method="POST" action="deleteQnA">
-															 <div>
-																		<div style="width:100; overflow:hidden text-overflow:ellipsis">
-																			현재 선택한 글 번호는 <input name="DeleteQnANo" style="width:5%" value="<%= qaBoardList.get(i).getQaNo() %>" readonly> 번 입니다.<br>
-																			<input type="text" name="DeleteQnATitle" style="width:100%" value="<%= qaBoardList.get(i).getQaTitle() %>" readonly>
-																			 <textArea name="DeleteQnAContent" cols="63" rows="20" style="resize:none " readonly><%= qaBoardList.get(i).getQaContent() %></textArea>
-																		</div>
-																	</div>
+															
+															<input type="text" name="DeleteQnATitle" style="width:100%" value="<%= qaBoardList.get(i).getQaTitle() %>" readonly>
+															 <textArea name="DeleteQnAContent" cols="63" rows="20" style="resize:none " readonly><%= qaBoardList.get(i).getQaContent() %></textArea>
+																</div>
 															
 																
 															<div class="modal-footer">
 															해당 글을 정말 삭제하시겠습니까? &nbsp;&nbsp;
-																<button type="submit" class="btn btn-outline-secondary">삭제하기</button>
+																<button type="submit" class="btn btn-outline-danger">삭제하기</button>
 																<button type="reset" class="btn btn-outline-secondary"
 																	data-dismiss="modal">Close</button>
 															</div>
@@ -251,7 +262,7 @@
 													</div>
 												</div>
 											</div>
-												</div>
+												
 									</tr>
 									 <% } %>
 								<% } %> 

@@ -10,8 +10,29 @@
             <link rel="stylesheet" href="<%= request.getContextPath() %>/css/index.css" type="text/css">
             <link rel="stylesheet" href="<%= request.getContextPath() %>/css/management.css" type="text/css">
             <link href="https://fonts.googleapis.com/css?family=Song+Myung|Noto+Sans+KR|Do+Hyeon|Yeon+Sung|Nanum+Myeongjo|Sunflower:300&display=swap" rel="stylesheet">
+          <style>
+          
+.table tr th a {
+	color : white;
+	font-size: 20px;
+	font-family: 'Sunflower', sans-serif;
+
+}
+
+#boardList{
+font-family: 'Sunflower', sans-serif;	
+}
+
+
+h5{
+	font-family: 'Sunflower', sans-serif;
+}
+          </style>
+          
           </head>
         <body>
+        
+        
        <div class="container-fluid row-md-2" style="height: 1000px;">
 				
                 <%@ include file="../common/sidebar.jsp"%>
@@ -29,15 +50,15 @@
                             <div class="row-md-12" id="manageheader" style="width:100%; height:850px; overflow:auto">
                               <table  class="table">
 
-                              <thead>
-                                <tr>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Member">회원관리</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Board">게시판관리</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_QnA">QnA등록</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Ask">1:1문의</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Report">신고 관리</a></th>
-                                </tr>
-                              </thead>
+                               <thead>
+									<tr>
+										<th scope="col"><a class="badge badge-pill badge-danger" href="<%=request.getContextPath()%>/Management/management_Member">회원관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-warning" href="<%=request.getContextPath()%>/Management/management_Board">게시판관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-success" href="<%=request.getContextPath()%>/Management/management_QnA">QnA등록</a></th>
+										<th scope="col"><a class="badge badge-pill badge-info" href="<%=request.getContextPath()%>/Management/management_Ask">1:1문의</a></th>
+										<th scope="col"><a class="badge badge-pill badge-primary" href="<%=request.getContextPath()%>/Management/management_Report">신고관리</a></th>
+									</tr>
+								</thead>
                             
                                 </table>
                             

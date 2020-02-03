@@ -28,6 +28,20 @@
   width: 100px;
   height: 20px;
 }
+
+
+.table tr th a {
+	color : white;
+	font-size: 20px;
+	font-family: 'Sunflower', sans-serif;
+
+}
+
+
+
+h5{
+	font-family: 'Sunflower', sans-serif;
+}
 </style>          
           
 </head>
@@ -39,7 +53,7 @@
 
                   <!-- Content -->
                   
-                  <div class="container-fluid row-md-10 mr-5" style="width: 80%;">
+                  <div class="container-fluid row-md-10 mr-5 mt-5" style="width: 80%;">
 	                <div id="page-content-wrapper mb-5">
 	                  <div class="card bg-light shadow ml-5 mr-5">
 	                    <div class="card-body">
@@ -49,24 +63,24 @@
                                  <!-- Content -->
                        <div class="row-md-12" id="manageheader" style="width:100%; height:850px; overflow:auto">
                         <div class="row-md-10" style="height: 720px;">
-                        <table class="table" style="mb-0" >
+                        <table class="table">
 
-                              <thead>
-                                <tr>
- 								  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Member">회원관리</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Board">게시판관리</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_QnA">QnA등록</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Ask">1:1문의</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Report">신고 관리</a></th>
-                                </tr>
-                              </thead>
+                             <thead>
+									<tr>
+										<th scope="col"><a class="badge badge-pill badge-danger" href="<%=request.getContextPath()%>/Management/management_Member">회원관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-warning" href="<%=request.getContextPath()%>/Management/management_Board">게시판관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-success" href="<%=request.getContextPath()%>/Management/management_QnA">QnA등록</a></th>
+										<th scope="col"><a class="badge badge-pill badge-info" href="<%=request.getContextPath()%>/Management/management_Ask">1:1문의</a></th>
+										<th scope="col"><a class="badge badge-pill badge-primary" href="<%=request.getContextPath()%>/Management/management_Report">신고관리</a></th>
+									</tr>
+								</thead>
                             </table>
             
             		
            				 <!-- 검색창-->
 							
-								<form class="col" method="POST" action="searchAsk">
-									<div class="form-row align-items-center">
+								<form class="col" method="POST" action="searchAsk" style="border: 1px solid yellowgreen;">
+									<div class="ml-5 form-row align-items-center">
 										<div class="row-md-2 my-5">
 											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
 											<select name="searchKey" class="custom-select mr-sm-2"
@@ -128,50 +142,61 @@
 	                              	<td> <!-- 1:1 문의 답장 모달   -->
 	                              		
 							<a id="modal-<%= i %>" href="#modal-container-<%= i %>" role="button"
-									class="btn btn-sm btn-outline-secondary reply" data-toggle="modal">답장</a>
+									class="btn btn-sm btn-outline-info reply" data-toggle="modal">답장하기</a>
 										 
 									<div class="modal fade" id="modal-container-<%= i %>" role="dialog"
                                         aria-labelledby="myModalLabel" aria-hidden="true" >
                                         <div class="modal-dialog" role="document" >
                                           <div class="modal-content" id="modal-renew">
+                                             <form class="form-signin" method="POST" action="answer" >
                                             <div class="modal-header">
-                                              <h5 class="modal-title" id="myModalLabel">1:1 문의 답변창</h5>
+                                              <h5 class="modal-title" id="myModalLabel">1:1 문의 답변창 | <input type="text" style="width:28%" name="recievedAskMemberId" value="<%= AskBoardList.get(i).getMemberId() %>" readonly >님의 문의입니다.</h5>
                                               <button type="button" class="close" data-dismiss="modal">
                                                 <span aria-hidden="true">×</span>
                                               </button>
                                             </div>
                                            <div class="modal-body" >
+                                           
+                                           
                                                 <!-- 사용자가 남긴 질문 -->
-                                                <div id="recievedQuestion">
-                                                  
+                                                <div id="recievedQuestion" style="width:100% ">
+                                                
                                                     <div>
-                                                    	<input type="text" style="width:100%" name="recievedAskMemberId" value="<%= AskBoardList.get(i).getMemberId() %>님의 문의입니다." >
-                                                    	<input type="text" style="width:100%" name="recievedAskTitle" value="제목 | <%= AskBoardList.get(i).getAskTitle() %>">
+                                                 	<p class="badge badge-pill badge-info" style="width:15%"> 문의 제목 </p>
+                                                    <p style="width:70% height:10%" name="recievedAskTitle"><%= AskBoardList.get(i).getAskTitle() %></p>
                                                     </div>
-                                                    <div>
-              
-                                                      	<textArea name="recievedAskContent" cols="97" rows="10" style="resize:none">내용 |
-<%= AskBoardList.get(i).getAskContent() %></textArea>
-                                                	</div>
-                                                </div>
-                                             <form class="form-signin" method="POST" action="answer" >
-													<div>
-													<input type="text" style="width:5%" name="answerAskNo" value="<%= AskBoardList.get(i).getAskNo() %>">번 문의글 답변입니다.
+                                              
+                                               
+                                               
+                                                    <div> <!--  recievedAskContent 시작  -->
+              										<p class="badge badge-pill badge-info" style="width:15%"> 문의 내용 </p>
+                                                     <p style="height:30%" name="recievedAskContent"><%= AskBoardList.get(i).getAskContent() %></p>
+                                                	</div> <!--  recievedAskContent  -->
+                                                	
+                                              </div> <!--  recievedQuestion /div -->
+                                               
+                                               
+                                               
+											<div> <!--  answerContent 시작 -->
+													
 													<%
 														String answerContent = "답변을 입력해 주세요.";
 														if( AskBoardList.get(i).getAnswerContent() != null){
 															answerContent =  AskBoardList.get(i).getAnswerContent();
 														}
 													%>
-                                                   <textArea name="answerContent" cols="97" rows="10" style="resize:none"><%= answerContent %></textArea>
-                                                </div>
+													<p class="badge badge-pill badge-info" style="width:30%"> 아래 빈 칸에 답변을 입력해주세요. </p>
+                                                    <textArea name="answerContent" cols="106" rows="9" style="resize:none"><%= answerContent %></textArea>
+                                                </div> <!--  answerContent 끝  -->
+                                                
                                                 <input type="text" value= "<%= AskBoardList.get(i).getMemberId() %>" style="display:none" name="checkMemberId" id="checkMemberId">
                                              
-                                                
+                                                </div>
 								
 								            <div class="modal-footer">
-                                              <button class="btn btn-primary " type="submit">등록</button>
-                                              <button type="button" class="btn btn-secondary"
+								            <input type="text" style="width:4%" name="answerAskNo" value="<%= AskBoardList.get(i).getAskNo() %>">번 문의글에 답변을 등록하시겠습니까?
+                                              <button class="btn btn-outline-danger " type="submit">등록하기</button>
+                                              <button type="button" class="btn btn-outline-primary"
                                                 data-dismiss="modal">Close</button>
 											</div>
 											

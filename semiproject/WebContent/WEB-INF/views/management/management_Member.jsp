@@ -22,7 +22,21 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Song+Myung|Noto+Sans+KR|Do+Hyeon|Yeon+Sung|Nanum+Myeongjo|Sunflower:300&display=swap"
 	rel="stylesheet">
+<style>
 
+.table tr th a {
+	color : white;
+	font-size: 20px;
+	font-family: 'Sunflower', sans-serif;
+
+}
+
+
+
+h5{
+	font-family: 'Sunflower', sans-serif;
+}
+</style>
 </head>
 <body>
 
@@ -44,27 +58,22 @@
 						<div class="row-md-12" id="manageheader" style="width: 100%; height: 850px; overflow: auto">
 							<div class="row-md-10" style="height: 720px;">
 							<table class="table">
-								<thead>
+								  <thead>
 									<tr>
-										<th scope="col">
-											<a href="<%=request.getContextPath()%>/Management/management_Member">회원관리</a></th>
-										<th scope="col">
-											<a href="<%=request.getContextPath()%>/Management/management_Board">게시판관리</a></th>
-										<th scope="col">
-											<a href="<%=request.getContextPath()%>/Management/management_QnA">QnA등록</a></th>
-										<th scope="col">
-											<a href="<%=request.getContextPath()%>/Management/management_Ask">1:1문의</a></th>
-										<th scope="col">
-											<a href="<%=request.getContextPath()%>/Management/management_Report">신고관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-danger" href="<%=request.getContextPath()%>/Management/management_Member">회원관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-warning" href="<%=request.getContextPath()%>/Management/management_Board">게시판관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-success" href="<%=request.getContextPath()%>/Management/management_QnA">QnA등록</a></th>
+										<th scope="col"><a class="badge badge-pill badge-info" href="<%=request.getContextPath()%>/Management/management_Ask">1:1문의</a></th>
+										<th scope="col"><a class="badge badge-pill badge-primary" href="<%=request.getContextPath()%>/Management/management_Report">신고관리</a></th>
 									</tr>
 								</thead>
-							</table>
+							</table> 
 
 					<!-- 검색창-->
 
 				
-								<form class="col" method="POST" action="searchMember">
-									<div class="form-row align-items-center">
+								<form class="col" method="POST" action="searchMember" style="border: 1px solid yellowgreen;">
+									<div class="ml-5 form-row align-items-center">
 										<div class="row-md-2 my-5">
 											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
 											<select name="searchKey" class="custom-select mr-sm-2"
@@ -119,40 +128,45 @@
 										 <a id="modal-<%=i%>" href="#modal-container-<%=i%>" role="button"
 											class="btn btn-sm btn-outline-secondary" data-toggle="modal">수정</a>
 										 
-											<div class="modal fade" id="modal-container-<%=i%>"
-												role="dialog" aria-labelledby="myModalLabel"
-												aria-hidden="true">
-												<div class="modal-dialog" role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="myModalLabel">회원 정보 수정</h5>
-															<button type="button" class="close" data-dismiss="modal">
-																<span aria-hidden="true">×</span>
-															</button>
-														</div>
-														<div class="modal-body">
-															<form class="form-signin" method="POST" action="updateMember">
-																<% String newId = "newId" + i; %>
-																아이디 <input type="text" class="form-control"
-																	id="<%= newId %>" name="newId" 
-																	value="<%=mList.get(i).getMemberId()%>" readonly> <br>
-																<% String newName = "newName" + i; %>
-																이름 <input type="text" class="form-control"
-																	id="<%= newName %>" name="newName" placeholder="닉네임 입력">
-																<br>
-																<% String newEmail = "newEmail" + i; %>
-																이메일 <input type="text" class="form-control"
-																	id="<%= newEmail %>" name="newEmail"
-																	placeholder="이메일 입력"> <br>
-																<div class="modal-footer">
-																	<button type="submit" class="btn btn-outline-secondary">수정하기</button>
-																	<button type="reset" class="btn btn-outline-secondary"
-																		data-dismiss="modal">Close</button>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
+											 <!-- The Modal -->
+        <div class="modal fade" id="modal-container-<%=i%>">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">회원정보 수정</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form class="form-signin" method="POST" action="updateMember">
+                    <% String newId = "newId" + i; %>
+                    <label for="newId">아이디</label>
+                     <input type="text" class="form-control"
+                        id="<%= newId %>" name="newId" 
+                        value="<%=mList.get(i).getMemberId()%>" readonly> <br>
+                    <% String newName = "newName" + i; %>
+                    <label for="newName">닉네임</label>
+                    <input type="text" class="form-control"
+                        id="<%= newName %>" name="newName" placeholder="닉네임 입력">
+                    <br>
+                    <label for="newEmail">이메일</label>
+                    <% String newEmail = "newEmail" + i; %>
+                    <input type="text" class="form-control" id="<%= newEmail %>" name="newEmail" placeholder="이메일 입력"> <br>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-danger">수정하기</button>
+                        <button type="reset" class="btn btn-outline-secondary"
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+              </div>
+       
+              
+            </div>
+          </div>
+        </div>
 											</div>
 											
 											<!--  회원 삭제 모달  -->																	
@@ -181,7 +195,7 @@
 																<p> 정말로 이 회원을 삭제하시겠습니까? </p>
 																
 															<div class="modal-footer">
-																<button type="submit" class="btn btn-outline-secondary">삭제하기</button>
+																<button type="submit" class="btn btn-outline-danger">삭제하기</button>
 																<button type="reset" class="btn btn-outline-secondary"
 																	data-dismiss="modal">Close</button>
 															</div>

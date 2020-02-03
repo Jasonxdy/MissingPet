@@ -23,6 +23,25 @@
   width: 100px;
   height: 20px;
 }
+
+
+.table tr th a {
+	color : white;
+	font-size: 20px;
+	font-family: 'Sunflower', sans-serif;
+
+}
+
+#boardList{
+font-family: 'Sunflower', sans-serif;	
+}
+
+
+
+
+h5{
+	font-family: 'Sunflower', sans-serif;
+}
 </style>     
 
         </head>
@@ -44,20 +63,20 @@
                         <div class="row-md-10" style="height: 720px;">
                         <table  class="table" >
 
-                              <thead>
-                                <tr>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Member">회원관리</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Board">게시판관리</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_QnA">QnA등록</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Ask">1:1문의</a></th>
-                                  <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Report">신고 관리</a></th>
-                                </tr>
-                              </thead>
+                             <thead>
+									<tr>
+										<th scope="col"><a class="badge badge-pill badge-danger" href="<%=request.getContextPath()%>/Management/management_Member">회원관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-warning" href="<%=request.getContextPath()%>/Management/management_Board">게시판관리</a></th>
+										<th scope="col"><a class="badge badge-pill badge-success" href="<%=request.getContextPath()%>/Management/management_QnA">QnA등록</a></th>
+										<th scope="col"><a class="badge badge-pill badge-info" href="<%=request.getContextPath()%>/Management/management_Ask">1:1문의</a></th>
+										<th scope="col"><a class="badge badge-pill badge-primary" href="<%=request.getContextPath()%>/Management/management_Report">신고관리</a></th>
+									</tr>
+								</thead>
 
                                  </table>
                             
-                         <table >
-                            <thead>
+                         <table id="boardList" class="mb-3">
+                            <thead> 
                               <tr>
                                <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Board_Find">찾아주세요 게시판 </a> &nbsp;|&nbsp;</th>
                                 <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Board_See">봤어요 게시판 </a> &nbsp;|&nbsp; </th>
@@ -73,8 +92,8 @@
                            
                         
              
-                          <form class="col" method="POST" action="searchReviewBoard">
-                              <div class="form-row align-items-center" >
+                          <form class="col" method="POST" action="searchReviewBoard" style="border: 1px solid yellowgreen;">
+                              <div class="ml-5 form-row align-items-center" >
                                 <div class="col-auto my-5">
                                   <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                                   <select name="searchKey" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
@@ -126,7 +145,7 @@
                                       <td><span class="ContentLength"><%= ReviewBoardList.get(i).getBoardContent() %></span></td>
                                       <td><%= ReviewBoardList.get(i).getMemberId() %></td>
                                       <td><%= ReviewBoardList.get(i).getBoardCreateDt() %></td>
-                                      <td><button id="moveBoard">해당 글 이동</button></td>
+                                      <td><button id="moveBoard" class="btn btn-sm btn-secondary">해당 글 이동</button></td>
                                   </tr>
                                   	<% } %>
 								<% } %>
