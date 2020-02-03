@@ -1,7 +1,18 @@
 #bigdiv{
     width: 100%; height : 500px;
-    padding: 30px 30px 30px 30px;
+    padding: 50px 50px 50px 50px;
 }
+
+#bodytitle{
+	
+ box-shadow: 2px 2px 2px rgba(135,139,133,0.4);
+ border-radius: 30px;
+ height : 50px;
+ padding : 3px 20px 1px 20px;
+ 
+}
+
+
 
 .container{margin-bottom: 20px;}
 
@@ -135,6 +146,21 @@
     margin-left: 30px;
 }
 
+
+#listback{
+	margin-top:10px;
+	margin-bottom:40px;
+}
+#listback>a{
+	width : 200px; 
+	height: 50px; 
+	font-size : 20px; 
+	padding-top:10px; 
+     border : 1px solid blue; 
+     background-color:white; 
+     color: blue;"
+}
+
 #text{
     width: 500px;
     height: 100px;
@@ -150,6 +176,7 @@
        margin-left: 10px;
        width: 70px;
        height: 70px;
+       border-radius: 100px;
    }
 #imgdiv2{
     display: block;
@@ -213,6 +240,8 @@
 
 #comment{
     min-height: 90px;
+    border-bottom : 1px dashed lightgray;
+    border-radius : 10px;
 }
 
 
@@ -226,10 +255,24 @@
 
 #commContent{
 	margin-left: 100px;
+	border-radius: 10px;
 }
 
 #addComment{
 	
 	margin-left : 70px;
-	margin-top : 20px;
+	margin-bottom : 20px;
+	width : 100px;
+	height: 100px;
+	color:
+}
+
+.freett1{
+	font-weight : bold;
+	color : white;
+	font-size: 18px;
+	border : 1px solid darkblue;
+	background-color : darkblue;
+	padding: 3px 3px 3px 6px;
+	
 }

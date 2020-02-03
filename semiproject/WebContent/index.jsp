@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 </head>
 <body>
-    
+
 <div class="container-fluid">
 
     <section class="row">
-    
+
       <!-- 사이드바 -->
       <%@ include file="WEB-INF/views/common/sidebar.jsp"%>
 
@@ -30,14 +30,14 @@
             </div>
             <div class="carousel-item">
               <img class=" d-block w-100" style="background-size:contain"
-                src="<%= request.getContextPath() %>/img/main3.jpg"
+                src="<%= request.getContextPath() %>/img/main7.jpg"
                 alt="Third slide">
-            </div> 
+            </div>
             <ul class="carousel-indicators">
               <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
               <li data-target="#main-carousel" data-slide-to="1"></li>
               <li data-target="#main-carousel" data-slide-to="2"></li>
-            </ul> 
+            </ul>
           </div>
         </div>
         <!-- 컨텐츠 끝 -->
@@ -47,7 +47,7 @@
 
       <!-- 웹페이지 알림 -->
       <%@ include file="WEB-INF/views/common/header.jsp"%>
-      
+
 
     </section>
 </div>

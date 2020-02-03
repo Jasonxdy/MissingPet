@@ -44,8 +44,8 @@
       <form class="form-signin" method="POST" action="<%= request.getContextPath() %>/member/login" onsubmit="return loginValidate();">
         <div class="text-center mb-4">
 	        <a href="<%= request.getContextPath() %>">
-	          <img class="mb-4 rounded" src="${pageContext.request.contextPath}/img/MissPet.png"
-	            alt="" width="170">
+	          <img class="mb-4 rounded" src="${pageContext.request.contextPath}/img/MissPet2.png" width=200px
+	            alt="" >
 	        </a>
           <!-- <h1 class="h3 mb-3 font-weight-normal">Login</h1> -->
         </div>
