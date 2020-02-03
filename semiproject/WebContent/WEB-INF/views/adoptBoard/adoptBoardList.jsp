@@ -72,8 +72,9 @@
                               		<td> <h2>존재하는 게시글이 없습니다.</h2>
                               	</tr>
                               <% } else {
+                            	  int rCount = 0;
                             	for(BoardHJ board : bList){
-                              	 int rCount = 0; %>
+                              	  %>
                               	   
                               	   
                                 <tr>

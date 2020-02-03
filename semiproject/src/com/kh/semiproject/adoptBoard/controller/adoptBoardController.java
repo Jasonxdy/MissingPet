@@ -101,6 +101,8 @@ public class adoptBoardController extends HttpServlet {
 				//request.setAttribute("animalList", animalList);
 				request.setAttribute("adoptList", adoptList);
 				
+				System.out.println(bList);
+				
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 				
