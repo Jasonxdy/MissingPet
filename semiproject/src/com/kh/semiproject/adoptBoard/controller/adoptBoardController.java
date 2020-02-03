@@ -449,7 +449,7 @@ public class adoptBoardController extends HttpServlet {
 			}
 			try {
 				int boardType = 3;
-				int listCount = boardService.getSearchListCount(condition, boardType);
+				int listCount = adoptBoardService.getAdoptSearchListCount(condition, boardType, doneCheck1, doneCheck2);
 				
 				int limit = 1;
 				int pagingBarSize = 10;
@@ -485,6 +485,7 @@ public class adoptBoardController extends HttpServlet {
 				
 				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition);
 				
+				System.out.println(bList);
 				
 				path = "/WEB-INF/views/adoptBoard/adoptBoardSearchList.jsp";
 				request.setAttribute("pInf", pInfo);

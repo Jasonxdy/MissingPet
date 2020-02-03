@@ -325,4 +325,35 @@ public class AdoptBoardDao {
 		return bList;
 	}
 
+	/** 분양합니다 게시글 수 조회용 Dao
+	 * @param conn
+	 * @param condition
+	 * @param boardType
+	 * @param condition2
+	 * @return searchAdoptListCount
+	 * @throws Exception
+	 */
+	public int getSearchAdoptListCount(Connection conn, String condition, int boardType, String condition2) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int searchAdoptListCount = 0;
+		String query = prop.getProperty("getSearchAdoptListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query + condition + condition2);
+			
+			pstmt.setInt(1, boardType);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				searchAdoptListCount = rset.getInt(1); 
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return searchAdoptListCount;
+	}
+
 }

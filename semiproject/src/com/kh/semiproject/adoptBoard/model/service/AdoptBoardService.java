@@ -273,4 +273,37 @@ public class AdoptBoardService {
 		return bList;
 	}
 
+	/** 분양합니다 검색 게시글 수 조회 Service
+	 * @param condition
+	 * @param boardType
+	 * @param doneCheck1
+	 * @param doneCheck2
+	 * @return
+	 * @throws Exception
+	 */
+	public int getAdoptSearchListCount(String condition, int boardType, String doneCheck1, String doneCheck2) throws Exception {
+		Connection conn = getConnection();
+		
+				
+		String condition2 = null;
+		
+		System.out.println(doneCheck1 + "||" + doneCheck2);
+		
+		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
+			condition2 = " AND ADOPT_DONE='Y' OR ADOPT_DONE='N'";
+		} else if(doneCheck1.equals("Y") && doneCheck2.equals("N")) {
+			condition2 = " AND ADOPT_DONE='Y'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("Y")) {
+			condition2= " AND ADOPT_DONE='N'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("N")) {
+			condition2= " AND ADOPT_DONE='C'";
+		}
+
+		int searchAdoptListCount = new AdoptBoardDao().getSearchAdoptListCount(conn, condition, boardType, condition2);
+		
+		close(conn);
+		
+		return searchAdoptListCount;
+	}
+
 }
