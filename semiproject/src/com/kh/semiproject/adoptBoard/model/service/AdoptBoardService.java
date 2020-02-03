@@ -51,6 +51,8 @@ public class AdoptBoardService {
 		AdoptBoardDao adoptBoardDao = new AdoptBoardDao();
 		BoardDao boardDao = new BoardDao();
 		
+		board.setBoardContent(board.getBoardContent().replace("\r\n", "<br>"));
+		
 		int result = 0;
 		
 		int boardNo = boardDao.selectNextBoardNo(conn);
