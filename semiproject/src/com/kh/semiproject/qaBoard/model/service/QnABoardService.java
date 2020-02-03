@@ -44,7 +44,11 @@ public class QnABoardService {
 		
 		Connection conn = getConnection();
 		
+		QnAContent.replace("\r\n", "<br>");
+		
 		int result = new QnABoardDao().insertQnA(conn, QnATitle, QnAContent);
+		
+	
 		
 		if(result > 0) commit(conn);
 		else		rollback(conn);
@@ -66,6 +70,8 @@ public class QnABoardService {
 	 */
 	public int updateQnA(int UpdateQnANo, String updateQnAContent, String updateQnATitle) throws Exception{
 		Connection conn = getConnection();
+		
+		updateQnAContent.replace("\r\n", "<br>");
 		
 		int result = new QnABoardDao().updateQnA(conn, UpdateQnANo, updateQnATitle, updateQnAContent);
 		

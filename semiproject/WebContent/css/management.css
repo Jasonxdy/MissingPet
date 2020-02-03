@@ -2,10 +2,6 @@
 	color : black;
 }
 
-.table tr th:hover {
-	font-weight : bold;
-	font-size : 20px;
-}
 
 #boardList  a{
 	color : black;
