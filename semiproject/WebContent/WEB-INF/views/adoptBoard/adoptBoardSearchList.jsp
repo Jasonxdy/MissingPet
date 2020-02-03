@@ -128,7 +128,6 @@
                                             <span class="pull-right pendiente"></span>
                                           </h4>
                                       
-                                      	
                                           <% 
                                           	String content = board.getBoardContent();
                                           	int conLength = 0;
