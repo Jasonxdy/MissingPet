@@ -221,7 +221,7 @@ int endPage = pInf.getEndPage();
                 
               <div id="bt-bt">
                <% if(loginMember != null && loginMember.getMemberGrade().equals("N")) {%>
-              <button type="button" class="btn btn-primary" onclick="location.href = 'writeForm';">글쓰기</button>
+              <button type="button" style= "width : 130px;" class="btn btn-outline-primary" onclick="location.href = 'writeForm';">글쓰기</button>
              <%} %>
              </div>
 

@@ -81,7 +81,7 @@ String currentPage = request.getParameter("currentPage");
                           	    조회 : <%=board.getBoardCount() %>
                           	  &nbsp;&nbsp;
                                  <% if( request.getSession().getAttribute("loginMember") != null ) { %>
-                      			  <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-secondary btn-sm ml-5">신고하기</button>
+                      			  <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-outline-secondary btn-sm ml-5">신고하기</button>
 								 <% } %>
                              <%-- 모달 시작 --%>
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
