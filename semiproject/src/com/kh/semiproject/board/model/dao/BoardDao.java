@@ -1374,6 +1374,32 @@ public class BoardDao {
 		}
 
 
+
+
+		/** 게시글 댓글 삭제용 Dao
+		 * @param conn
+		 * @param no
+		 * @return result
+		 * @throws Exception
+		 */
+		public int deleteComment(Connection conn, int no) throws Exception {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("deleteComment");
+			
+			try {
+				pstmt = conn.prepareStatement(query);		
+				pstmt.setInt(1, no);
+				
+				result = pstmt.executeUpdate();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+
 		
 		
 		

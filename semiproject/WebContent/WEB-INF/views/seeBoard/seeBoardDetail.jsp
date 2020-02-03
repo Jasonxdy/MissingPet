@@ -320,10 +320,12 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="float-right">
-								<% if(loginMember != null && (board.getBoardWriter().equals(loginMember.getMemberId())) || loginMember.getMemberGrade().equals("Y")){ %>
+								<% if(loginMember != null) {
+									if((board.getBoardWriter().equals(loginMember.getMemberId())) || loginMember.getMemberGrade().equals("Y") ){%>
 						
 								<a href="updateForm?no=<%=board.getBoardNo() %>" class="btn btn-primary m-3">수정</a>
 								<button type="button" class="btn btn-primary m-3" id="deleteBtn">삭제</button>
+								<% } %>
 								<% } %>
 							</div>
 						</div>
