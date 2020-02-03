@@ -436,6 +436,9 @@ public class adoptBoardController extends HttpServlet {
 			String searchValue = request.getParameter("searchValue");
 			String doneCheck1 = request.getParameter("doneCheck1");
 			String doneCheck2 = request.getParameter("doneCheck2");
+			
+			System.out.println(doneCheck1);
+			System.out.println(doneCheck2);
 
 			String condition = null;
 			
@@ -485,7 +488,9 @@ public class adoptBoardController extends HttpServlet {
 				
 				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition);
 				
+				System.out.println(pInfo);
 				System.out.println(bList);
+				System.out.println(aList);
 				
 				path = "/WEB-INF/views/adoptBoard/adoptBoardSearchList.jsp";
 				request.setAttribute("pInf", pInfo);

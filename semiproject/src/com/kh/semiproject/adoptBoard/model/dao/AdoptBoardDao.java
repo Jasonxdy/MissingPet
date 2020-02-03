@@ -340,6 +340,7 @@ public class AdoptBoardDao {
 		String query = prop.getProperty("getSearchAdoptListCount");
 		
 		try {
+			System.out.println(query + condition + condition2);
 			pstmt = conn.prepareStatement(query + condition + condition2);
 			
 			pstmt.setInt(1, boardType);

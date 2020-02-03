@@ -1,9 +1,9 @@
-<%@page import="com.kh.semiproject.board.model.vo.BoardHJ"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.List, com.kh.semiproject.board.model.vo.PageInfo, com.kh.semiproject.board.model.vo.Attachment"%>
 <%@page import="com.kh.semiproject.board.model.vo.Animal"%>
 <%@page import="com.kh.semiproject.findBoard.model.vo.FindBoard"%>
+<%@page import="com.kh.semiproject.board.model.vo.BoardHJ"%>
 
 <%
 	List<BoardHJ> bList = (List<BoardHJ>)request.getAttribute("bList");

@@ -16,6 +16,8 @@
 	
 	String searchKey = request.getParameter("searchKey");
 	String searchValue = request.getParameter("searchValue");
+	String doneCheck1 = request.getParameter("doneCheck1");
+	String doneCheck2 = request.getParameter("doneCheck2");
 		
 	int listCount = pInf.getListCount();
 	int currentPage = pInf.getCurrentPage();
@@ -203,12 +205,12 @@
 	            	<% if(currentPage > 1) { %>
 	                <li>
 	                	<!-- 맨 처음으로(<<) -->
-	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=1">&lt;&lt;</a>
+	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=1">&lt;&lt;</a>
 	                </li>
 	                
 	                <li>
 	                	<!-- 이전으로(<) -->
-                   		<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= currentPage-1 %>">&lt;</a>
+                   		<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= currentPage-1 %>">&lt;</a>
 	                </li>
 	                <% } %>
 	                
@@ -220,7 +222,7 @@
 		                </li>
 	                	<% } else{ %>
                 		<li>
-	                    	<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= p %>"><%= p %></a>
+	                    	<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= p %>"><%= p %></a>
 	                	</li>
 	                	<% } %>
 					<%} %>
@@ -228,12 +230,12 @@
 	                <!-- 다음 페이지로(>) -->
 	                <% if(currentPage < maxPage){ %>
 	                <li>
-	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= currentPage+1 %>">&gt;</a>
+	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= currentPage+1 %>">&gt;</a>
 	                </li>
 	                
 	                <!-- 맨 끝으로(>>) -->
 	                <li>
-	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&currentPage=<%= maxPage %>">&gt;&gt;</a>
+	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= maxPage %>">&gt;&gt;</a>
 	                </li>
 	                <% }%>
 	                
