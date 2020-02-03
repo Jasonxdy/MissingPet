@@ -176,7 +176,7 @@
 		var content = $("#commContent").val();
 		
 		// 댓글 등록 시 해당 글 작성자가 댓글 알림 설정했는지 확인
-		var boardWriter = <%= review.getMemberId() %>
+		var boardWriter = "<%= review.getMemberId() %>";
 		
 		// 로그인 검사
 		<% if(loginMember == null){ %>
