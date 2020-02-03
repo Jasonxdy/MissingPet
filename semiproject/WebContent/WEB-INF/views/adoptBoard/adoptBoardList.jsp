@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>분양합니다</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/ReviewList.css" type="text/css"/>
 </head>
 <body>
@@ -52,14 +52,14 @@
               <!-- 이 안에다가 작성하세요!!!!!!!! -->
 
 
-              <div class="container" style="margin-left:20rem;">
+              <div class="container">
                 <div class="row">
 
                   <section class="content">
                     <h2 id="title-top"><a href="#">분양합니다</a></h2>
                     <hr>
                     <div class="col-md-12 col-md-offset-2" id="panelwrap">
-                      <div class="panel panel-default">
+                      <div class="panel panel-default" style="min-height:640px;">
                         <div class="panel-body">
 
 
@@ -187,27 +187,6 @@
                             <input type="text" name="doneCheck2"> -->
                         </form>
                     </div>
-                    
-                    <script>
-	                    $(function(){
-		            		var searchKey = "<%= searchKey %>";
-		            		var searchValue = "<%= searchValue %>";
-		            		
-		            		if(searchKey != "null" && searchValue != "null"){
-		            			// 검색한 경우
-		            			
-		            			$.each( $("select[name=searchKey] > option") , function(index, item){
-		            					// $(item) : 현재 접근 요소
-		            				if( $(item).val() == searchKey ){
-		            					$(item).prop("seleted", "true");
-		            				}
-		            			});
-		            			$("input[name=searchValue]").val(searchValue);
-		            			
-		            		} 
-		            	});
-                    </script>
-    
                     
                     <% if(loginMember != null) {%>
                     <div class="float-right m-2">
