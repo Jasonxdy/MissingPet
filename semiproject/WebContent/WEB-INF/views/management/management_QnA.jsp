@@ -89,7 +89,7 @@
 											</select>
 										</div>
 
-										<div class="col-md-9" >
+										<div class="col-md-9"  >
 											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
 												placeholder="검색어를 입력하세요.">
 										</div>
