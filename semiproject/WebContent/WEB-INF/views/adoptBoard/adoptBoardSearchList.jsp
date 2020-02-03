@@ -151,7 +151,7 @@
                       
                       <div class="col-md-12">
                     <div class="float-left m-2">
-                        <form class="input-group" method="GET" action="searchList" id="searchForm">
+                        <form class="input-group" method="GET" action="searchList" id="searchForm" onsubmit="return validate();">
                             <select class="form-control label" name="searchKey">
                                 <option value="title">제목</option>
                                 <option value="content">내용</option>
