@@ -23,6 +23,19 @@ public class BoardHJ {
 		this.boardContent = boardContent;
 	}
 
+	
+
+	public BoardHJ(int boardNo, String boardTitle, String boardContent, int boardCount, Date boardModifyDate,
+			String boardWriter) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCount = boardCount;
+		this.boardModifyDate = boardModifyDate;
+		this.boardWriter = boardWriter;
+	}
+
 
 
 	public BoardHJ(String boardTitle, String boardContent, String boardURL, String boardWriter, int boardCode) {
