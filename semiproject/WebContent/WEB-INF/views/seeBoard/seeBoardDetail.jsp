@@ -311,11 +311,48 @@
 								<span> <%= board.getBoardTitle() %> </span> &nbsp;&nbsp; <span
 									class="float-right"> <%= board.getBoardModifyDate() %> &nbsp;&nbsp;&nbsp;&nbsp;
 									조회 : <%= board.getBoardCount() %> &nbsp;&nbsp;
-									<button class="flot-right" type="button">신고하기</button>
+									<% if( request.getSession().getAttribute("loginMember") != null ) { %>
+                        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-secondary btn-sm ml-5">신고하기</button>
+						<% } %>
 								</span>
 							</div>
 						</div>
 					</div>
+					
+					<%-- 모달 시작 --%>
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			                <div class="modal-dialog modal-dialog-centered" role="document">
+			                  <div class="modal-content">
+			                    <div class="modal-header">
+			                      <h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
+			                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                        <span aria-hidden="true">&times;</span>
+			                      </button>
+			                    </div>
+		                        <form action="<%= request.getContextPath()%>/review/report" method="post">
+			                    	<div class="modal-body">
+			                            <div class="form-group">
+			                              <label for="recipient-name" class="col-form-label">제목</label>
+			                              <input type="text" class="form-control" id="reportTitle" name="reportTitle">
+			                              <% if( request.getSession().getAttribute("loginMember") != null ) { %>
+			                              <input type="text" name="reportMemberId" value="<%= loginMember.getMemberId() %>" hidden>
+			                              <% } %>
+			                              <input type="text" name="reportBoardNo" value="<%= review.getBoardNo() %>" hidden>
+			                            </div>
+			                            <div class="form-group">
+			                              <label for="message-text" class="col-form-label">내용</label>
+			                              <textarea class="form-control" id="reportContent" name="reportContent"></textarea>
+			                            </div>
+			                    	</div>
+				                    <div class="modal-footer">
+				                      <button type="submit" class="btn btn-primary" onclick="return reportVil()">작성</button>
+				                      <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				                    </div>
+		                    	</form>
+			                  </div>
+			                </div>
+			              </div>
+						<%-- 모달 끝 --%>
 
 					<div class="row">
 						<div class="col-md-12">
@@ -528,8 +565,10 @@
 			var title = "<%= board.getBoardTitle() %>";
 			var commentTell = "<%= seeBoard.getsBoardCommentTell() %>"
 			
-			// 댓글 등록 시 해당 글 작성자가 댓글 알림 설정했는지 확인
-			var boardWriter = "<%= board.getBoardWriter() %>";
+				// 댓글 등록 시 해당 글 작성자가 댓글 알림 설정했는지 확인
+				var boardWriter = "<%= board.getBoardWriter() %>";
+				var alertContent = "<%= board.getBoardTitle() %>";
+				var alertURL = "<%= request.getContextPath() %>" + "/seeBoard/detail?no=" + boardNo + "&currentPage=1";
 			
 			// 로그인 검사
 			<% if(loginMember == null){ %>
@@ -542,7 +581,8 @@
 					url: "insertComment", // url은 필수 속성!!
 					type: "post",
 					data: {writer: writer, 	// key는 ""가 포함된 문자열
-						   content: content, boardNo: boardNo, boardWriter:boardWriter, email: email, title: title, commentTell: commentTell},
+						   content: content, boardNo: boardNo, boardWriter:boardWriter, email: email, title: title, commentTell: commentTell
+						   , alertContent : alertContent, alertURL:alertURL},
 					success: function(result){ // result에 서버의 응답이 담겨서 넘어온다
 						if(!content.trim().length == 0){
 							if(result>0){

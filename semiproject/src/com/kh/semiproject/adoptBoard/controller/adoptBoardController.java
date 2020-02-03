@@ -26,6 +26,7 @@ import com.kh.semiproject.board.model.vo.BoardHJ;
 import com.kh.semiproject.board.model.vo.PageInfo;
 import com.kh.semiproject.common.ExceptionForward;
 import com.kh.semiproject.common.MyFileRenamePolicy;
+import com.kh.semiproject.common.alert.model.vo.Alert;
 import com.kh.semiproject.findBoard.model.service.FindBoardService;
 import com.kh.semiproject.findBoard.model.vo.FindBoard;
 import com.kh.semiproject.map.model.service.MapService;
@@ -537,6 +538,8 @@ public class adoptBoardController extends HttpServlet {
 			
 			// 댓글 알림용 게시글 작성자 얻어오기
 			String boardWriter = request.getParameter("boardWriter");
+			String alertContent = request.getParameter("alertContent");
+			String alertURL = request.getParameter("alertURL");
 			
 			//Reply reply = new Reply(replyContent, boardId);
 			Comment comment = new Comment(commentContent, boardNo);
@@ -545,10 +548,20 @@ public class adoptBoardController extends HttpServlet {
 				int result = reviewService.insertComment(comment, commentWriter);
 				
 				
-				// 댓글 등록 시 게시글 작성자가 알림 설정한 경우 알림 board에 값 추가
-				if(result > 0) {
-					//int checkNo = reviewService.checkTell(boardWriter);
-					
+				// 댓글 등록자와 글 작성자가 같지 않는 경우만 실행
+				if(!commentWriter.equals(boardWriter)) {
+					// 댓글 등록 시 게시글 작성자가 알림 설정한 경우 ALERT 테이블에 값 추가
+					if(result > 0) {
+						String[] tell = reviewService.checkTell(boardWriter);
+						
+						if(tell[0].equals("Y") && tell[1].equals("Y")) { // 글 작성자가 댓글 알림을 켜둔 경우
+							
+							// 알림 테이블에 알림 정보 등록
+							Alert alert = new Alert(boardWriter, alertContent, alertURL);
+							
+							result = reviewService.insertTell(alert);
+						}
+					}
 				}
 				
 				response.getWriter().print(result);

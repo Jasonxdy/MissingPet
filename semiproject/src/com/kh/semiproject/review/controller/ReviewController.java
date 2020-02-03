@@ -498,6 +498,8 @@ public class ReviewController extends HttpServlet {
 			
 			int alertNo = Integer.parseInt(request.getParameter("alertNo"));
 			
+			System.out.println("delteAlert 실행");
+			
 			try {
 				
 				int result = reviewService.deleteAlert(alertNo);

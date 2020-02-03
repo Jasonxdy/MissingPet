@@ -97,7 +97,7 @@
 	        		console.log(alertUrl);
 	        		
 	        		$.ajax({
-	    	        	url : "deleteNo",
+	    	        	url : "/review/deleteAlert",
 	    	        	type : "GET",
 	    	        	data : {
 	    	        		alertNo : alertNo
