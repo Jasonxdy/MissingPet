@@ -511,6 +511,7 @@ public class findBoardController extends HttpServlet {
 			
 			String email = request.getParameter("email");
 			String title = request.getParameter("title");
+			String commentTell = request.getParameter("commentTell");
 			
 			// 댓글 알림용 게시글 작성자 얻어오기
 			String boardWriter = request.getParameter("boardWriter");
@@ -525,7 +526,7 @@ public class findBoardController extends HttpServlet {
 				// 댓글 등록 시 게시글 작성자가 알림 설정한 경우 알림 board에 값 추가
 				if(result > 0) {
 					//int checkNo = reviewService.checkTell(boardWriter);
-					if(!boardWriter.equals(commentWriter)) {
+					if(!boardWriter.equals(commentWriter) && commentTell.equals("Y")) {
 						new BoardService().sendCommentAlram(commentWriter, commentContent, title, email);
 					}
 				}
