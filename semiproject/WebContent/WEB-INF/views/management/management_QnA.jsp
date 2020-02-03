@@ -80,7 +80,8 @@
 								<form class="col" method="POST" action="searchQnA">
 									<div class="form-row align-items-center">
 										<div class="row-md-2 my-5">
-											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
+											<label class="mr-sm-2 sr-only" for="inlineFormCusto
+											mSelect"></label>
 											<select name="searchKey" class="custom-select mr-sm-2"
 												id="inlineFormCustomSelect">
 												<option value="SearchQnATitle" selected>제목</option>
@@ -102,6 +103,7 @@
 								
 							
 									
+
 
 
 

@@ -195,6 +195,12 @@ public class adoptBoardController extends HttpServlet {
 					
 					ArrayList<Attachment> fList = new ArrayList<Attachment>();
 					
+					// map 정보 가저오기
+					Double mapLatitude = Double.parseDouble(multiRequest.getParameter("latitude"));
+					Double mapLongitude = Double.parseDouble(multiRequest.getParameter("longitude"));
+					String mapAddress = multiRequest.getParameter("mapAddress");
+					Map map = new Map(mapLatitude, mapLongitude, mapAddress);
+					
 					for(int i = originFiles.size()-1 ; i >=0 ; i--) {
 						Attachment file = new Attachment();
 						file.setFilePath(savePath);
@@ -211,7 +217,7 @@ public class adoptBoardController extends HttpServlet {
 						fList.add(file);
 					}
 					
-					int result = AdoptBoardService.insertAdoptBoard(board,adoptBoard,animal,fList);
+					int result = AdoptBoardService.insertAdoptBoard(board,adoptBoard,animal,fList, map);
 					
 					if(result>0) {
 						msg = "게시글 등록 성공";
@@ -246,7 +252,7 @@ public class adoptBoardController extends HttpServlet {
 					
 					Member member = memberService.selectMember(memberId);
 					
-					//Map map = new MapService().selectMap(boardNo);
+					Map map = new MapService().selectMap(boardNo);
 					
 					if(!files.isEmpty()) {
 						request.setAttribute("files", files);
@@ -256,7 +262,7 @@ public class adoptBoardController extends HttpServlet {
 					request.setAttribute("animal", animal);
 					request.setAttribute("board", board);
 					request.setAttribute("member", member);
-					//request.setAttribute("map", map);
+					request.setAttribute("map", map);
 					
 					path = "/WEB-INF/views/adoptBoard/adoptBoardDetail.jsp";
 					view = request.getRequestDispatcher(path);
@@ -375,13 +381,13 @@ public class adoptBoardController extends HttpServlet {
 					
 					ArrayList<Attachment> fList = new ArrayList<Attachment>();
 					
-					/*
-					 * // map 정보 가저오기 Double mapLatitude =
-					 * Double.parseDouble(multiRequest.getParameter("latitude")); Double
-					 * mapLongitude = Double.parseDouble(multiRequest.getParameter("longitude"));
-					 * String mapAddress = multiRequest.getParameter("mapAddress"); Map map = new
-					 * Map(mapLatitude, mapLongitude, mapAddress);
-					 */
+					
+					 // map 정보 가저오기 Double mapLatitude =
+					Double mapLatitude = Double.parseDouble(multiRequest.getParameter("latitude")); 
+					Double mapLongitude = Double.parseDouble(multiRequest.getParameter("longitude"));
+					String mapAddress = multiRequest.getParameter("mapAddress"); 
+					Map map = new Map(mapLatitude, mapLongitude, mapAddress);
+					 
 					
 					
 					for(int i = originFiles.size()-1 ; i >=0 ; i--) {
@@ -400,7 +406,7 @@ public class adoptBoardController extends HttpServlet {
 						fList.add(file);
 					}
 					
-					int result = AdoptBoardService.updateAdoptBoard(board,adoptBoard,animal,fList);
+					int result = AdoptBoardService.updateAdoptBoard(board,adoptBoard,animal,fList,map);
 					
 					if(result>0) {
 						msg = "게시글 수정 성공";

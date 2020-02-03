@@ -58,7 +58,7 @@
     }
         
     .table tr th:nth-child(2) {
-        width : 50px;
+        width : 80px;
     }
     .table tr th:nth-child(3) {
         width : 200px;
