@@ -436,7 +436,7 @@ public class ReviewController extends HttpServlet {
 			case "writer" : condition = " MEM_ID LIKE " + searchValue; break;
 			}
 			try {
-				int listCount = reviewService.getListCount();
+				int listCount = reviewService.getSearchListCount(condition);
 				
 				int limit = 5;
 				int pagingBarSize = 5;

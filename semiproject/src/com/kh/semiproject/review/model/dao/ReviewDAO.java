@@ -484,6 +484,21 @@ public class ReviewDAO {
 		}
 		return iList;
 	}
+
+	public int getSearchListCount(Connection conn, String condition) throws Exception {
+		Statement stmt = null; 
+		int result = 0;
+		String query1 = prop.getProperty("getSearchListCount1");
+		//String query2 = prop.getProperty("getSearchListCount2");
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query1+condition);
+		}finally {
+			close(stmt);
+		}
+		return result;
+	}
 }
 
 
