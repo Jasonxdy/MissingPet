@@ -473,7 +473,7 @@ public class seeBoardController extends HttpServlet {
 				List<BoardHJ> bList = boardService.searchBoardList(startRow, endRow, boardType, condition);
 				
 				List<Attachment> aList = boardService.searchAList(startRow, endRow, boardType, condition);
-				
+				 
 				List<Animal> animalList = boardService.searchAnimalList(startRow, endRow, boardType, condition);
 				
 				List<SeeBoard> sList = seeBoardService.searchSeeList(startRow, endRow, boardType, condition);
