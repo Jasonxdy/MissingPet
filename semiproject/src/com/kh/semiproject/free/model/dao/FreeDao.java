@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.semiproject.board.model.vo.Attachment;
 import com.kh.semiproject.board.model.vo.BoardEH;
 import com.kh.semiproject.board.model.vo.Img;
 import com.kh.semiproject.board.model.vo.M_Comment;
@@ -39,13 +40,14 @@ public class FreeDao {
 	
 	/** 전체 게시글 수 조회용 Dao
 	 * @param conn
+	 * @param boardType 
 	 * @return listCount
 	 * @throws Exception
 	 */
 	
-	public int getListCount(Connection conn) throws Exception {
+	public int getListCount(Connection conn, int boardType) throws Exception {
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int listCount = 0;
 		
@@ -53,8 +55,11 @@ public class FreeDao {
 		
 		try {
 			
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardType);
+			
+			rset = pstmt.executeQuery();
+
 			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
@@ -62,7 +67,7 @@ public class FreeDao {
 			
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return listCount;
@@ -73,11 +78,12 @@ public class FreeDao {
 	 * @param conn
 	 * @param limit 
 	 * @param currentPage 
+	 * @param boardType 
 	 * @return list
 	 * @throws Exception
 	 */
 
-	public List<BoardEH> selectList(Connection conn, int currentPage, int limit) throws Exception{
+	public List<BoardEH> selectList(Connection conn, int currentPage, int limit, int boardType) throws Exception{
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -93,7 +99,7 @@ public class FreeDao {
 
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1, 5);
+			pstmt.setInt(1, boardType);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 			
@@ -134,10 +140,11 @@ public class FreeDao {
 	 * @param conn
 	 * @param currentPage
 	 * @param limit
+	 * @param boardType 
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Free> selectfList(Connection conn, int currentPage, int limit) throws Exception{
+	public List<Free> selectfList(Connection conn, int currentPage, int limit, int boardType) throws Exception{
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -154,7 +161,7 @@ public class FreeDao {
 			
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1, 5);
+			pstmt.setInt(1, boardType);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 			
@@ -167,8 +174,9 @@ public class FreeDao {
 			while(rset.next()) {
 				
 				free = new Free(
+						rset.getInt("BOARD_NO"),
 						rset.getString("FREE_CATEGORY"));
-				free.setBoardNo(rset.getInt("BOARD_NO"));
+				// free.setBoardNo(rset.getInt("BOARD_NO"));
 				
 				flist.add(free);
 			}
@@ -280,90 +288,6 @@ public class FreeDao {
 
 	
 	
-	
-
-	/** 검색용 dao
-	 * @param conn
-	 * @param condition
-	 * @return
-	 * @throws Exception
-	 */
-	public List<BoardEH> searchFree(Connection conn, String condition) throws Exception {
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		List<BoardEH> blist = null;
-		
-		String query1 = prop.getProperty("searchBoard1");
-		String query2 = prop.getProperty("searchBoard2");
-		
-		
-		try {
-			
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query1 + condition + query2);
-			
-			blist = new ArrayList<BoardEH>();
-			
-			BoardEH board = null;
-			
-			while(rset.next()) {
-				board = new BoardEH(rset.getInt("BOARD_NO"), 
-						rset.getString("BOARD_TITLE"), 
-						rset.getDate("BOARD_CREATE_DT"), 
-						rset.getInt("BOARD_COUNT"), 
-						rset.getString("MEM_ID"));
-				
-				blist.add(board);
-			}
-			
-			
-		}finally {
-			
-			close(rset);
-			close(stmt);
-		}
-		
-		   System.out.println("DAO 검색 성공");
-		return blist;
-	}
-
-	
-	
-
-	/** 검색용 dao2 
-	 * @param conn
-	 * @param condition
-	 * @return
-	 * @throws Exception
-	 */
-	public PageInfo searchPinf(Connection conn, String condition) throws Exception {
-		
-		Statement stmt = null;
-		ResultSet rset = null;
-		PageInfo pInf = null;
-		
-		String query1 = prop.getProperty("searchBoard3");
-		String query2 = prop.getProperty("searchBoard4");
-	
-		try {
-			
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query1 + condition + query2);
-			
-			
-			
-			
-		}finally {
-			
-			close(rset);
-			close(stmt);
-		}
-		
-		   System.out.println("DAO 검색 성공");
-		return pInf;
-	}
-
 	
 	
 
@@ -817,9 +741,134 @@ public class FreeDao {
 		      return result;
 	}
 
+	
+	/** 검색 게시글 수 조회용 Dao
+	 * @param conn
+	 * @param boardType
+	 * @return searchListCount
+	 * @throws Exception 
+	 * @throws Exception
+	 */
+	
+	public int getSearchListCount(Connection conn, String condition, int boardType) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int searchListCount = 0;
+		
+		String query = prop.getProperty("getSearchListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query + condition);
+			
+			pstmt.setInt(1, boardType);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				searchListCount = rset.getInt(1); 
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return searchListCount;
+		
+	}
+
+	
+	
+	/** 검색용 dao
+	 * @param conn
+	 * @param condition 
+	 * @param condition
+	 * @return
+	 * @throws Exception
+	 */
+
+	public List<BoardEH> searchList(Connection conn, int startRow, int endRow, int boardType, String condition) throws Exception{
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<BoardEH> blist = null;
+		
+		String query1 = prop.getProperty("searchBoard1");
+		String query2 = prop.getProperty("searchBoard2");
+		
+		
+		try {
+			System.out.println(query1+condition+query2);
+			pstmt = conn.prepareStatement(query1+condition+query2);
+			
+			pstmt.setInt(1, boardType);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			blist = new ArrayList<BoardEH>();
+			BoardEH board = null;
+			
+			while(rset.next()) {
+				board = new BoardEH(rset.getInt("BOARD_NO"), 
+						rset.getString("BOARD_TITLE"), 
+						rset.getDate("BOARD_CREATE_DT"), 
+						rset.getInt("BOARD_COUNT"), 
+						rset.getString("MEM_ID"));
+				
+				blist.add(board);
+			}
+			
+			
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		return blist;
+	}
 
 
 
+	public List<Free> searchfList(Connection conn, int startRow, int endRow, int boardType, String condition) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Free> fList = null;
+		
+
+		String query1 = prop.getProperty("searchfList1");
+		String query2 = prop.getProperty("searchfList2");
+		
+		try {
+			
+			System.out.println(query1+condition+query2);
+			pstmt = conn.prepareStatement(query1+condition+query2);
+			
+			pstmt.setInt(1, boardType);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			fList = new ArrayList<Free>();
+			Free free = null;
+			
+			while(rset.next()) {
+				free = new Free();
+				free.setBoardNo(rset.getInt("BOARD_NO"));
+				free.setFreeCategory(rset.getString("FREE_CATEGORY"));
+				
+				fList.add(free);
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fList;
+	}
+	
 
 
 

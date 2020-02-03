@@ -18,22 +18,22 @@ import com.kh.semiproject.review.model.vo.Comment;
 public class FreeService {
 	
 	
-	public static int getListCount() throws Exception{
+	public int getListCount(int boardType) throws Exception{
 		
 		Connection conn = getConnection();
 		
-		int listCount = new FreeDao().getListCount(conn);
+		int listCount = new FreeDao().getListCount(conn,boardType);
 		
 		close(conn);
 		return listCount;
 	}
 	
 
-	public  List<BoardEH> selectList(int currentPage, int limit) throws Exception{
+	public  List<BoardEH> selectList(int currentPage, int limit, int boardType) throws Exception{
 		
 		Connection conn = getConnection();
 		
-		List<BoardEH> blist = new FreeDao().selectList(conn,currentPage,limit);
+		List<BoardEH> blist = new FreeDao().selectList(conn,currentPage,limit,boardType);
 		
 		close(conn);
 		
@@ -41,7 +41,15 @@ public class FreeService {
 	}
 	
 	
+	public List<Free> selectfList(int currentPage, int limit, int boardType) throws Exception {
 
+		Connection conn = getConnection();
+		
+		List<Free> flist = new FreeDao().selectfList(conn, currentPage, limit, boardType);
+		
+		close(conn);
+		return flist;
+	}
 	
 
 	
@@ -76,71 +84,8 @@ public class FreeService {
 		return board;
 	}
 
-	public static List<BoardEH> searchFree(String searchKey, String searchValue) throws Exception{
-		
-		Connection conn = getConnection();
 
-		String condition = null;
-
-		searchValue = "'%' || '" + searchValue + "' || '%'";
-		
-		
-		switch(searchKey) {
-		
-		case "title" : condition = " BOARD_TITLE LIKE " + searchValue; break;
-		case "content" : condition = " BOARD_CONTENT LIKE " + searchValue; break;
-		case "titcont" : condition = " (BOARD_TITLE LIKE " + searchValue 
-									+ " OR BOARD_CONTENT LIKE" + searchValue + ") "; break;
-		}
-		
-		
-		List<BoardEH> blist = new FreeDao().searchFree(conn,condition);
-		// serchkey, searchvalue 다 condition 안에있음
-		
-		System.out.println("검색 서비스  성공");
-
-		close(conn);
-		return blist;
-	}
 	
-	
-
-	public static PageInfo searchPinf(String searchKey, String searchValue) throws Exception{
-
-		Connection conn = getConnection();
-
-		
-		String condition = null;
-
-		searchValue = "'%' || '" + searchValue + "' || '%'";
-		
-		switch(searchKey) {
-		
-		case "title" : condition = " BOARD_TITLE LIKE " + searchValue; break;
-		case "content" : condition = " BOARD_CONTENT LIKE " + searchValue; break;
-		case "titcont" : condition = " (BOARD_TITLE LIKE " + searchValue 
-									+ " OR BOARD_CONTENT LIKE" + searchValue + ") "; break;
-		}
-		
-		PageInfo pInf = new FreeDao().searchPinf(conn, condition);
-		
-		System.out.println("검색 서비스  성공");
-		
-		close(conn);
-		return pInf;
-	}
-
-
-
-	public List<Free> selectfList(int currentPage, int limit) throws Exception {
-
-		Connection conn = getConnection();
-		
-		List<Free> flist = new FreeDao().selectfList(conn, currentPage, limit);
-		
-		close(conn);
-		return flist;
-	}
 
 
 	public static Free selectFree2(int no) throws Exception{
@@ -413,6 +358,49 @@ public class FreeService {
 		
 		close(conn);
 		return result;
+	}
+
+
+	public int getSearchListCount(String condition, int boardType) throws Exception {
+	
+		Connection conn = getConnection();
+		
+		int searchListCount = new FreeDao().getSearchListCount(conn, condition, boardType);
+		
+		close(conn);
+		
+		return searchListCount;
+	}
+	
+	
+
+	/** 검색 게시글 조회 Service
+	 * @param currentPage
+	 * @param limit
+	 * @param boardType
+	 * @param condition
+	 * @return bList
+	 * @throws Exception
+	 */
+
+	public List<BoardEH> searchList(int startRow, int endRow, int boardType, String condition) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		 List<BoardEH> bList = new FreeDao().searchList(conn,startRow,endRow,boardType,condition);
+	
+		 close(conn);
+			
+		 return bList;
+	}
+
+
+	public List<Free> searchfList(int startRow, int endRow, int boardType, String condition)throws Exception {
+		
+		Connection conn = getConnection();
+		
+		List<Free> fList =  new FreeDao().searchfList(conn,startRow,endRow,boardType,condition);
+		return fList;
 	}
 	
 	
