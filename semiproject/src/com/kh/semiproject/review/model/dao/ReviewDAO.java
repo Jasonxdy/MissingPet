@@ -637,6 +637,40 @@ public class ReviewDAO {
 		
 		return tell;
 	}
+
+	
+	
+	
+	
+	/**
+	 * 알림 삭제용 DAO
+	 * 
+	 * @param conn
+	 * @param alertNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteAlert(Connection conn, int alertNo) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteAlert");
+		
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, alertNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
 
 

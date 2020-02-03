@@ -275,11 +275,11 @@
 	        /*
 	       	콘솔 체크용
 	       	*/
-	        console.log("webTell : " + webTell);
+	       /*  console.log("webTell : " + webTell);
 	        console.log("commentTell : " + commentTell);
 	        console.log("askTell : " + askTell);
 	        console.log("rtTell : " + rtTell); 
-	        console.log("-------------------");
+	        console.log("-------------------"); */
 	        
        		$.ajax({
 	        	url : "updateTell",

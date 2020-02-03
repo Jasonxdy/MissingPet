@@ -220,7 +220,8 @@
     float:left;
     margin-right: 30px;
     margin-left: 10px;
-
+	width: 70px;
+    height: 70px;
 }
 
 #imgdiv2{
@@ -261,7 +262,6 @@
 }
 
 #comment-Wrapper{
-    background-color: lightgray;
     
 }
 
@@ -497,57 +497,21 @@
 						<div class="col-md-12 p-5">
 
 							<div id="comment-Wrapper" class="container">
-								<div id="comment" class="row ml-1 mt-2 mb-2">
-									<div id="imgdiv1" class="col-auto">
-										<img
-											src="https://postfiles.pstatic.net/MjAxNzEyMjlfNDQg/MDAxNTE0NTExNDEyNDU0.96lwkH4peyvDrTpX7wG2Zv5a7Gmy8YlxhwRvVMjKBpwg.NF6iNTCZ1o5q6pETOTjHpwhg85y1_Dt1sx50E8sxinwg.PNG.lovetotalk/12%EA%B7%80%EC%97%AC%EC%9A%B4_%EA%B0%95%EC%95%84%EC%A7%80_%EC%82%AC%EC%A7%84_%281%29-001.png?type=w1"
-											width="70px" height="70px">
-									</div>
-									<div id="comment-Writer" class="col-auto">
-										<span id="n-name">리트리버덕후</span><br> <span>2020-01-20</span>
-									</div>
-									<div class="col-md-8">
-										<span>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</span>
-
-									</div>
-									<div>
-										<button type="button" class="btn btn-primary m-3">수정</button>
-										<button type="button" class="btn btn-primary m-3">삭제</button>
-									</div>
-
-
-									&nbsp;&nbsp;&nbsp;&nbsp;
-
+								
+							</div>
+							<% if( request.getSession().getAttribute("loginMember") != null ) { %>
+			                <div id="loadId" style="display:none;"><%= loginMember.getMemberId() %></div>
+							<% } %>
+							
+							<div class="row">
+								<div class="col-8 mr-5">
+									<textarea id="commContent" style="resize: none; width: 100%;"></textarea>
 								</div>
-
-								<div id="comment" class="row ml-1 mt-2 mb-2">
-									<div id="imgdiv1" class="col-auto">
-										<img
-											src="https://postfiles.pstatic.net/MjAxNzEyMjlfNDQg/MDAxNTE0NTExNDEyNDU0.96lwkH4peyvDrTpX7wG2Zv5a7Gmy8YlxhwRvVMjKBpwg.NF6iNTCZ1o5q6pETOTjHpwhg85y1_Dt1sx50E8sxinwg.PNG.lovetotalk/12%EA%B7%80%EC%97%AC%EC%9A%B4_%EA%B0%95%EC%95%84%EC%A7%80_%EC%82%AC%EC%A7%84_%281%29-001.png?type=w1"
-											width="70px" height="70px">
-									</div>
-									<div id="comment-Writer" class="col-auto">
-										<span id="n-name">리트리버덕후</span><br> <span>2020-01-20</span>
-									</div>
-									<div class="col-8">
-										<span>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</span>
-									</div>
-									<div>
-										<button type="button" class="btn btn-primary m-3">수정</button>
-										<button type="button" class="btn btn-primary m-3">삭제</button>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-8 mr-5">
-										<textarea style="resize: none; width: 100%;">d</textarea>
-									</div>
-									<div class="col-2 ml-5">
-										<button type="button" class="btn btn-primary btn-lg">댓글작성</button>
-									</div>
+								<div class="col-2 ml-5">
+									<button id="addComment" type="button" class="btn btn-primary btn-lg">댓글작성</button>
 								</div>
 							</div>
-
+							
 							<div class="col-md-12">
 								<div class="text-center">
 									<a href="boardList?currentPage=<%= currentPage %>" class="btn btn-primary m-3">목록으로</a>
@@ -555,20 +519,159 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
-
+				<%@ include file="../common/footer.jsp"%>
 			</div>
-
-
+			
 			<%@ include file="../common/header.jsp"%>
 	</div>
-	<%@ include file="../common/footer.jsp"%>
+	
 </div>
 <script>
 		$("#deleteBtn").on("click",function(){
 			if(confirm("정말 삭제 하시겠습니까?")) location.href = "delete?no=<%=board.getBoardNo() %>";
+		});
+		$("#addComment").on("click", function(){
+			var writer; // null 발생 예방을 위해서 아래에서 로그인 검사 실시
+			var boardNo = <%= board.getBoardNo() %>;
+			var content = $("#commContent").val();
+						
+			// 댓글 등록 시 해당 글 작성자가 댓글 알림 설정했는지 확인
+			var boardWriter = "<%= board.getBoardWriter() %>";
+			
+			// 로그인 검사
+			<% if(loginMember == null){ %>
+				alert("로그인 후 이용해 주세요.");
+				
+			<% }else { %>
+				writer = "<%= loginMember.getMemberId()%>";
+				
+				$.ajax({ 
+					url: "insertComment", // url은 필수 속성!!
+					type: "post",
+					data: {writer: writer, 	// key는 ""가 포함된 문자열
+						   content: content, boardNo: boardNo, boardWriter: boardWriter},
+					success: function(result){ // result에 서버의 응답이 담겨서 넘어온다
+						if(!content.trim().length == 0){
+							if(result>0){
+								$("#commContent").val("");
+								selectcList();
+							}else{
+								alert("댓글 등록 실패");
+							}
+						}else {
+							alert("댓글 내용을 입력해주세요");
+						}
+					},
+					error: function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+			<% } %>
+		});
+		
+		function selectcList(){
+			var boardNo = <%= board.getBoardNo() %>;
+			
+			$.ajax({
+				url: "selectCommentList",
+				type: "POST",
+				dataType: "json",
+				data: {boardNo: boardNo},
+				success: function(cList){
+					var $commentWrapper = $("#comment-Wrapper"); // 같은 아이디의 div 태그 안에 댓글이 채워짐
+					var $loadId = $("#loadId").text(); // 로그인된 memberId 가저오는 변수
+					
+					$commentWrapper.html(""); // 기존 내용 삭제
+					
+					$.each(cList, function(i){
+						var $div = $("<div>").prop("class", "row ml-1 mt-2 mb-2").prop("id", "comment"); 
+						var $divImgWriter1 = $("<div>").prop("class", "col-2 mt-2"); //이미지 담는 div
+						var $divImgWriter2 = $("<div>").prop("class", "col-2 mt-2"); // 작성자+작성일 담는 div
+						var $divContent = $("<div>").prop("class", "col-6 mt-2"); // 댓글 본문 div
+						var $divButton = $("<div>").prop("class", "col-2 mt-2 text-center"); // 수정 삭제 담는 div
+						var $uButton = $("<button>").prop("class", "btn btn-sm btn-primary").on("click", function(){
+							$(this).parent().parent()
+							.html("<textarea id='commentModify' class='m-2 pb-1' style='resize: none; width: 80%; height: 70px'></textarea>")
+							.append("<button id='CMB' class='btn btn-sm btn-primary m-2 pb-1'>등록</button>");
+							var commModifyContent;
+							var commentNo = cList[i].commentNo;
+							$("#CMB").click(function(){
+								commModifyContent = $("#commentModify").val();
+								$.ajax({
+									url: "commentUpdate",
+									type: "POST",
+									dataType: "json",
+									data: {commentNo: commentNo, commModifyContent: commModifyContent},
+									success: function(result){
+										if(result>0){
+											selectcList();
+										}else{
+											alert("댓글 수정 실패");
+										}
+									}
+								})
+							});
+						}).text("수정");
+						var $dButton = $("<button>").prop("class", "btn btn-sm mt-1 btn-primary").on("click", function(){
+							var commentNo = cList[i].commentNo;
+							if(confirm("정말 삭제하시겠습니까?")){
+									$.ajax({
+										url: "commentDelete",
+										type: "POST",
+										dataType: "json",
+										data: {commentNo: commentNo},
+										success: function(result){
+											if(result>0){
+												selectcList();
+											}
+										}
+									});
+							}
+						}).text("삭제");
+						var $img = $("<img>").prop("id", "imgdiv1")
+						.prop("src", "<%= request.getContextPath()%>/resources/upProfileImage/" + cList[i].memberProImg);
+						var $cWriter = $("<span>").html(cList[i].memberId);    // 작성자 값 cList에서 호출
+						var $cDate = $("<span>").html(cList[i].commentModifyDt);
+						var $cContent = $("<p>").html(cList[i].commentContent);
+						//var $br = $("<br>");
+						var $hr = $("<hr>");
+						
+						// 수업시간에 배운 내용
+						//$div.append($cWriter).append($cDate).append($cContent);
+						
+						// append안에 append 사용
+						if($loadId != null){
+							if(cList[i].memberId == $loadId){
+								$div.append($divImgWriter1.append($img)).append($divImgWriter2.append($cWriter).append("<br>").append($cDate))
+								.append($divContent.append($cContent)).append($divButton.append($uButton).append("<br>").append($dButton));;
+							}
+							
+							 else{
+								$div.append($divImgWriter1.append($img)).append($divImgWriter2.append($cWriter).append("<br>").append($cDate))
+								.append($divContent.append($cContent)).append($divButton);;
+							} 
+						} 
+						
+						 else { 
+							$div.append($divImgWriter1.append($img)).append($divImgWriter2.append($cWriter).append("<br>").append($cDate))
+							.append($divContent.append($cContent)).append($divButton);;
+						} 
+						// 최종적으로 Wrapper에 모두 담은 div 추가
+						$commentWrapper.append($div);
+						// 태그의 경우 append는 태그 안에 추가함
+						//$commentWrapper.append($div).append($hr);
+					});
+				},
+				error: function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		
+		$(function(){
+			selectcList();
+			
 		});
 </script>
 

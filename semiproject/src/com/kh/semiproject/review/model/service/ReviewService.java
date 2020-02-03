@@ -342,6 +342,27 @@ public class ReviewService {
 		
 		return tell;
 	}
+
+	
+	
+	/**
+	 * 알림 삭제용 Service
+	 * @param alertNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteAlert(int alertNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		
+		int result = new ReviewDAO().deleteAlert(conn, alertNo);
+		
+		if(result > 0) commit(conn);
+		else			rollback (conn);
+		
+		return result;
+	}
 }
 
 
