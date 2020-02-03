@@ -64,12 +64,12 @@ public class FreeController extends HttpServlet {
 			
 			try {
 				
-				
+		    int boardType = 5;
 			// 현재 게시글 전체 수
-			int listCount = freeService.getListCount();
+			int listCount = freeService.getListCount(boardType);
 					
-			int limit = 5; // 한 페이지에 보여질 게시글의 수 
-			int pagingBarSize = 5;// 보여질 페이징바의 페이지 개수
+			int limit = 6; // 한 페이지에 보여질 게시글의 수 
+			int pagingBarSize = 10;// 보여질 페이징바의 페이지 개수
 				
 			int currentPage = 0;// 현재 페이지 번호를 표시할 변수
 			int maxPage = 0;// 전체 페이지의 수(== 마지막 페이지)
@@ -100,12 +100,10 @@ public class FreeController extends HttpServlet {
 			
 			PageInfo pInf = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
 			
-			System.out.println(pInf);
 			
+			List<BoardEH> blist = freeService.selectList(currentPage, limit, boardType);	
 			
-			List<BoardEH> blist = freeService.selectList(currentPage, limit);	
-			
-			List<Free> flist = freeService.selectfList(currentPage, limit);
+			List<Free> flist = freeService.selectfList(currentPage, limit, boardType);
 			
 			System.out.println("flist" + flist);
 			System.out.println("blist" + blist);
@@ -280,19 +278,76 @@ public class FreeController extends HttpServlet {
 	    	  String searchKey = request.getParameter("searchKey");
 	    	  String searchValue = request.getParameter("searchValue");
 	    	  
-	            System.out.println("선택 옵션 : " + searchKey);
-	            System.out.println("검색 내용 : " + searchValue);
+	    	  String condition = null;
 	    	  
+	    	  searchValue = "'%' || '" + searchValue + "' || '%' ";
+				
+				switch(searchKey) {
+				case "title": condition =  " BOARD_TITLE LIKE " + searchValue; break;
+				case "content": condition =  " BOARD_CONTENT LIKE " + searchValue; break;
+				case "titcont": condition =  " (BOARD_CONTENT LIKE" + searchValue + " OR BOARD_TITLE LIKE " + searchValue +")"; break;
+				case "writer" : condition = " MEM_NAME LIKE " + searchValue; break;
+				}
+				
 	    	  try {
 	    		  
-	    		  List<BoardEH>blist = FreeService.searchFree(searchKey,searchValue);
-	    		  PageInfo pInf = FreeService.searchPinf(searchKey,searchValue);
+	    		int boardType = 5;
+	  			// 현재 게시글 전체 수
+	  			int listCount = freeService.getSearchListCount(condition,boardType);
+	  					
+	  			int limit = 6; // 한 페이지에 보여질 게시글의 수 
+	  			int pagingBarSize = 10;// 보여질 페이징바의 페이지 개수
+	  				
+	  			int currentPage = 0;// 현재 페이지 번호를 표시할 변수
+	  			int maxPage = 0;// 전체 페이지의 수(== 마지막 페이지)
+	  			int startPage = 0;// 페이징바 시작페이지 번호
+	  			int endPage = 0;// 페이징바 끝 페이지 번호 
+	  			
+	  			// currentPage - 현재 페이지 번호를 표시할 변수
+	  			
+	  			if(request.getParameter("currentPage") == null) {
+	  				currentPage = 1;
+	  			}else {
+	  				// 전달받은 값이 있을 경우 해당 번호를 저장
+	  				currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	  			}
+	  			
+	  			int startRow = (currentPage -1) * limit + 1;
+				int endRow = startRow + limit -1;
+
+	  			maxPage = (int)Math.ceil( ( (double)listCount / limit ) );
+	  			startPage = (currentPage-1) / pagingBarSize * pagingBarSize + 1;
+	  			endPage = startPage + pagingBarSize - 1;
+	  			
+	  			if(maxPage <= endPage) {
+	  				endPage = maxPage;
+	  			}
+	  			
+	  			
+	  			PageInfo pInf = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
+	  			
+	  			
+	  			List<BoardEH> blist = freeService.searchList(startRow, endRow, boardType, condition);	
+	  			
+	  			List<Free> flist = freeService.searchfList(startRow, endRow, boardType, condition);
+	  			
+	  			
+	  			
+	  			path = "/WEB-INF/views/free/freeSearch.jsp";
+	  			request.setAttribute("blist", blist);
+	  			request.setAttribute("pInf", pInf);
+	  			request.setAttribute("flist", flist);
+	  			
+	  			System.out.println(blist);
+	  			System.out.println(pInf);
+	  			System.out.println(flist);
+	  			
+	  			System.out.println("선택 옵션 : " + searchKey);
+	            System.out.println("검색 내용 : " + searchValue);
+	  			
+	  			view = request.getRequestDispatcher(path);
+	  			view.forward(request, response);
 	    		  
-	    		  path = "/WEB-INF/views/free/freeList.jsp";
-	    		  request.setAttribute("blist", blist);
-	    		  request.setAttribute("pInf", pInf);
-	    		  view = request.getRequestDispatcher(path);
-	    		  view.forward(request, response);
 	    		  
 	    		  
 	    	  }catch(Exception e) {

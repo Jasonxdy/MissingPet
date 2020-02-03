@@ -76,9 +76,8 @@
 								</thead>
 							</table>
 						<!-- 검색창-->
-							<div id="searchTab" style="display:inline-block">
-							<div style="display:inline-block" class="pl-5">
-								<form class="col mb-5" method="POST" action="searchQnA">
+							
+								<form class="col" method="POST" action="searchQnA">
 									<div class="form-row align-items-center">
 										<div class="row-md-2 my-5">
 											<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect"></label>
@@ -90,7 +89,7 @@
 											</select>
 										</div>
 
-										<div class="col-md-6" style="width: 950px;">
+										<div class="col-md-9" >
 											<input name="searchValue" type="text" class=" form-control mr-sm-2" 
 												placeholder="검색어를 입력하세요.">
 										</div>
@@ -99,15 +98,28 @@
 										</div>
 									</div>
 								</form>
-								</div>
+								
 								
 							
-							
-									<!-- 글 등록  -->
-									<div style="display:inline-block" style="width: 100px;">
+									
+
+
+
+									
+							<table class="row-md-10 table">
+
+								<thead>
+									<tr>
+										<th scope="col">글번호</th>
+										<th scope="col">&nbsp;&nbsp;제목</th>
+										<th scope="col">&nbsp;내용</th>
+										<th scope="col">&nbsp;&nbsp;등록일</th>
+										<th scope="col">
+										<!--  글 등록  -->
+														<div style="display:inline-block" style="width: 100px;">
 											<a id="modal-QnAwrite" href="#modal-container-QnAwrite"
-												role="button" class="btn btn-sm btn-outline-secondary"
-												data-toggle="modal">글 등록</a>
+												role="button" class="btn btn-sm btn-outline-primary"
+												data-toggle="modal">Q&A 글 등록</a>
 
 											<div class="modal fade" id="modal-container-QnAwrite"
 												role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -139,21 +151,8 @@
 													</div>
 												</div>
 											</div> <!--  글 등록 div END -->
-										</div>
-									
 
-
-
-									
-							<table class="row-md-10 table" style="height: 15px;">
-
-								<thead>
-									<tr>
-										<th scope="col">글번호</th>
-										<th scope="col">&nbsp;&nbsp;제목</th>
-										<th scope="col">&nbsp;내용</th>
-										<th scope="col">&nbsp;&nbsp;등록일</th>
-										<th scope="col"><!-- 관리 모달 버튼 --></th>
+										</th>
 									</tr>
 								</thead>
 

@@ -255,6 +255,14 @@ public class ReviewService {
 		close(conn);
 		return iList;
 	}
+
+	public int getSearchListCount(String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new ReviewDAO().getSearchListCount(conn, condition);
+		close(conn);
+		return result;
+	}
 }
 
 

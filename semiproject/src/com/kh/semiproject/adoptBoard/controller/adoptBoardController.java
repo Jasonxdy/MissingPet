@@ -436,6 +436,9 @@ public class adoptBoardController extends HttpServlet {
 			String searchValue = request.getParameter("searchValue");
 			String doneCheck1 = request.getParameter("doneCheck1");
 			String doneCheck2 = request.getParameter("doneCheck2");
+			
+			System.out.println(doneCheck1);
+			System.out.println(doneCheck2);
 
 			String condition = null;
 			
@@ -448,8 +451,17 @@ public class adoptBoardController extends HttpServlet {
 			case "writer" : condition = " MEM_NAME LIKE " + searchValue; break;
 			}
 			try {
+				if(doneCheck1==null) {
+					doneCheck1 = "N";
+					request.setAttribute("doneCheck1", doneCheck1);
+				}
+				if(doneCheck2==null) {
+					doneCheck2 = "N";
+					request.setAttribute("doneCheck2", doneCheck2);
+				}
+				
 				int boardType = 3;
-				int listCount = boardService.getSearchListCount(condition, boardType);
+				int listCount = adoptBoardService.getAdoptSearchListCount(condition, boardType, doneCheck1, doneCheck2);
 				
 				int limit = 1;
 				int pagingBarSize = 10;
@@ -477,14 +489,17 @@ public class adoptBoardController extends HttpServlet {
 				
 				PageInfo pInfo = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
 				
-				List<BoardHJ> bList = boardService.searchBoardList(startRow, endRow, boardType, condition);
+				List<BoardHJ> bList = adoptBoardService.searchAdoptBList(startRow, endRow, boardType, condition, doneCheck1, doneCheck2);
 				
 				List<Attachment> aList = boardService.searchAList(startRow, endRow, boardType, condition);
 				
 				List<Animal> animalList = boardService.searchAnimalList(startRow, endRow, boardType, condition);
 				
-				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition, doneCheck1, doneCheck2);
+				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition);
 				
+				System.out.println(pInfo);
+				System.out.println(bList);
+				System.out.println(aList);
 				
 				path = "/WEB-INF/views/adoptBoard/adoptBoardSearchList.jsp";
 				request.setAttribute("pInf", pInfo);
