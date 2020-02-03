@@ -130,12 +130,17 @@
 				<% } %>
 				
                 <div class="row">
-                  <div class="col-8 mr-3">
+                  <div class="col-10">
                     <textarea id="commContent" style="resize: none; width: 100%; height: 100px"></textarea>
                   </div>
-                  <div class="col-2 ml-3 mt-2">
+                  <div class="col-2">
                     <button id="addComment" type="button" class="btn btn-primary ">등록하기</button>
                   </div>
+                </div>
+                <div class="row">
+                	<div class="col-12 text-center">
+                		<button id="list" type="button" class="btn btn-outline-primary btn-lg">목록</button>
+                	</div>
                 </div>
              
               <!-- 이 안에다가 작성하세요!!!!!!!! -->
@@ -231,7 +236,7 @@
 					var $divImgWriter2 = $("<div>").prop("class", "col-2 mt-2"); // 작성자+작성일 담는 div
 					var $divContent = $("<div>").prop("class", "col-6 mt-2"); // 댓글 본문 div
 					var $divButton = $("<div>").prop("class", "col-2 mt-2 text-center"); // 수정 삭제 담는 div
-					var $uButton = $("<button>").prop("class", "btn btn-sm btn-primary").on("click", function(){
+					var $uButton = $("<button>").prop("class", "btn btn-sm btn-outline-warning").on("click", function(){
 						$(this).parent().parent()
 						.html("<textarea id='commentModify' class='m-2 pb-1' style='resize: none; width: 80%; height: 70px'></textarea>")
 						.append("<button id='CMB' class='btn btn-sm btn-primary m-2 pb-1'>등록</button>");
@@ -254,7 +259,7 @@
 							})
 						});
 					}).text("수정");
-					var $dButton = $("<button>").prop("class", "btn btn-sm mt-1 btn-primary").on("click", function(){
+					var $dButton = $("<button>").prop("class", "btn btn-sm mt-1 btn-outline-primary").on("click", function(){
 						var commentNo = cList[i].commentNo;
 						if(confirm("정말 삭제하시겠습니까?")){
 								$.ajax({
