@@ -538,6 +538,8 @@
 						
 			// 댓글 등록 시 해당 글 작성자가 댓글 알림 설정했는지 확인
 			var boardWriter = "<%= board.getBoardWriter() %>";
+			var alertContent = "<%= board.getBoardTitle() %>";
+			var alertURL = "<%= request.getContextPath() %>" + "/adoptBoard/detail?no=" + boardNo + "&currentPage=1";
 			
 			// 로그인 검사
 			<% if(loginMember == null){ %>
@@ -550,7 +552,8 @@
 					url: "insertComment", // url은 필수 속성!!
 					type: "post",
 					data: {writer: writer, 	// key는 ""가 포함된 문자열
-						   content: content, boardNo: boardNo, boardWriter: boardWriter},
+						   content: content, boardNo: boardNo, boardWriter: boardWriter
+						   , alertContent : alertContent, alertURL:alertURL},
 					success: function(result){ // result에 서버의 응답이 담겨서 넘어온다
 						if(!content.trim().length == 0){
 							if(result>0){

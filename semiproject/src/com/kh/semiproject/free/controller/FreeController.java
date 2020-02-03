@@ -23,9 +23,11 @@ import com.kh.semiproject.board.model.vo.M_Comment;
 import com.kh.semiproject.board.model.vo.PageInfo;
 import com.kh.semiproject.common.ExceptionForward;
 import com.kh.semiproject.common.MyFileRenamePolicy;
+import com.kh.semiproject.common.alert.model.vo.Alert;
 import com.kh.semiproject.free.model.service.FreeService;
 import com.kh.semiproject.free.model.vo.Free;
 import com.kh.semiproject.member.model.vo.Member;
+import com.kh.semiproject.review.model.service.ReviewService;
 import com.kh.semiproject.review.model.vo.Comment;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -366,9 +368,31 @@ public class FreeController extends HttpServlet {
 				
 				Comment comm = new Comment(commentContent, boardNo);
 				
+				// 댓글 알림용 게시글 작성자 얻어오기
+				String boardWriter = request.getParameter("boardWriter");
+				String alertContent = request.getParameter("alertContent");
+				String alertURL = request.getParameter("alertURL");
+				
 				try {
 					
 					int result = freeService.insertComm(comm,commentWriter);
+					
+					// 댓글 등록자와 글 작성자가 같지 않는 경우만 실행
+					if(!commentWriter.equals(boardWriter)) {
+						// 댓글 등록 시 게시글 작성자가 알림 설정한 경우 ALERT 테이블에 값 추가
+						if(result > 0) {
+							String[] tell = new ReviewService().checkTell(boardWriter);
+							
+							if(tell[0].equals("Y") && tell[1].equals("Y")) { // 글 작성자가 댓글 알림을 켜둔 경우
+								
+								// 알림 테이블에 알림 정보 등록
+								Alert alert = new Alert(boardWriter, alertContent, alertURL);
+								
+								result = new ReviewService().insertTell(alert);
+							}
+						}
+					}
+					
 					
 					response.getWriter().print(result);
 					// 문자를 내보내는 스트림
