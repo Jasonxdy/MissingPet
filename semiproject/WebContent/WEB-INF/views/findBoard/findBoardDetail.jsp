@@ -534,6 +534,8 @@
 			var writer; // null 발생 예방을 위해서 아래에서 로그인 검사 실시
 			var boardNo = <%= board.getBoardNo() %>;
 			var content = $("#commContent").val();
+			var email = <%= member.getMemberPwd() %>;
+			var title = <%= board.getBoardTitle() %>;
 			
 			// 댓글 등록 시 해당 글 작성자가 댓글 알림 설정했는지 확인
 			var boardWriter = "<%= board.getBoardWriter() %>";
@@ -549,7 +551,7 @@
 					url: "insertComment", // url은 필수 속성!!
 					type: "post",
 					data: {writer: writer, 	// key는 ""가 포함된 문자열
-						   content: content, boardNo: boardNo, boardWriter:boardWriter},
+						   content: content, boardNo: boardNo, boardWriter:boardWriter, email:email, title:title},
 					success: function(result){ // result에 서버의 응답이 담겨서 넘어온다
 						if(!content.trim().length == 0){
 							if(result>0){

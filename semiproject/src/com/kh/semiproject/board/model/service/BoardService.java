@@ -488,6 +488,20 @@ public class BoardService {
 		}
 	}
 
+	/** 댓글 이메일 알림용 Service
+	 * @param commentWriter
+	 * @param commentContent
+	 * @param email
+	 * @throws Exception
+	 */
+	public void sendCommentAlram(String commentWriter, String commentContent, String title, String email) throws Exception {
+		String boardTitle = null;
+		
+		boardTitle = commentWriter+"님이 "+title +"글에 댓글을 달았습니다. 내용 : commentContent";
+		
+		new BoardService().sendMail(boardTitle, email);
+	}
+
 
 
 	
