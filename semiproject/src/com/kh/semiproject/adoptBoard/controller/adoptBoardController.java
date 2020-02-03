@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.semiproject.adoptBoard.model.service.AdoptBoardService;
 import com.kh.semiproject.adoptBoard.model.vo.AdoptBoard;
 import com.kh.semiproject.board.model.service.BoardService;
@@ -30,6 +32,8 @@ import com.kh.semiproject.map.model.service.MapService;
 import com.kh.semiproject.map.model.vo.Map;
 import com.kh.semiproject.member.model.service.MemberService;
 import com.kh.semiproject.member.model.vo.Member;
+import com.kh.semiproject.review.model.service.ReviewService;
+import com.kh.semiproject.review.model.vo.Comment;
 import com.kh.semiproject.seeBoard.model.service.SeeBoardService;
 import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 import com.oreilly.servlet.MultipartRequest;
@@ -510,6 +514,94 @@ public class adoptBoardController extends HttpServlet {
 			} catch(Exception e) {
 				ExceptionForward.errorPage(request, response, "게시판 검색", e);
 			}
+		}
+		
+		else if(command.equals("/insertComment")) {
+			ReviewService reviewService = new ReviewService();
+			String commentWriter = request.getParameter("writer"); // ajax 키값을 받아옴
+			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			String commentContent = request.getParameter("content");
+			
+			
+			// 댓글 알림용 게시글 작성자 얻어오기
+			String boardWriter = request.getParameter("boardWriter");
+			
+			//Reply reply = new Reply(replyContent, boardId);
+			Comment comment = new Comment(commentContent, boardNo);
+			
+			try {
+				int result = reviewService.insertComment(comment, commentWriter);
+				
+				
+				// 댓글 등록 시 게시글 작성자가 알림 설정한 경우 알림 board에 값 추가
+				if(result > 0) {
+					//int checkNo = reviewService.checkTell(boardWriter);
+					
+				}
+				
+				response.getWriter().print(result);
+				// getWriter(): response에 문자열을 포함시키는 객체
+				
+			}catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "댓글 등록", e);
+			}
+			
+		}
+		
+		else if(command.equals("/selectCommentList")) {
+			ReviewService reviewService = new ReviewService();
+			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			
+			try {
+				List<Comment> cList = reviewService.selectCommentList(boardNo);
+				
+				response.setCharacterEncoding("UTF-8");
+				
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create(); // Gson은 GsonBuilder의 부모
+				// Gson으로 만들고 결과는 json 형태로만 반환
+				
+				gson.toJson(cList, response.getWriter());
+				
+			}catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "댓글 조회", e);
+			}
+			
+		} 
+		
+		else if(command.equals("/commentUpdate")) {
+			ReviewService reviewService = new ReviewService();
+			int commentNo = Integer.parseInt(request.getParameter("commentNo")); // ajax 키값을 받아옴
+			String commentContent = request.getParameter("commModifyContent");
+			//Reply reply = new Reply(replyContent, boardId);
+			Comment comment = new Comment(commentNo, commentContent);
+			
+			try {
+				int result = reviewService.updateComment(comment);
+				
+				// getWriter(): response에 문자열을 포함시키는 객체
+				response.getWriter().print(result);
+				
+			}catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "댓글 수정", e);
+			}
+			
+		}
+		
+		else if(command.equals("/commentDelete")) {
+			ReviewService reviewService = new ReviewService();
+			int commentNo = Integer.parseInt(request.getParameter("commentNo")); // ajax 키값을 받아옴
+			//Reply reply = new Reply(replyContent, boardId);
+			
+			try {
+				int result = reviewService.deleteComment(commentNo);
+				
+				// getWriter(): response에 문자열을 포함시키는 객체
+				response.getWriter().print(result);
+				
+			}catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "댓글 수정", e);
+			}
+			
 		}
 	}
 
