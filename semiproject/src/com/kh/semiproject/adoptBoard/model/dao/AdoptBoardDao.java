@@ -7,10 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.semiproject.adoptBoard.model.vo.AdoptBoard;
 import com.kh.semiproject.board.model.vo.Animal;
+import com.kh.semiproject.board.model.vo.BoardHJ;
 import com.kh.semiproject.findBoard.model.vo.FindBoard;
 import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
 
@@ -234,7 +236,7 @@ public class AdoptBoardDao {
 	 * @return adoptList
 	 * @throws Exception
 	 */
-	public ArrayList<AdoptBoard> searchFindList(Connection conn, int startRow, int endRow, int boardType, String condition, String condition2) throws Exception {
+	public ArrayList<AdoptBoard> searchFindList(Connection conn, int startRow, int endRow, int boardType, String condition) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<AdoptBoard> adoptList = null;
@@ -243,7 +245,7 @@ public class AdoptBoardDao {
 		String query2 = prop.getProperty("searchAdoptList2");
 		
 		try {
-			pstmt = conn.prepareStatement(query1+condition+condition2+query2);
+			pstmt = conn.prepareStatement(query1+condition+query2);
 			
 			pstmt.setInt(1, boardType);
 			pstmt.setInt(2, startRow);
@@ -257,10 +259,10 @@ public class AdoptBoardDao {
 			while(rset.next()) {
 				adoptBoard = new AdoptBoard();
 				
-				//findBoard.setBoardNo(rset.getInt("BOARD_NO"));
-				//findBoard.setfBoardLocation(rset.getString("FIND_LOCATION"));
-				//findBoard.setfBoardDate(rset.getDate("FIND_DATE"));
-				//findBoard.setAnimalCode(rset.getInt("ANIMAL_CODE"));
+				adoptBoard.setBoardNo(rset.getInt("BOARD_NO"));
+				adoptBoard.setaBoardLocation(rset.getString("ADOPT_LOCATION"));
+				adoptBoard.setaBoardDone(rset.getString("ADOPT_DONE"));
+				adoptBoard.setAnimalCode(rset.getInt("ANIMAL_CODE"));
 				
 				adoptList.add(adoptBoard);
 			}
@@ -269,6 +271,58 @@ public class AdoptBoardDao {
 			close(pstmt);
 		}
 		return adoptList;
+	}
+
+	/** 분양합니다 게시판 BoardList Dao
+	 * @param conn
+	 * @param startRow
+	 * @param endRow
+	 * @param boardType
+	 * @param condition
+	 * @param condition2
+	 * @return bList
+	 * @throws Exception
+	 */
+	public List<BoardHJ> searchAdoptBList(Connection conn, int startRow, int endRow, int boardType, String condition, String condition2) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<BoardHJ> bList = null;
+		
+		String query1 = prop.getProperty("searchAdoptBList1");
+		String query2 = prop.getProperty("searchAdoptBList2");
+		
+		try {
+			pstmt = conn.prepareStatement(query1+condition+condition2+query2);
+			
+			System.out.println(query1+condition+condition2+query2);
+			
+			pstmt.setInt(1, boardType);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			bList = new ArrayList<BoardHJ>();
+			BoardHJ board = null;
+			
+			while(rset.next()) {
+				board = new BoardHJ(rset.getInt("BOARD_NO"), 
+								rset.getString("BOARD_TITLE"), 
+								rset.getString("BOARD_CONTENT"),
+								rset.getInt("BOARD_COUNT"),
+								rset.getDate("BOARD_MODIFY_DT"), 
+								rset.getString("MEM_ID"), 
+								rset.getInt("BOARD_CODE"));
+				
+				System.out.println(rset.getInt("BOARD_NO"));
+				
+				bList.add(board);
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return bList;
 	}
 
 }

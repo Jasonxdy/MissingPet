@@ -781,7 +781,11 @@ public class BoardDao {
 				while(rset.next()) {
 					board = new BoardHJ(rset.getInt("BOARD_NO"),
 									rset.getString("BOARD_TITLE"),
-									rset.getString("BOARD_CONTENT"));
+									rset.getString("BOARD_CONTENT"),
+									rset.getInt("BOARD_COUNT"),
+									rset.getDate("BOARD_MODIFY_DT"),
+									rset.getString("MEM_ID")
+									);
 					bList.add(board);
 				}
 			} finally {
@@ -1220,7 +1224,8 @@ public class BoardDao {
 				while(rset.next()) {
 					board = new BoardHJ(rset.getInt("BOARD_NO"), 
 									rset.getString("BOARD_TITLE"), 
-									rset.getInt("BOARD_COUNT"), 
+									rset.getString("BOARD_CONTENT"),
+									rset.getInt("BOARD_COUNT"),
 									rset.getDate("BOARD_MODIFY_DT"), 
 									rset.getString("MEM_ID"), 
 									rset.getInt("BOARD_CODE"));
@@ -1233,7 +1238,6 @@ public class BoardDao {
 				close(rset);
 				close(pstmt);
 			}
-			System.out.println(bList);
 			return bList;
 		}
 
@@ -1342,8 +1346,8 @@ public class BoardDao {
 			
 			return animalList;
 		}
-		
-		
+
+
 		
 		
 		
