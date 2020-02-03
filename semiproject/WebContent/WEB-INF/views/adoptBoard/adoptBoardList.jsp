@@ -101,8 +101,26 @@
                                       <div class="media-body">
                                       	<% for(AdoptBoard adoptBoard : adoptList) { 
                                       			if(adoptBoard.getBoardNo() == board.getBoardNo()) {%>
-                                       	<div> <%= adoptBoard.getaBoardDone()   %> </div>
-                                       	<div> <%= adoptBoard.getaBoardLocation() %></div>
+                                      			
+                                      			
+                                       	<div> 
+                                       	<% switch(adoptBoard.getaBoardDone().charAt(0)){ 
+                                       	case 'Y' : %><span class="badge badge-pill badge-dark">분양 완료</span><% break;
+                                       	case 'N' : %><span class="badge badge-pill badge-info">분양 중</span><% break;
+                                       	}%>
+                                       	
+                                       	<% 
+                                    		String location[] = adoptBoard.getaBoardLocation().split(",");
+                                       	%>
+                                       	
+                                       	<span>[<%= location[0] %>]</span>
+                                       	
+                                       	
+                                       	</div>
+                                       	
+                                       	
+                                       	
+                                       	
                                        	<% }
                                       		}%>
                                           <h4 class="title">
@@ -159,13 +177,14 @@
                                 <option value="writer">작성자</option>
                             </select>
                             <input type="text" name="searchValue">
+                            <input type="hidden" name="doneCheck1" value="N">
                             <button class="btn btn-primary">검색</button>
-                            <!-- <input type="hidden" name="doneCheck1" value="N">
-                            <input type="checkbox" name="doneCheck1" id="doneCheck1" value="N">분양중
+                            <input type="hidden" name="doneCheck1" value="N">
+                            <input type="checkbox" name="doneCheck1" id="doneCheck1" value="Y">분양중
                             <input type="hidden" name="doneCheck2" value="N">
-                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="N">분양완료 -->
-                          	<input type="text" name="doneCheck1">
-                            <input type="text" name="doneCheck2">
+                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="Y">분양완료
+                          	<!-- <input type="text" name="doneCheck1">
+                            <input type="text" name="doneCheck2"> -->
                         </form>
                     </div>
                     

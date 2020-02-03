@@ -221,7 +221,7 @@ input::-webkit-inner-spin-button {
 
                           <tr>
                             <th><label>E-mail</label></th>
-                            <td><input type="email" size="24" value="<%= member.getMemberEmail() %>" name="email" disabled></td>
+                            <td><input type="email" size="24" value="<%= member.getMemberPwd() %>" name="email" disabled></td>
                           </tr>
 
 							<%

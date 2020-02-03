@@ -321,6 +321,19 @@ public class BoardService {
 		
 		BoardHJ board = boardDao.selectboard(conn, boardNo);
 		
+		if(board != null) {
+			int result = boardDao.increaseCount(conn, boardNo);
+			
+			if(result>0) {
+				commit(conn);
+				
+				board.setBoardCount(board.getBoardCount()+1);
+			} else {
+				rollback(conn);
+				board=null;
+			}
+		}
+		
 		close(conn);
 		
 		return board;
