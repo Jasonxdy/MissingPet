@@ -1,6 +1,9 @@
 package com.kh.semiproject.adoptBoard.model.service;
 
-import static com.kh.semiproject.common.JDBCTemplate.*;
+import static com.kh.semiproject.common.JDBCTemplate.close;
+import static com.kh.semiproject.common.JDBCTemplate.commit;
+import static com.kh.semiproject.common.JDBCTemplate.getConnection;
+import static com.kh.semiproject.common.JDBCTemplate.rollback;
 
 import java.io.File;
 import java.sql.Connection;
@@ -13,11 +16,8 @@ import com.kh.semiproject.board.model.dao.BoardDao;
 import com.kh.semiproject.board.model.vo.Animal;
 import com.kh.semiproject.board.model.vo.Attachment;
 import com.kh.semiproject.board.model.vo.BoardHJ;
-import com.kh.semiproject.findBoard.model.dao.FindBoardDao;
-import com.kh.semiproject.findBoard.model.vo.FindBoard;
 import com.kh.semiproject.map.model.DAO.MapDAO;
-import com.kh.semiproject.seeBoard.model.dao.SeeBoardDao;
-import com.kh.semiproject.seeBoard.model.vo.SeeBoard;
+import com.kh.semiproject.map.model.vo.Map;
 
 public class AdoptBoardService {
 
@@ -45,7 +45,7 @@ public class AdoptBoardService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public static int insertAdoptBoard(BoardHJ board, AdoptBoard adoptBoard, Animal animal, ArrayList<Attachment> fList) throws Exception {
+	public static int insertAdoptBoard(BoardHJ board, AdoptBoard adoptBoard, Animal animal, ArrayList<Attachment> fList, Map map) throws Exception {
 		Connection conn = getConnection();
 		
 		AdoptBoardDao adoptBoardDao = new AdoptBoardDao();
@@ -61,6 +61,7 @@ public class AdoptBoardService {
 			animal.setAnimalCode(animalNo);
 			adoptBoard.setBoardNo(boardNo);
 			adoptBoard.setAnimalCode(animalNo);
+			map.setBoardNo(boardNo);
 			
 			result = boardDao.insertBoard(conn, board);
 			if(result > 0) {
@@ -72,32 +73,37 @@ public class AdoptBoardService {
 					
 					result = adoptBoardDao.insertAdoptBoard(conn, adoptBoard);
 					if(result > 0) {
-						if(!fList.isEmpty()) {
-							result = 0;
+						result = 0;
 						
-							for(Attachment file : fList) {
-								file.setBoardNo(boardNo);
+						result = new MapDAO().insertMap(conn, map);
+						if(result > 0) {
+							if(!fList.isEmpty()) {
+								result = 0;
 								
-								result = boardDao.insertAttachment(conn, file);
-								if(result ==0) {
-									break;
+								for(Attachment file : fList) {
+									file.setBoardNo(boardNo);
+									
+									result = boardDao.insertAttachment(conn, file);
+									if(result ==0) {
+										break;
+									}
 								}
 							}
-						}
-						if(result >0) {
-							commit(conn);
-						} else {
-							for(Attachment file : fList) {
-								String path = file.getFilePath();
-								String saveFile = file.getFileChangeName();
-								
-								File failedFile = new File(path + saveFile);
-								
-								failedFile.delete();
+							if(result >0) {
+								commit(conn);
+							} else {
+								for(Attachment file : fList) {
+									String path = file.getFilePath();
+									String saveFile = file.getFileChangeName();
+									
+									File failedFile = new File(path + saveFile);
+									
+									failedFile.delete();
+								}
+								rollback(conn);
 							}
-							rollback(conn);
+							close(conn);
 						}
-						close(conn);
 					}
 				} 
 			}
@@ -128,7 +134,7 @@ public class AdoptBoardService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public static int updateAdoptBoard(BoardHJ board, AdoptBoard adoptBoard, Animal animal, ArrayList<Attachment> fList) throws Exception {
+	public static int updateAdoptBoard(BoardHJ board, AdoptBoard adoptBoard, Animal animal, ArrayList<Attachment> fList, Map map) throws Exception {
 		Connection conn = getConnection();
 		
 		AdoptBoardDao adoptBoardDao = new AdoptBoardDao();
@@ -147,9 +153,9 @@ public class AdoptBoardService {
 				result = adoptBoardDao.updateAdoptAnimal(conn, animal, boardNo);
 				if(result>0) {
 					// 지도 업데이트
-					// result=0;
-					//map.setBoardNo(boardNo);
-					//result = new MapDAO().updateMap(conn, map);
+					 result=0;
+					map.setBoardNo(boardNo);
+					result = new MapDAO().updateMap(conn, map);
 					if(result>0) {
 						if(!fList.isEmpty()) {
 							result = 0;

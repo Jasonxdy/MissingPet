@@ -350,9 +350,9 @@ input::-webkit-inner-spin-button {
 						<input type="file" id="img5" name="img5" onchange="LoadImg(this,5)">
 						</div>
 						
-                      <%-- <br><br>
+                      <br><br>
                       <label><b>지도표시(임시)</b></label>
-                      <input type="text" size="10" name="spot" value="<%= seeBoard.getsBoardMap() %>">
+                      <input type="text" size="10" name="spot" value="no">
                       <% if(request.getAttribute("map") != null) { %>
 							<input id="latitude" name="latitude" style="display:none;" value="<%=map.getMapLatitude()%>">
 							<input id="longitude" name="longitude" style="display:none;" value="<%=map.getMapLongitude()%>">
@@ -360,7 +360,7 @@ input::-webkit-inner-spin-button {
 					  <% } %>
                       <div id="map">
                         <%@ include file="/WEB-INF/views/map/updateMap.jsp"%>
-                      </div> --%>
+                      </div>
                       <br>
                       <div id="bottom-bt">
                         <button type="submit" class="btn btn-primary mb-3">등록하기</button>
