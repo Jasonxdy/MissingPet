@@ -30,7 +30,7 @@
             <ul class="nav flex-column">
               <li class="align-items-center text-center">
                 <a id="logo" href="<%= request.getContextPath() %>">
-                  <img src="<%= request.getContextPath() %>/img/logo7.png" width=150px>
+                  <img src="<%= request.getContextPath() %>/img/MissPet2.png" width=200px style="margin-top:30px; margin-bottom:20px;">
                 </a>
               </li>
 			<% if(loginMember == null){ %>

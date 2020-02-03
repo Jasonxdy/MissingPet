@@ -55,7 +55,7 @@ String currentPage = request.getParameter("currentPage");
                       <div class="container-fluid mt-3">
                           <div class="row">
                               <div class="col-md-12">
-                                  <h3>게시판 제목</h3>
+                                 <h2 id="title-top"><a href="<%= request.getContextPath() %>/free/list">자유게시판</a></h2>
                                   <hr>
                               </div>
                           </div>
@@ -63,13 +63,13 @@ String currentPage = request.getParameter("currentPage");
                   </div>
       
                   <div class="col-md-12" >
-                      <div class="card">
+                      <div class="card"  id="bodytitle">
                           <div class="card-body p-1 pl-2 pt-2">
-                          	<span>
+                          	<span class="freett1">
                                   <%=free.getFreeCategory() %>
                               </span>
-                               &nbsp;&nbsp;
-                              <span>
+                               &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                              <span class="freett2">
                                   <%=board.getBoardTitle() %>
                               </span>
                               &nbsp;&nbsp;
@@ -132,8 +132,8 @@ String currentPage = request.getParameter("currentPage");
                     <div class="col-md-12">
                       <div class="float-right">
                       <% if(loginMember != null && (board.getMemId().equals(loginMember.getMemberId()))) {%>
-                      <a href="updateForm?no=<%=board.getBoardNo() %>" class="btn btn-primary">수정</a>
-                        <button type="button" class="btn btn-primary m-3" id="deleteBtn">삭제</button>
+                      <a href="updateForm?no=<%=board.getBoardNo() %>" class="btn btn-warning id="updateBtn">수정</a>
+                        <button type="button" class="btn btn-primary m-3 mr-5" id="deleteBtn">삭제</button>
                         	<% } %>
                       </div>
                     </div>
@@ -155,11 +155,11 @@ String currentPage = request.getParameter("currentPage");
                         	 <br>
                        		 <br>
                        		 
-                       		 <div class="mb-5">
+                       		 <div class="mb-5" style="height:500px;">
                       	<% if(iList != null) { %>
 	                      	<% for(Img img : iList) { 
 	                      	%>
-	                      		<img style="display: block; max-width:250px; max-height:250px;"  alt="" src="<%= request.getContextPath()%>/resources/uploadImages/<%= img.getImgChangeName() %>">
+	                      		<img style="display:inline-block; max-width:250px; max-height:250px;"  alt="" src="<%= request.getContextPath()%>/resources/uploadImages/<%= img.getImgChangeName() %>">
 	                      	<% } %>
 	                   <% } %>   	
                       </div>
@@ -185,10 +185,10 @@ String currentPage = request.getParameter("currentPage");
 									<% } %>
 				
                 				  <div class="row">
-                				  <div class="col-8 mr-3">
+                				  <div class="col-9 mr-3">
                  				   <textarea id="commContent" style="resize: none; width: 100%; height: 100px"></textarea>
                  				 </div>
-                 				 <div class="col-2 ml-3 mt-2">
+                 				 <div class="col-2 ml-3">
                  				   <button id="addComment" type="button" class="btn btn-primary ">등록하기</button>
                 				  </div>
               					  </div>
@@ -196,7 +196,7 @@ String currentPage = request.getParameter("currentPage");
 
 
                                   <div class="col-md-12">
-                                    <div class="text-center">
+                                    <div class="text-center" id="listback">
                                       <a href="list?currentPage=<%= currentPage %>" class="btn btn-primary">목록으로</a>
                                     </div>
                                   </div>
@@ -290,7 +290,7 @@ String currentPage = request.getParameter("currentPage");
 						var $divImgWriter2 = $("<div>").prop("class", "col-2"); // 작성자+작성일 담는 div
 						var $divContent = $("<div>").prop("class", "col-6"); // 댓글 본문 div
 						var $divButton = $("<div>").prop("class", "col-2 text-center"); // 수정 삭제 담는 div
-						var $uButton = $("<button>").prop("class", "btn btn-sm btn-primary").on("click", function(){
+						var $uButton = $("<button>").prop("class", "btn btn-sm btn-outline-warning").on("click", function(){
 							$(this).parent().parent()
 							.html("<textarea id='commentModify' class='m-1 pb-1' style='resize: none; width: 80%; height: 80px'></textarea>")
 							.append("<button id='CMB' class='btn btn-sm btn-primary m-1 pb-1'>등록</button>");
@@ -313,7 +313,7 @@ String currentPage = request.getParameter("currentPage");
 								})
 							});
 						}).text("수정");
-						var $dButton = $("<button>").prop("class", "btn btn-sm mt-1 btn-primary").on("click", function(){
+						var $dButton = $("<button>").prop("class", "btn btn-sm mt-1 btn-outline-primary").on("click", function(){
 							var commentNo = cList[i].commentNo;
 							if(confirm("정말 삭제하시겠습니까?")){
 									$.ajax({

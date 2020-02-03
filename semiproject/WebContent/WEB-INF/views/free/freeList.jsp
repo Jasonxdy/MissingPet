@@ -73,7 +73,7 @@ int endPage = pInf.getEndPage();
               <div class="row">
             
                 <section class="content">
-                  <h2 id="title-top"><a href="#">자유게시판</a></h2>
+                  <h2 id="title-top"><a href="<%= request.getContextPath() %>/free/list">자유게시판</a></h2>
                   <hr>
                   <div class="col-md-12 col-md-offset-2" id="panelwrap" >
                     <div class="panel panel-default">
@@ -134,7 +134,7 @@ int endPage = pInf.getEndPage();
                     <!--오른쪽 배너-->
                     <div id="right-ban">
                       <a href="#">
-                        <img src="<%= request.getContextPath() %>/img/배너.PNG" alt="배너" width="190px" height="550px">
+                        <img src="<%= request.getContextPath() %>/img/배너.PNG" alt="배너" width="190px" height="600px">
                       </a>
                     </div>
 
@@ -151,7 +151,7 @@ int endPage = pInf.getEndPage();
 	                 <option value="titcont">제목+내용</option>
                 </select>
                 <input name="searchValue" id="text-tt" type="text">
-                <button type="submit">검색</button>
+                <button type="submit" class="btn btn-primary">검색</button>
                 </form>
                 
                 
