@@ -101,8 +101,26 @@
                                       <div class="media-body">
                                       	<% for(AdoptBoard adoptBoard : adoptList) { 
                                       			if(adoptBoard.getBoardNo() == board.getBoardNo()) {%>
-                                       	<div> <%= adoptBoard.getaBoardDone()   %> </div>
-                                       	<div> <%= adoptBoard.getaBoardLocation() %></div>
+                                      			
+                                      			
+                                       	<div> 
+                                       	<% switch(adoptBoard.getaBoardDone().charAt(0)){ 
+                                       	case 'Y' : %><span class="badge badge-pill badge-dark">분양 완료</span><% break;
+                                       	case 'N' : %><span class="badge badge-pill badge-info">분양 중</span><% break;
+                                       	}%>
+                                       	
+                                       	<% 
+                                    		String location[] = adoptBoard.getaBoardLocation().split(",");
+                                       	%>
+                                       	
+                                       	<span>[<%= location[0] %>]</span>
+                                       	
+                                       	
+                                       	</div>
+                                       	
+                                       	
+                                       	
+                                       	
                                        	<% }
                                       		}%>
                                           <h4 class="title">
@@ -277,6 +295,24 @@
     </section>
 </div>
 <script>
+
+/* $('document').ready(function() {
+	if(doneCheck1 == "Y"){
+		$('input[name=cdoneCheck1]').attr("checked","true");
+	}
+	if(doneCheck2 == "Y"){
+		$('input[name=cdoneCheck2]').attr("checked","true");
+	}
+}); */
+$(function () {
+	if('<%=doneCheck1%>' == 'Y'){
+		$('input[name=cdoneCheck1]').attr("checked",true);
+	}
+	if('<%=doneCheck2%>' == 'Y'){
+		$('input[name=cdoneCheck2]').attr("checked",true);
+	}
+});
+
 	$(function(){
 		$(".summary1").text($("#dummy1").text().slice(0, 45));
 		$(".summary2").text($("#dummy2").text().slice(0, 45));
@@ -341,6 +377,15 @@
 		    $('input[name=doneCheck2]').val('N');
 		}	
 	}
+	
+	/* /* function(){
+		if(doneCheck1 == 'Y'){
+			$('input[name=cdoneCheck1]').attr("checked",true);
+		}
+		if(doneCheck2 == 'Y'){
+			$('input[name=cdoneCheck2]').attr("checked",true);
+		}
+	}); */
 </script>
 
 </body>
