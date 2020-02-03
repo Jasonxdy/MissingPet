@@ -336,7 +336,9 @@ input::-webkit-inner-spin-button {
                       <br><br>
                       <label><b>지도표시(임시)</b></label>
                       <input type="text" size="10" name="spot" id="spot" value="no">
-                      <div id="map"></div>
+                      <div id="map">
+                       <%@ include file="/WEB-INF/views/map/insertMap.jsp"%>
+                      </div>
                       <br>
                       <div id="bottom-bt">
                         <button type="submit" class="btn btn-primary m-2">등록하기</button>

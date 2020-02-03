@@ -466,14 +466,14 @@
 									<td><%= adoptBoard.getaBoardCost() %>만원</td>
 								</tr>
 							</table>
-							<%-- <% if(request.getAttribute("map") != null) { %>
+							<% if(request.getAttribute("map") != null) { %>
 							<input id="latitude" name="latitude" style="display:none;" value="<%=map.getMapLatitude()%>">
 							<input id="longitude" name="longitude" style="display:none;" value="<%=map.getMapLongitude()%>">
 							<input id="mapAddress" type="textarea" name="mapAddress" value="<%=map.getMapAddress() %>" style="display:none;">
 							<% } %>
 							<div id="map">
 								<%@ include file="/WEB-INF/views/map/detailMap.jsp"%>
-							</div> --%>
+							</div>
 						</div>
 					</div>
 
