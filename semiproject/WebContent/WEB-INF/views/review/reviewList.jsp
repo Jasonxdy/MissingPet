@@ -142,16 +142,79 @@
 
 
                     <!--하단-->
-                    <div id="bottom-bar" class="row">
+                    <div class="row">
+                    <div class="col-10">
+                    <div class="row">
+                    <div class="col-md-12">
+	                    <div class="float-left m-2">
+	                        <form class="input-group" method="GET" action="searchList" id="searchForm">
+	                            <select class="form-control label" name="searchKey">
+	                                <option value="title">제목</option>
+	                                <option value="content">내용</option>
+	                                <option value="titcont">제목+내용</option>
+	                                <option value="writer">작성자</option>
+	                            </select>
+	                            <input type="text" name="searchValue">
+	                            <button class="btn btn-primary">검색</button>
+	                        </form>
+	                    </div>
+                    
+                    <% if(loginMember != null) {%>
+                    <div class="float-right m-2">
+                        <button type="button" class="btn btn-primary" id="insertBtn" onclick="location.href = 'insertForm';">글쓰기</button>
+                    </div>
+	        		<% } %>
+    
+                </div>
+                
+                <div class="col-md-12">
+                	<ul class="pagination justify-content-center">
+                          <% if(currentPage > 1) { %>
+                         	 <li class="page-item">
+                          	  	<a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=1">&laquo;</a>
+                        	 </li>
+	                		<!-- 이전으로(<) -->
+	                         <li class="page-item">
+	                   			<a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= currentPage-1 %>">&lt;</a>
+		                	 </li>
+	                	   <% } %>
+	                	   
+	                	   <% for(int p = startPage; p<=endPage; p++) { %>
+	                	   	<% if(p == currentPage) { %>
+	                	   	
+	                          <li class="page-item">
+	                            <a class="page-link"><%= p %></a>
+	                          </li>
+	                        <% } else { %>
+	                          <li class="page-item">
+	                            <a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= p %>"><%= p %></a>
+	                          </li>
+	                        <% } %>
+	                      <% } %>
+                          
+                          <% if(currentPage < maxPage) { %>
+                         	 <li class="page-item">
+	                   	 		<a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= currentPage+1 %>">&gt;</a>
+	               			 </li>
+                          <li class="page-item">
+                            <a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=<%= maxPage %>">&raquo;</a>
+                          </li>
+                          <% } %>
+                    </ul>
+               </div>
+               </div>
+               </div>
+               </div>
+                    <%-- <div id="bottom-bar" class="row">
                       <form class="col-4 text-center" method="GET" action="searchList" id="searchForm">
-	                      <select class="custom-select" name="searchKey" style="font-size: 12px;">
+	                      <select class="custom-select" name="searchKey" style="font-size: 14px;">
 	                        <option value="title" selected>제목</option>
 	                        <option value="content">내용</option>
 	                        <option value="titcont">제목+내용</option>
 	                        <option value="writer">작성자</option>
 	                      </select>
-                      	<input id="text-tt" type="text" name="searchValue">
-                      	<button type="submit">검색</button>
+                      	<input class="pb-1" id="text-tt" type="text" name="searchValue">
+                      	<button class="pb-1" type="submit">검색</button>
                       </form>
                       <div id="num" class="col-3">
                         <ul class="pagination">
@@ -193,7 +256,7 @@
                         <button type="button" class="btn btn-primary"><a href="<%= request.getContextPath() %>/review/reviewInsert">글쓰기</a></button>
                       </div>
 					 <% } %>
-                    </div>
+                    </div> --%>
 
 
                   </section>

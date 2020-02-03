@@ -20,17 +20,17 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img class=" d-block w-100" style="background-size:contain"
-                src="http://cdn.ppomppu.co.kr/zboard/data3/2013/0108/1357646773_Animal__Samoyed__Husky__Wallpaper_%281920X1080%29.jpg"
+                src="<%= request.getContextPath() %>/img/main1.jpg"
                 alt="First slide">
             </div>
             <div class="carousel-item">
               <img class=" d-block w-100" style="background-size:contain"
-                src="http://cdn.ppomppu.co.kr/zboard/data3/2013/0108/1357646773_Animal__Samoyed__Husky__Wallpaper_%281920X1080%29.jpg"
+                src="<%= request.getContextPath() %>/img/main3.jpg"
                 alt="Second slide">
             </div>
             <div class="carousel-item">
               <img class=" d-block w-100" style="background-size:contain"
-                src="http://cdn.ppomppu.co.kr/zboard/data3/2013/0108/1357646773_Animal__Samoyed__Husky__Wallpaper_%281920X1080%29.jpg"
+                src="<%= request.getContextPath() %>/img/main5.jpg"
                 alt="Third slide">
             </div> 
             <ul class="carousel-indicators">

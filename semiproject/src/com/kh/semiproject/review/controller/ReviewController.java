@@ -452,7 +452,7 @@ public class ReviewController extends HttpServlet {
 			case "writer" : condition = " MEM_ID LIKE " + searchValue; break;
 			}
 			try {
-				int listCount = reviewService.getListCount();
+				int listCount = reviewService.getSearchListCount(condition);
 				
 				int limit = 5;
 				int pagingBarSize = 5;
@@ -482,7 +482,7 @@ public class ReviewController extends HttpServlet {
 				
 				List<Review> rList = reviewService.searchReviewList(startRow, endRow, condition);
 				List<Img> iList = reviewService.searchRImgList(startRow, endRow, condition);
-				
+				//
 				path = "/WEB-INF/views/review/reviewSearchList.jsp";
 				request.setAttribute("rList", rList);
 				request.setAttribute("pInf", pInf);
@@ -494,7 +494,7 @@ public class ReviewController extends HttpServlet {
 			}
 		}
 	}
-
+	//
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

@@ -141,14 +141,16 @@
     border: 1px solid lightgray;
 }
 
+
+
 #imgdiv1{
-    display: block;
-    float:left;
-    margin-right: 30px;
-    margin-left: 10px;
-
-}
-
+       display: block;
+       float:left;
+       margin-right: 30px;
+       margin-left: 10px;
+       width: 70px;
+       height: 70px;
+   }
 #imgdiv2{
     display: block;
     float:left;
@@ -220,4 +222,14 @@
     width : 880px;
     height: 500px;
     background-color: lightskyblue;
+}
+
+#commContent{
+	margin-left: 100px;
+}
+
+#addComment{
+	
+	margin-left : 70px;
+	margin-top : 20px;
 }

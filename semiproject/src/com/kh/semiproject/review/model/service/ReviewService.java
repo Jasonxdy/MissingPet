@@ -295,7 +295,15 @@ public class ReviewService {
 		
 		if(result > 0) commit(conn);
 		else			rollback(conn);
+
+		return result;
+	}
 		
+	public int getSearchListCount(String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new ReviewDAO().getSearchListCount(conn, condition);
+		close(conn);
 		return result;
 	}
 }
