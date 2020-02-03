@@ -29,7 +29,7 @@
 	      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="dropdown-menu" style ="z-index:1030">
 	
 	        <div class="dropdown-item  text-center">
-	          로그인 후 이용해주세요 :)
+	          알림 내역이 없습니다 :)
 	        </div>
 	        </div>
 	<% } else if (alertList.isEmpty()){ %>

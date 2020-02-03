@@ -40,7 +40,10 @@ public class AlertFilter implements Filter {
 
 		if (member != null) { // 로그인이 되어있는 경우
 			try {
-				if (member.getMemberWebTell().equals("Y")) {
+				
+				String memberWebTell = alertService.selectMemberWebTell(member.getMemberId());
+				
+				if (memberWebTell.equals("Y")) {
 					alertList = alertService.selectAlert(member.getMemberId());
 				}
 

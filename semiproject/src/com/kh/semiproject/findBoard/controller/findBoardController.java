@@ -148,6 +148,7 @@ public class findBoardController extends HttpServlet {
 					
 					String boardTitle = multiRequest.getParameter("title");
 					String boardContent = multiRequest.getParameter("content");
+					
 					String boardURL = multiRequest.getParameter("videoURL");
 					String boardWriter = loginMember.getMemberId();
 					int boardCode = 1;

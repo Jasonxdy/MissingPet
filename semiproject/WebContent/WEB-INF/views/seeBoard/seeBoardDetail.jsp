@@ -337,7 +337,7 @@
 			                              <% if( request.getSession().getAttribute("loginMember") != null ) { %>
 			                              <input type="text" name="reportMemberId" value="<%= loginMember.getMemberId() %>" hidden>
 			                              <% } %>
-			                              <input type="text" name="reportBoardNo" value="<%= review.getBoardNo() %>" hidden>
+			                              <input type="text" name="reportBoardNo" value="<%= board.getBoardNo() %>" hidden>
 			                            </div>
 			                            <div class="form-group">
 			                              <label for="message-text" class="col-form-label">내용</label>

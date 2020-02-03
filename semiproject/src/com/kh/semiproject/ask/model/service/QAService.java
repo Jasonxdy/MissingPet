@@ -44,6 +44,10 @@ public class QAService {
 		
 		ask.setAskNo(askNo);
 		
+		ask.setAskContent(
+				ask.getAskContent().replace("\r\n", "<br>")
+		);
+		
 		// 1:1 문의 글 생성
 		int result = new QADAO().insertAsk(conn, ask);
 		

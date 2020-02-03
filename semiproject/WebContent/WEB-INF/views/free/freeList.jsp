@@ -73,7 +73,10 @@ int endPage = pInf.getEndPage();
               <div class="row">
             
                 <section class="content">
-                  <h2 id="title-top"><a href="<%= request.getContextPath() %>/free/list">자유게시판</a></h2>
+                  <h2 id="title-top">
+                  <a href="<%= request.getContextPath() %>/free/list">자유게시판</a>
+                   <img src="<%= request.getContextPath() %>/img/자유게시판logo.png" style="widht : 50px; height:50px; display:inline-block">
+                  </h2>
                   <hr>
                   <div class="col-md-12 col-md-offset-2" id="panelwrap" >
                     <div class="panel panel-default">
