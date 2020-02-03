@@ -8,9 +8,10 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/mypage-header.css">
 
 
+
 </head>
 <body>
-	<div class="row ml-1 w-100" id="mypage-header" style= "z-index:1030">
+	<div class="row ml-1 w-100" id="mypage-header" style= "z-index:1020">
 		<h1 style="font-weight: bold;">마이페이지</h1>
 		<!-- 마이페이지 Header nav -->
 		<div class="row w-100 mt-2">

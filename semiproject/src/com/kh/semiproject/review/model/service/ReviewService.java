@@ -1,7 +1,10 @@
 package com.kh.semiproject.review.model.service;
 
 
-import static com.kh.semiproject.common.JDBCTemplate.*;
+import static com.kh.semiproject.common.JDBCTemplate.close;
+import static com.kh.semiproject.common.JDBCTemplate.commit;
+import static com.kh.semiproject.common.JDBCTemplate.getConnection;
+import static com.kh.semiproject.common.JDBCTemplate.rollback;
 
 import java.io.File;
 import java.sql.Connection;
@@ -216,6 +219,47 @@ public class ReviewService {
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
+		return result;
+	}
+
+	/** Review 검색 리스트 Service
+	 * @param startRow
+	 * @param endRow
+	 * @param condition
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Review> searchReviewList(int startRow, int endRow, String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Review> rList = new ReviewDAO().searchReviewList(conn, startRow, endRow, condition);
+		
+		close(conn);
+		
+		return rList;
+	}
+
+	/** Img 검색 리스트 Service
+	 * @param startRow
+	 * @param endRow
+	 * @param condition
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Img> searchRImgList(int startRow, int endRow, String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Img> iList = new ReviewDAO().searchRImgList(conn, startRow, endRow, condition);
+		
+		close(conn);
+		return iList;
+	}
+
+	public int getSearchListCount(String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new ReviewDAO().getSearchListCount(conn, condition);
 		close(conn);
 		return result;
 	}

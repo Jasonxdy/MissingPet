@@ -18,8 +18,12 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.semiproject.board.model.vo.Animal;
+import com.kh.semiproject.board.model.vo.Attachment;
+import com.kh.semiproject.board.model.vo.BoardHJ;
 import com.kh.semiproject.common.ExceptionForward;
 import com.kh.semiproject.common.proImgRenamePolicy;
+import com.kh.semiproject.findBoard.model.vo.FindBoard;
 import com.kh.semiproject.member.model.vo.Member;
 import com.kh.semiproject.review.model.service.ReviewService;
 import com.kh.semiproject.review.model.vo.Comment;
@@ -318,11 +322,20 @@ public class ReviewController extends HttpServlet {
 			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 			String commentContent = request.getParameter("content");
 			
+			// 댓글 알림용 게시글 작성자 얻어오기
+			String boardWriter = request.getParameter("boardWriter");
+			
 			//Reply reply = new Reply(replyContent, boardId);
 			Comment comment = new Comment(commentContent, boardNo);
 			
 			try {
 				int result = reviewService.insertComment(comment, commentWriter);
+				
+				
+				// 댓글 등록 시 게시글 작성자가 알림 설정한 경우 알림 board에 값 추가
+				if(result > 0) {
+//					int checkNo = reviewService.checkTell(boardWriter);
+				}
 				
 				response.getWriter().print(result);
 				// getWriter(): response에 문자열을 포함시키는 객체
@@ -407,8 +420,65 @@ public class ReviewController extends HttpServlet {
 			}
 					
 		}
-	}
+		
+		else if(command.contentEquals("/searchList")) {
+			String searchKey = request.getParameter("searchKey");
+			String searchValue = request.getParameter("searchValue");
 
+			String condition = null;
+			
+			searchValue = "'%' || '" + searchValue + "' || '%' ";
+			
+			switch(searchKey) {
+			case "title": condition =  " BOARD_TITLE LIKE " + searchValue; break;
+			case "content": condition =  " BOARD_CONTENT LIKE " + searchValue; break;
+			case "titcont": condition =  " (BOARD_CONTENT LIKE" + searchValue + " OR BOARD_TITLE LIKE " + searchValue +")"; break;
+			case "writer" : condition = " MEM_ID LIKE " + searchValue; break;
+			}
+			try {
+				int listCount = reviewService.getSearchListCount(condition);
+				
+				int limit = 5;
+				int pagingBarSize = 5;
+				
+				int currentPage = 0;	
+				int maxPage = 0;		
+				int startPage = 0;		
+				int endPage = 0;
+				
+				if(request.getParameter("currentPage") == null) {
+					currentPage = 1;
+				} else {
+					currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				}
+				
+				int startRow = (currentPage -1) * limit + 1;
+				int endRow = startRow + limit -1;
+				
+				maxPage = (int)Math.ceil( ( (double)listCount / limit ) );
+				startPage = (currentPage -1) / pagingBarSize * pagingBarSize +1;
+				endPage = startPage + pagingBarSize - 1;
+				if(maxPage <= endPage) {
+					endPage = maxPage;
+				}
+				
+				PageInfo pInf = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
+				
+				List<Review> rList = reviewService.searchReviewList(startRow, endRow, condition);
+				List<Img> iList = reviewService.searchRImgList(startRow, endRow, condition);
+				//
+				path = "/WEB-INF/views/review/reviewSearchList.jsp";
+				request.setAttribute("rList", rList);
+				request.setAttribute("pInf", pInf);
+				request.setAttribute("iList", iList);
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시판 검색", e);
+			}
+		}
+	}
+	//
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

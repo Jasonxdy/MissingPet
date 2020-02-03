@@ -478,8 +478,6 @@ public class seeBoardController extends HttpServlet {
 				
 				List<SeeBoard> sList = seeBoardService.searchSeeList(startRow, endRow, boardType, condition);
 				
-				System.out.println(bList);
-				System.out.println(aList);
 				
 				path = "/WEB-INF/views/seeBoard/seeBoardSearchList.jsp";
 				request.setAttribute("pInf", pInfo);

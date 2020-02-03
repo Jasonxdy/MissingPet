@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -413,6 +414,88 @@ public class ReviewDAO {
 			result = pstmt.executeUpdate();
 		}finally {
 			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<Review> searchReviewList(Connection conn, int startRow, int endRow, String condition) throws Exception {
+		PreparedStatement pstmt = null; 
+		ResultSet rset = null;
+		List<Review> rList = null;
+		
+		String query1 = prop.getProperty("searchReviewList1");
+		String query2 = prop.getProperty("searchReviewList2");
+		
+		try {
+			pstmt = conn.prepareStatement(query1+condition+query2);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			rList = new ArrayList<Review>();
+			Review review = null;
+			
+			while(rset.next()) {
+				review = new Review(rset.getInt("BOARD_NO"),
+						rset.getString("BOARD_TITLE"),
+						rset.getString("BOARD_CONTENT"),
+						rset.getDate("BOARD_MODIFY_DT"),
+						rset.getInt("BOARD_COUNT"),
+						rset.getString("MEM_ID"),
+						rset.getInt("RNUM"));
+				rList.add(review);
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return rList;
+	}
+
+	public List<Img> searchRImgList(Connection conn, int startRow, int endRow, String condition) throws Exception {
+		PreparedStatement pstmt = null; 
+		ResultSet rset = null;
+		List<Img> iList = null;
+		
+		String query1 = prop.getProperty("searchRImgList1");
+		String query2 = prop.getProperty("searchRImgList2");
+		
+		try {
+			pstmt = conn.prepareStatement(query1+condition+query2);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			iList = new ArrayList<Img>();
+			Img img = null;
+			
+			while(rset.next()) {
+				img = new Img(
+						rset.getInt("IMG_NO"), 
+						rset.getString("IMG_CHANGE_NAME"),
+						rset.getInt("BOARD_NO"));
+				iList.add(img);
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return iList;
+	}
+
+	public int getSearchListCount(Connection conn, String condition) throws Exception {
+		Statement stmt = null; 
+		int result = 0;
+		String query1 = prop.getProperty("getSearchListCount1");
+		//String query2 = prop.getProperty("getSearchListCount2");
+		
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(query1+condition);
+		}finally {
+			close(stmt);
 		}
 		return result;
 	}

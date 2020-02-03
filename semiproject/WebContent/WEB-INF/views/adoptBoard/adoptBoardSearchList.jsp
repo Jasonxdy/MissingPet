@@ -4,7 +4,7 @@
 <%@page import="com.kh.semiproject.board.model.vo.Animal"%>
 <%@page import="com.kh.semiproject.adoptBoard.model.vo.AdoptBoard"%>   
 <%@page import="com.kh.semiproject.board.model.vo.BoardHJ"%> 
-    
+
 <%
 	List<BoardHJ> bList = (List<BoardHJ>)request.getAttribute("bList");
 	List<Attachment> aList = (List<Attachment>)request.getAttribute("aList");
@@ -16,6 +16,8 @@
 	
 	String searchKey = request.getParameter("searchKey");
 	String searchValue = request.getParameter("searchValue");
+	String doneCheck1 = request.getParameter("doneCheck1");
+	String doneCheck2 = request.getParameter("doneCheck2");
 		
 	int listCount = pInf.getListCount();
 	int currentPage = pInf.getCurrentPage();
@@ -158,12 +160,10 @@
                             </select>
                             <input type="text" name="searchValue">
                             <button class="btn btn-primary">검색</button>
-                            <!-- <input type="hidden" name="doneCheck1" value="N">
-                            <input type="checkbox" name="doneCheck1" id="doneCheck1" value="Y">분양중
+                            <input type="hidden" name="doneCheck1" value="N">
+                            <input type="checkbox" name="doneCheck1" id="doneCheck1" value="Y" checked>분양중
                             <input type="hidden" name="doneCheck2" value="N">
-                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="Y">분양완료 -->
-                            <input type="text" name="doneCheck1">
-                            <input type="text" name="doneCheck2">
+                            <input type="checkbox" name="doneCheck2" id="doneCheck2" value="Y" checked>분양완료
                         </form>
                     </div>
                     
@@ -205,12 +205,12 @@
 	            	<% if(currentPage > 1) { %>
 	                <li>
 	                	<!-- 맨 처음으로(<<) -->
-	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/boardList?currentPage=1">&lt;&lt;</a>
+	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=1">&lt;&lt;</a>
 	                </li>
 	                
 	                <li>
 	                	<!-- 이전으로(<) -->
-                   		<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/boardList?currentPage=<%= currentPage-1 %>">&lt;</a>
+                   		<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= currentPage-1 %>">&lt;</a>
 	                </li>
 	                <% } %>
 	                
@@ -222,7 +222,7 @@
 		                </li>
 	                	<% } else{ %>
                 		<li>
-	                    	<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/boardList?currentPage=<%= p %>"><%= p %></a>
+	                    	<a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= p %>"><%= p %></a>
 	                	</li>
 	                	<% } %>
 					<%} %>
@@ -230,12 +230,12 @@
 	                <!-- 다음 페이지로(>) -->
 	                <% if(currentPage < maxPage){ %>
 	                <li>
-	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/boardList?currentPage=<%= currentPage+1 %>">&gt;</a>
+	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= currentPage+1 %>">&gt;</a>
 	                </li>
 	                
 	                <!-- 맨 끝으로(>>) -->
 	                <li>
-	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/boardList?currentPage=<%= maxPage %>">&gt;&gt;</a>
+	                    <a class="page-link" href="<%= request.getContextPath() %>/adoptBoard/searchList?searchKey=<%=searchKey %>&searchValue=<%=searchValue %>&doneCheck1=<%= doneCheck1 %>&doneCheck2=<%= doneCheck2 %>&currentPage=<%= maxPage %>">&gt;&gt;</a>
 	                </li>
 	                <% }%>
 	                

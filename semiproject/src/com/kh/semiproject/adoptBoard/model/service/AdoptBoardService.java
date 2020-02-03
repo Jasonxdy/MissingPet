@@ -146,8 +146,8 @@ public class AdoptBoardService {
 			if(result>0) {
 				result = adoptBoardDao.updateAdoptAnimal(conn, animal, boardNo);
 				if(result>0) {
-					result=0;
 					// 지도 업데이트
+					// result=0;
 					//map.setBoardNo(boardNo);
 					//result = new MapDAO().updateMap(conn, map);
 					if(result>0) {
@@ -199,6 +199,109 @@ public class AdoptBoardService {
 			}
 		}
 		return result;
+	}
+
+	/** 분양합니다 게시글 삭제용 Service
+	 * @param no
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteAdoptBoard(int no) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(conn, no);
+		
+		if(result>0) {
+			result = 0;
+			
+			result = new BoardDao().deleteAttachment(conn, no);
+			if(result>0) {
+				result = 0;
+				
+				result = new AdoptBoardDao().adoptDeleteAnimal(conn, no);
+				if(result>0) {
+					commit(conn);
+				}
+			}
+		} else {
+			rollback(conn);
+		}
+			
+		close(conn);
+		return result;
+	}
+
+	public List<AdoptBoard> searchAdoptList(int startRow, int endRow, int boardType, String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		ArrayList<AdoptBoard> adoptList = new AdoptBoardDao().searchFindList(conn, startRow, endRow, boardType, condition);
+		
+		close(conn);
+		return adoptList;
+	}
+
+	/** 분양합니다 게시판 BoardList 검색용 Service
+	 * @param startRow
+	 * @param endRow
+	 * @param boardType
+	 * @param condition
+	 * @param doneCheck2
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BoardHJ> searchAdoptBList(int startRow, int endRow, int boardType, String condition, String doneCheck1, String doneCheck2) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition2 = null;
+		
+		System.out.println(doneCheck1 + "||" + doneCheck2);
+		
+		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
+			condition2 = " ";
+		} else if(doneCheck1.equals("Y") && doneCheck2.equals("N")) {
+			condition2 = " AND ADOPT_DONE='Y'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("Y")) {
+			condition2= " AND ADOPT_DONE='N'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("N")) {
+			condition2= " AND ADOPT_DONE='C'";
+		}
+		
+		List<BoardHJ> bList = new AdoptBoardDao().searchAdoptBList(conn, startRow, endRow, boardType, condition, condition2);
+		
+		close(conn);
+		
+		return bList;
+	}
+
+	/** 분양합니다 검색 게시글 수 조회 Service
+	 * @param condition
+	 * @param boardType
+	 * @param doneCheck1
+	 * @param doneCheck2
+	 * @return
+	 * @throws Exception
+	 */
+	public int getAdoptSearchListCount(String condition, int boardType, String doneCheck1, String doneCheck2) throws Exception {
+		Connection conn = getConnection();
+		
+				
+		String condition2 = null;
+		
+		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
+			condition2 = " ";
+		} else if(doneCheck1.equals("Y") && doneCheck2.equals("N")) {
+			condition2 = " AND ADOPT_DONE='N'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("Y")) {
+			condition2= " AND ADOPT_DONE='Y'";
+		} else if(doneCheck1.equals("N") && doneCheck2.equals("N")) {
+			condition2= " AND ADOPT_DONE='C'";
+		}
+
+		int searchAdoptListCount = new AdoptBoardDao().getSearchAdoptListCount(conn, condition, boardType, condition2);
+		
+		close(conn);
+		
+		return searchAdoptListCount;
 	}
 
 }

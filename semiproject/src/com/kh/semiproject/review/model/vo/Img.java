@@ -10,7 +10,7 @@ public class Img {
 	private Date imgCreateDt;
 	private String imgStatus;
 	private int imgLevel;
-	private int BoardNo;
+	private int boardNo;
 	
 	public Img() {
 	}
@@ -25,7 +25,7 @@ public class Img {
 		this.imgCreateDt = imgCreateDt;
 		this.imgStatus = imgStatus;
 		this.imgLevel = imgLevel;
-		BoardNo = boardNo;
+		this.boardNo = boardNo;
 	}
 	
 	
@@ -36,6 +36,15 @@ public class Img {
 		this.imgOriginName = imgOriginName;
 		this.imgChangeName = imgChangeName;
 		this.imgLevel = imgLevel;
+	}
+	
+	
+
+	public Img(int imgNo, String imgChangeName, int boardNo) {
+		super();
+		this.imgNo = imgNo;
+		this.imgChangeName = imgChangeName;
+		this.boardNo = boardNo;
 	}
 
 	public int getImgNo() {
@@ -95,18 +104,18 @@ public class Img {
 	}
 
 	public int getBoardNo() {
-		return BoardNo;
+		return boardNo;
 	}
 
 	public void setBoardNo(int boardNo) {
-		BoardNo = boardNo;
+		this.boardNo = boardNo;
 	}
 
 	@Override
 	public String toString() {
 		return "Img [imgNo=" + imgNo + ", imgOriginName=" + imgOriginName + ", imgChangeName=" + imgChangeName
 				+ ", imgPath=" + imgPath + ", imgCreateDt=" + imgCreateDt + ", imgStatus=" + imgStatus + ", imgLevel="
-				+ imgLevel + ", BoardNo=" + BoardNo + "]";
+				+ imgLevel + ", BoardNo=" + boardNo + "]";
 	}
 	
 	
