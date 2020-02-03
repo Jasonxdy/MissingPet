@@ -59,7 +59,7 @@
                     <h2 id="title-top"><a href="#">분양합니다</a></h2>
                     <hr>
                     <div class="col-md-12 col-md-offset-2" id="panelwrap">
-                      <div class="panel panel-default" style="min-height:640px;">
+                      <div class="panel panel-default" style="min-height:600px;">
                         <div class="panel-body">
 
 
