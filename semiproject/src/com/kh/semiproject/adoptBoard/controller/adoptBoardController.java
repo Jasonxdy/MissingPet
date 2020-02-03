@@ -477,13 +477,13 @@ public class adoptBoardController extends HttpServlet {
 				
 				PageInfo pInfo = new PageInfo(listCount, limit, pagingBarSize, currentPage, maxPage, startPage, endPage);
 				
-				List<BoardHJ> bList = boardService.searchBoardList(startRow, endRow, boardType, condition);
+				List<BoardHJ> bList = adoptBoardService.searchAdoptBList(startRow, endRow, boardType, condition, doneCheck1, doneCheck2);
 				
 				List<Attachment> aList = boardService.searchAList(startRow, endRow, boardType, condition);
 				
 				List<Animal> animalList = boardService.searchAnimalList(startRow, endRow, boardType, condition);
 				
-				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition, doneCheck1, doneCheck2);
+				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition);
 				
 				
 				path = "/WEB-INF/views/adoptBoard/adoptBoardSearchList.jsp";

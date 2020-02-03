@@ -231,10 +231,30 @@ public class AdoptBoardService {
 		return result;
 	}
 
-	public List<AdoptBoard> searchAdoptList(int startRow, int endRow, int boardType, String condition, String doneCheck1, String doneCheck2) throws Exception {
+	public List<AdoptBoard> searchAdoptList(int startRow, int endRow, int boardType, String condition) throws Exception {
+		Connection conn = getConnection();
+		
+		ArrayList<AdoptBoard> adoptList = new AdoptBoardDao().searchFindList(conn, startRow, endRow, boardType, condition);
+		
+		close(conn);
+		return adoptList;
+	}
+
+	/** 분양합니다 게시판 BoardList 검색용 Service
+	 * @param startRow
+	 * @param endRow
+	 * @param boardType
+	 * @param condition
+	 * @param doneCheck2
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BoardHJ> searchAdoptBList(int startRow, int endRow, int boardType, String condition, String doneCheck1, String doneCheck2) throws Exception {
 		Connection conn = getConnection();
 		
 		String condition2 = null;
+		
+		System.out.println(doneCheck1 + "||" + doneCheck2);
 		
 		if(doneCheck1.equals("Y") && doneCheck2.equals("Y")) {
 			condition2 = " AND ADOPT_DONE='Y' OR ADOPT_DONE='N'";
@@ -246,10 +266,11 @@ public class AdoptBoardService {
 			condition2= " AND ADOPT_DONE='C'";
 		}
 		
-		ArrayList<AdoptBoard> adoptList = new AdoptBoardDao().searchFindList(conn, startRow, endRow, boardType, condition, condition2);
+		List<BoardHJ> bList = new AdoptBoardDao().searchAdoptBList(conn, startRow, endRow, boardType, condition, condition2);
 		
 		close(conn);
-		return adoptList;
+		
+		return bList;
 	}
 
 }
