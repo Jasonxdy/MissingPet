@@ -306,6 +306,42 @@ public class ReviewService {
 		close(conn);
 		return result;
 	}
+
+	
+	
+	/**
+	 * 1:1 문의 등록시 알림 테이블 값 입력
+	 * @param alert
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int insertAskTell(Alert alert) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = new ReviewDAO().insertAskTell(conn, alert);
+		
+		if(result > 0) commit(conn);
+		else			rollback(conn);
+
+		return result;
+	}
+
+	
+	/**
+	 * 1:1 문의 답변 시 알림 설정 조회
+	 * @param memberId
+	 * @return
+	 * @throws Exception
+	 */
+	public String[] checkAskTell(String memberId) throws Exception {
+		Connection conn = getConnection();
+		
+		String tell[] =  new ReviewDAO().checkAskTell(conn, memberId);
+		
+		
+		
+		return tell;
+	}
 }
 
 
