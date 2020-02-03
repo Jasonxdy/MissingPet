@@ -191,7 +191,7 @@ public class MypageService {
 		Connection conn = getConnection();
 
 		int listCount = new MypageDAO().getAskListCount(conn, memberId);
-
+		
 		close(conn);
 		return listCount;
 	}
@@ -212,6 +212,14 @@ public class MypageService {
 		Connection conn = getConnection();
 
 		List<Ask> aList = new MypageDAO().selectAskList(conn, currentPage, limit, memberId);
+		
+		for(Ask ask : aList) {
+			
+			if(ask.getAnswerContent() != null) {
+				ask.setAnswerContent(ask.getAnswerContent().replace("<br>", "\r\n"));
+			}
+			
+		}
 
 		close(conn);
 		return aList;

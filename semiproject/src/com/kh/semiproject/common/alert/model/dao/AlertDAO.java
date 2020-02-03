@@ -68,4 +68,41 @@ private Properties prop = null;
 		return alertList;
 	}
 
+
+
+	
+	/**
+	 * 웹페이지 알림설정 확인용
+	 * @param conn
+	 * @param memberId
+	 * @return memberWebTell
+	 * @throws Exception
+	 */
+	public String selectMemberWebTell(Connection conn, String memberId) throws Exception{
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectMemberWebTell");
+		
+		String memberWebTell = null;
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memberWebTell = rset.getString(1);
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memberWebTell;
+	}
+
 }

@@ -16,4 +16,16 @@ public class AlertService {
 		return new AlertDAO().selectAlert(conn, memberId);
 	}
 
+	
+	/**
+	 * 로그인한 유저 알림 설정 가져오기
+	 * @param memberId
+	 * @return
+	 * @throws Exception
+	 */
+	public String selectMemberWebTell(String memberId) throws Exception {
+		Connection conn = getConnection();
+		return new AlertDAO().selectMemberWebTell(conn, memberId);
+	}
+
 }

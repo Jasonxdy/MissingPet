@@ -74,9 +74,9 @@
                   <table class="table table-hover table-striped" id="list-table">
                     <thead>
                       <tr>
-                        <th style="width:12%">제목 </th>
-                        <th style="width:73%">상태</th>
-                        <th style="width:15%">작성일</th>
+                        <th style="width:60%">제목 </th>
+                        <th style="width:20%">상태</th>
+                        <th style="width:20%">작성일</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -106,6 +106,9 @@
                   	</td>
                   	<td style="display:none; width:1%">
                   		<%= ask.getAnswerDate() %>
+                  	</td>
+                  	<td style="display:none; width:1%">
+                  		<%= ask.getAskContent() %>
                   	</td>
                    </tr>
                    
@@ -189,6 +192,8 @@
 								</button>
 							</div>
 							<div class="modal-body">
+								<p id="askContent" class="text-muted"></p>
+								<hr>
 								<p id="answerCreateDate"></p>
 								<p class="text-muted" id="answerContent"></p>
 							</div>
@@ -219,11 +224,10 @@
 					
 					var answerDate = $(this).parent().children().eq(5).text();
 					var answerContent = $(this).parent().children().eq(4).text();
-					
-					console.log(answerDate);
-					console.log(answerContent);
+					var askContent = $(this).parent().children().eq(6).text();
 					
 					
+					$("#askContent").html(askContent);
 					$("#answerCreateDate").html("답변 작성일 : " + answerDate);
 					$("#answerContent").html(answerContent);
 					
