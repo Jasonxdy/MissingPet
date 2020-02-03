@@ -434,7 +434,7 @@
 								</tr>
 								<tr>
 									<th>이메일</th>
-									<td><%= member.getMemberEmail() %></td>
+									<td><%= member.getMemberPwd() %></td>
 								</tr>
 								<tr>
 									<th>실종장소</th>
