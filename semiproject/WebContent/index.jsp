@@ -25,12 +25,12 @@
             </div>
             <div class="carousel-item">
               <img class=" d-block w-100" style="background-size:contain"
-                src="<%= request.getContextPath() %>/img/main2.jpg"
+                src="<%= request.getContextPath() %>/img/main3.jpg"
                 alt="Second slide">
             </div>
             <div class="carousel-item">
               <img class=" d-block w-100" style="background-size:contain"
-                src="<%= request.getContextPath() %>/img/main3.jpg"
+                src="<%= request.getContextPath() %>/img/main5.jpg"
                 alt="Third slide">
             </div> 
             <ul class="carousel-indicators">
