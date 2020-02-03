@@ -161,7 +161,7 @@
                     
                     <% if(loginMember != null) {%>
                     <div class="float-right m-2">
-                        <button type="button" class="btn btn-primary" id="insertBtn" onclick="location.href = 'insertForm';">글쓰기</button>
+                        <button type="button" class="btn btn-primary" id="insertBtn" onclick="location.href = 'reviewInsert';">글쓰기</button>
                     </div>
 	        		<% } %>
     
