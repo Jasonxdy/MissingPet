@@ -143,30 +143,21 @@ String currentPage = request.getParameter("currentPage");
                   <!-- 이곳에 내용 넣어주시면 됩니다 -->
 
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div id="bigdiv">
-                        <%=board.getBoardContent() %> 
-                        <br>
+                       		 
+                       		  <div id="pic" class="col-12 p-4">
+	                     <%=board.getBoardContent() %> 
+	                       <br>
                         <br>
                         <% if(board.getBoardUrl() != null){ %>
                          <%=board.getBoardUrl() %> 
-                         <% } %>
-                        	 <br>
-                       		 <br>
-                       		 
-                       		 <div class="mb-5" style="height:500px;">
+                         <% } %>  	
                       	<% if(iList != null) { %>
 	                      	<% for(Img img : iList) { 
 	                      	%>
 	                      		<img style="display:inline-block; max-width:250px; max-height:250px;"  alt="" src="<%= request.getContextPath()%>/resources/uploadImages/<%= img.getImgChangeName() %>">
 	                      	<% } %>
-	                   <% } %>   	
+	                   <% } %> 
                       </div>
-                       		 
-                      </div>
-                    </div>
-                  </div>
 
 
                   <div class="row">
