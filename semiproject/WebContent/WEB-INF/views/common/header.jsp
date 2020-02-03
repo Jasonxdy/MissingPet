@@ -97,14 +97,14 @@
 	        		console.log(alertUrl);
 	        		
 	        		$.ajax({
-	    	        	url : deleteNo,
+	    	        	url : "deleteNo",
 	    	        	type : "GET",
 	    	        	data : {
 	    	        		alertNo : alertNo
 	    	        	},
 	    	        	
 	    	        	success : function(result) {
-	    	        		if(result > 0) { 
+	    	        		if(result > 0) {
 	    	        			location.href = alertUrl;
 	    	        		}
 	    	        	},
