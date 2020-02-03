@@ -41,7 +41,7 @@
                             
                                 </table>
                             
-                         <table >
+                         <table id="boardList">
                             <thead>
                               <tr>
                                <th scope="col"><a href="<%= request.getContextPath() %>/Management/management_Board_Find">찾아주세요 게시판 </a> &nbsp;|&nbsp;</th>

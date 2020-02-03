@@ -186,27 +186,6 @@
                         </form>
                     </div>
                     
-                    <script>
-	                    $(function(){
-		            		var searchKey = "<%= searchKey %>";
-		            		var searchValue = "<%= searchValue %>";
-		            		
-		            		if(searchKey != "null" && searchValue != "null"){
-		            			// 검색한 경우
-		            			
-		            			$.each( $("select[name=searchKey] > option") , function(index, item){
-		            					// $(item) : 현재 접근 요소
-		            				if( $(item).val() == searchKey ){
-		            					$(item).prop("seleted", "true");
-		            				}
-		            			});
-		            			$("input[name=searchValue]").val(searchValue);
-		            			
-		            		} 
-		            	});
-                    </script>
-    
-                    
                     <% if(loginMember != null) {%>
                     <div class="float-right m-2">
                         <button type="button" class="btn btn-primary" id="insertBtn" onclick="location.href = 'insertForm';">글쓰기</button>
@@ -310,6 +289,24 @@
 			});
 			
 		});
+		
+		$(function(){
+    		var searchKey = "<%= searchKey %>";
+    		var searchValue = "<%= searchValue %>";
+    		
+    		if(searchKey != "null" && searchValue != "null"){
+    			// 검색한 경우
+    			
+    			$.each( $("select[name=searchKey] > option") , function(index, item){
+    					// $(item) : 현재 접근 요소
+    				if( $(item).val() == searchKey ){
+    					$(item).prop("seleted", "true");
+    				}
+    			});
+    			$("input[name=searchValue]").val(searchValue);
+    			
+    		} 
+    	});
 		
 		
 </script>

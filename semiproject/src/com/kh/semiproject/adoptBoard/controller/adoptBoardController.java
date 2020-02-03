@@ -514,10 +514,6 @@ public class adoptBoardController extends HttpServlet {
 				
 				List<AdoptBoard> adoptList = adoptBoardService.searchAdoptList(startRow, endRow, boardType, condition);
 				
-				System.out.println(pInfo);
-				System.out.println(bList);
-				System.out.println(aList);
-				
 				path = "/WEB-INF/views/adoptBoard/adoptBoardSearchList.jsp";
 				request.setAttribute("pInf", pInfo);
 				request.setAttribute("bList", bList);

@@ -170,20 +170,19 @@
                       
                       <div class="col-md-12">
                     <div class="float-left m-2">
-                        <form class="input-group" method="GET" action="searchList" id="searchForm">
-                            <select class="form-control label" name="searchKey" onsubmit="return validate();">
+                        <form class="input-group" method="GET" action="searchList" id="searchForm"  onsubmit="return validate();">
+                            <select class="form-control label" name="searchKey">
                                 <option value="title">제목</option>
                                 <option value="content">내용</option>
                                 <option value="titcont">제목+내용</option>
                                 <option value="writer">작성자</option>
                             </select>
                             <input type="text" name="searchValue">
-                            <input type="hidden" name="doneCheck1" value="N">
                             <button class="btn btn-primary">검색</button>
-                            <!-- <input type="hidden" name="doneCheck1" value="N"> -->
-                            <input type="checkbox" name="doneCheck1" value="Y">분양중
-                            <!-- <input type="hidden" name="doneCheck2" value="N"> -->
-                            <input type="checkbox" name="doneCheck2" value="Y">분양완료
+                            <input type="hidden" name="doneCheck1">
+                            <input type="checkbox" name="cdoneCheck1">분양중
+                            <input type="hidden" name="doneCheck2">
+                            <input type="checkbox" name="cdoneCheck2">분양완료
                            <!--  <input type="text" name="doneCheck1">
                             <input type="text" name="doneCheck2"> -->
                             <!-- <input type="hidden" name="doneCheck1" value="N">
@@ -316,8 +315,39 @@
 			$(this).parent().css("cursor", "pointer");
 		
 		});
-		
 	});
+	
+	$(function(){
+		var searchKey = "<%= searchKey %>";
+		var searchValue = "<%= searchValue %>";
+		
+		if(searchKey != "null" && searchValue != "null"){
+			// 검색한 경우
+			
+			$.each( $("select[name=searchKey] > option") , function(index, item){
+					// $(item) : 현재 접근 요소
+				if( $(item).val() == searchKey ){
+					$(item).prop("seleted", "true");
+				}
+			});
+			$("input[name=searchValue]").val(searchValue);
+			
+		} 
+	});
+	
+	function validate() {
+		if ($('input[name=cdoneCheck1]').is(":checked")) {
+		    $('input[name=doneCheck1]').val('Y');
+		} else {
+		    $('input[name=doneCheck1]').val('N');
+		}	
+		
+		if ($('input[name=cdoneCheck2]').is(":checked")) {
+		    $('input[name=doneCheck2]').val('Y');
+		} else {
+		    $('input[name=doneCheck2]').val('N');
+		}	
+	}
 	
 </script>
 
