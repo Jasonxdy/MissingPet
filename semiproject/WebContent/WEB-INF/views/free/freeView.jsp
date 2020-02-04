@@ -149,7 +149,6 @@ String currentPage = request.getParameter("currentPage");
 	                       <br>
                         <br>
                         <% if(board.getBoardUrl() != null){ %>
-                         <%=board.getBoardUrl() %> 
                          <% } %>  	
                       	<% if(iList != null) { %>
 	                      	<% for(Img img : iList) { 
@@ -157,7 +156,13 @@ String currentPage = request.getParameter("currentPage");
 	                      		<img style="display:inline-block; max-width:250px; max-height:250px;"  alt="" src="<%= request.getContextPath()%>/resources/uploadImages/<%= img.getImgChangeName() %>">
 	                      	<% } %>
 	                   <% } %> 
+	                    <br>
+                         <br>
+	                    <div id="urlbox" style="background-color:white; border:1px solid lightgray; width:250px; height:30px;">
+                         <%=board.getBoardUrl() %> 
+                         </div>
                       </div>
+                      
 
 
                   <div class="row">

@@ -102,6 +102,7 @@
                     <input type="text" id="url" name="url" size="30" value="https://">
                     &nbsp;&nbsp;&nbsp;
                     
+                    
                      <div class="form-inline mb-2">
 						<label class="input-group-addon mr-3 insert-label"><b>업로드 이미지</b></label>
 						<div class="boardImg" id="titleImgArea">
