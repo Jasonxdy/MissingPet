@@ -158,7 +158,7 @@ String currentPage = request.getParameter("currentPage");
 	                   <% } %> 
 	                    <br>
                          <br>
-	                    <div id="urlbox" style="background-color:white; border:1px solid lightgray; width:250px; height:30px;">
+	                    <div id="urlbox" style="background-color:white; border:1px solid lightgray; width:250px;">
                          <%=board.getBoardUrl() %> 
                          </div>
                       </div>
