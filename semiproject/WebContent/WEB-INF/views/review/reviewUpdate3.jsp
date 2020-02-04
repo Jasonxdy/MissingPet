@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>만남 그 후 글쓰기</title>
+<title>만남 그 후 글수정</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/ReviewInsert.css" type="text/css" charset="utf-8"/>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/daumeditor/css/editor.css" type="text/css" charset="utf-8"/>
 <script src="<%= request.getContextPath() %>/daumeditor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
