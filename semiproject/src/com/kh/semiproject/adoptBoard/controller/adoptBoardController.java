@@ -64,7 +64,7 @@ public class adoptBoardController extends HttpServlet {
 				int boardType = 3;
 				int listCount = boardService.getListCount(boardType);
 				
-				int limit = 8;
+				int limit = 5;
 				int pagingBarSize = 10;
 				
 				int currentPage = 0;	
