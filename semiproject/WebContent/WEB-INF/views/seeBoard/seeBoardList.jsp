@@ -41,7 +41,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <h2><b>봤어요</b>
-                                  <img src="<%= request.getContextPath() %>/img/봤어요logo.png" style="widht : 50px; height:50px; display:inline-block">
+                                  <img src="<%= request.getContextPath() %>/img/봤어요logo2.png" style="widht : 50px; height:50px; display:inline-block">
                                   </h2>
                                   <hr>
                               </div>

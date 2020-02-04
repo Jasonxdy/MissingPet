@@ -148,9 +148,9 @@ h5{
                         id="<%= newId %>" name="newId" 
                         value="<%=mList.get(i).getMemberId()%>" readonly> <br>
                     <% String newName = "newName" + i; %>
-                    <label for="newName">닉네임</label>
+                    <label for="newName">실명 변경</label>
                     <input type="text" class="form-control"
-                        id="<%= newName %>" name="newName" placeholder="닉네임 입력">
+                        id="<%= newName %>" name="newName" placeholder="이름 입력">
                     <br>
                     <label for="newEmail">이메일</label>
                     <% String newEmail = "newEmail" + i; %>

@@ -101,6 +101,10 @@
 	                   <% } %>   	
 	                      	<%= review.getBoardContent() %>
                       </div>
+                      <div class="col-12">
+                      <input type="text" value="<%= review.getBoardUrl() %>"  readonly>
+                      </div>
+                      
                       <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4 text-center" >

@@ -99,32 +99,34 @@
                    <div id="bt-lable">
                     <label><b>영상 첨부</b></label>
                     &nbsp;&nbsp;
-                    <input type="text" id="url" name="url" size="30">
+                    <input type="text" id="url" name="url" size="30" value="https://">
                     &nbsp;&nbsp;&nbsp;
                     
+                    
                      <div class="form-inline mb-2">
-						<label class="input-group-addon mr-3 insert-label"><b>썸네일</b></label>
+						<label class="input-group-addon mr-3 insert-label"><b>업로드 이미지</b></label>
 						<div class="boardImg" id="titleImgArea">
-						<img id="titleImg" width="100" height="100">
+						<img id="titleImg" width="70" height="70">
 						</div>
-					</div>
 					
-					
-					<div class="form-inline mb-2">
-						<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
+					<div class="form-inline mb-2 mt-2">
+						<label class="input-group-addon mr-3 insert-label"></label>
 						<div class="mr-2 boardImg" id="contentImgArea1">
-							<img id="contentImg1" width="50" height="50">
+							<img id="contentImg1" width="70" height="70">
 						</div>
 
 						<div class="mr-2 boardImg" id="contentImgArea2">
-							<img id="contentImg2" width="50" height="50">
+							<img id="contentImg2" width="70" height="70">
 						</div>
 
 						<div class="mr-2 boardImg" id="contentImgArea3">
-							<img id="contentImg3" width="50" height="50">
+							<img id="contentImg3" width="70" height="70">
 						</div>
 						
 					</div>
+					</div>
+					
+					
 					
 					
 					<div id="fileArea">
