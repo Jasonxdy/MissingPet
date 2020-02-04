@@ -192,6 +192,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
+								<p>문의 내용</p>
 								<p id="askContent" class="text-muted"></p>
 								<hr>
 								<p id="answerCreateDate"></p>

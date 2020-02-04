@@ -117,10 +117,14 @@
                 <h5>이메일</h5>
               </div>
               <div class="col-md-10" id="profile-email" style="padding-left:0px;">
-                <h5>
+              <input type="text" class="form-control" id="email" name="email" value="<%= member.getMemberEmail() %>">
+              <div class="col-md-6 offset-md-3" style="margin-left: 0; padding-left: 0;">
+                		<span id="checkEmail">&nbsp;</span>
+          		  </div>
+                <%-- <h5>
                   <b><%= member.getMemberEmail() %></b>
                 </h5>
-                <p>인증된 이메일입니다. <a href="#" style="color: purple; text-decoration:none;" id="updateEmail">이메일 변경하기</a></p>
+                <p>인증된 이메일입니다. <a href="#" style="color: purple; text-decoration:none;" id="updateEmail">이메일 변경하기</a></p> --%>
               </div>
 
 
@@ -209,6 +213,7 @@
 	 // 각 유효성 검사 결과를 저장할 객체
     var signUpCheck = { 
 			"phone":true,
+			"email":true
 			};
     
 	 	// 실시간 입력 형식 검사
@@ -217,6 +222,7 @@
 		
 		var $phone2 = $("#phone2");
 		var $phone3 = $("#phone3");
+		var $email = $("#email");
 		
 		
 		// 전화번호 관련
@@ -245,6 +251,21 @@
 			
         });
 		
+	 	// 이메일 유효성 검사
+	 	$email.on("input", function(){
+			var regExp =  /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/; 
+			
+			if(!regExp.test($email.val())){
+				$("#checkEmail").text("이메일 형식이 유효하지 않습니다.")
+				.css("color", "red");
+            	signUpCheck.email = false;
+			} else {
+				$("#checkEmail").text("유효한 형식의 이메일입니다.")
+				.css("color","green");
+            	signUpCheck.email = true;
+			}
+		});
+		
           	
 		
 	});
@@ -255,7 +276,9 @@
 		
 		for(var key in signUpCheck){
 			if(!signUpCheck[key]){
-				alert("전화번호를 확인해주세요.");
+				alert("일부 입력값이 잘못되었습니다.");
+				var id = "#"+key;
+				$(id).focus();
 				return false;
 			}
 		}
