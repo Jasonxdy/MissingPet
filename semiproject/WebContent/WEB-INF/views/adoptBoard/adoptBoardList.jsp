@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분양합니다</title>
+<title>분양합니다 목록</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/ReviewList.css" type="text/css"/>
 </head>
 <body>

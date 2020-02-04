@@ -29,7 +29,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>분양합니다 검색 목록</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/ReviewList.css" type="text/css"/>
 </head>
 <body>

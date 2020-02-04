@@ -144,9 +144,9 @@
 
 
                     <!--하단-->
-                    <div class="row">
-                    <div class="col-10">
-                    <div class="row">
+                 <div class="row">
+                  <div class="col-10">
+                   <div class="row">
                     <div class="col-md-12">
 	                    <div class="float-left m-2">
 	                        <form class="input-group" method="GET" action="searchList" id="searchForm">
@@ -203,9 +203,9 @@
                           </li>
                           <% } %>
                     </ul>
-               </div>
-               </div>
-               </div>
+                  </div>
+                 </div>
+                </div>
                </div>
                     <%-- <div id="bottom-bar" class="row">
                       <form class="col-4 text-center" method="GET" action="searchList" id="searchForm">

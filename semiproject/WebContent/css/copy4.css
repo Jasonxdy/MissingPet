@@ -1,14 +1,22 @@
-
-
 .container{margin-bottom: 20px;}
 
 @media (min-width: 1200px){
     .container{
       max-width:1500px;
     }
-    
-    
-    }
+}
+
+@media(max-width: 1400px){
+  #findMain{
+    margin-left: 200px !important;
+  }
+}
+
+@media(min-width: 1400px){
+ #findMain{
+    margin-left: 300px !important;
+  }
+}
 
 /*    --------------------------------------------------
 	:: General
@@ -193,7 +201,8 @@
     float:left;
     margin-right: 30px;
     margin-left: 10px;
-
+	width: 70px;
+    height: 70px;
 }
 
 #imgdiv2{
@@ -234,7 +243,6 @@
 }
 
 #comment-Wrapper{
-    background-color: lightgray;
     
 }
 

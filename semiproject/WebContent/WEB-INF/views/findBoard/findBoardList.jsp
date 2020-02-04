@@ -27,7 +27,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>찾아주세요 목록</title>
 </head>
 <body>
 
