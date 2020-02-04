@@ -147,11 +147,10 @@ public class FindBoardService {
 		if(result>0) {
 			result = 0;
 			
-			result = new BoardDao().deleteAttachment(conn, no);
+			result = new FindBoardDao().deleteFindAnimal(conn, no);
 			if(result>0) {
-				result = 0;
 				
-				result = new FindBoardDao().deleteFindAnimal(conn, no);
+				new BoardDao().deleteAttachment(conn, no);
 				if(result>0) {
 					new BoardDao().deleteComment(conn, no);
 					if(result > 0) {
