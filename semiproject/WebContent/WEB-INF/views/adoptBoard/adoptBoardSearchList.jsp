@@ -52,7 +52,7 @@
               <!-- 이 안에다가 작성하세요!!!!!!!! -->
 
 
-              <div class="container" style="margin-left:20rem;">
+              <div class="container">
                 <div class="row">
 
                   <section class="content">

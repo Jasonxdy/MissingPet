@@ -60,6 +60,7 @@
                     <img src="<%= request.getContextPath() %>/img/분양합니다logo.png" style="widht : 50px; height:50px; display:inline-block">
                     </a></h2>
                     <hr>
+                    <div class="row">
                     <div class="col-md-12 col-md-offset-2" id="panelwrap">
                       <div class="panel panel-default" style="min-height:600px;">
                         <div class="panel-body">
@@ -170,6 +171,9 @@
                         </a>
                       </div>
                       
+    
+
+                    </div>
                       <div class="col-md-12">
                     <div class="float-left m-2">
                         <form class="input-group" method="GET" action="searchList" id="searchForm"  onsubmit="return validate();">
@@ -205,9 +209,6 @@
 	        		<% } %>
     
                 </div>
-    
-
-                    </div>
                     <!--하단-->
                     <!-- 검색 페이지 글쓰기 하단  시작 -->
                 <div class="col-md-12">
@@ -250,6 +251,7 @@
 	                <% }%>
 	                
 	            	</ul>
+                </div>
                 </div>
                 <!-- 검색 페이지 글쓰기 하단  종료 -->
                     
