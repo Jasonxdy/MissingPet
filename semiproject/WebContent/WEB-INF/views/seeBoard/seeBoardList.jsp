@@ -26,7 +26,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>봤어요 글목록</title>
 </head>
 <body>
 
@@ -41,7 +41,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <h2><b>봤어요</b>
-                                  <img src="<%= request.getContextPath() %>/img/봤어요logo.png" style="widht : 50px; height:50px; display:inline-block">
+                                  <img src="<%= request.getContextPath() %>/img/봤어요logo2.png" style="widht : 50px; height:50px; display:inline-block">
                                   </h2>
                                   <hr>
                               </div>
@@ -108,7 +108,12 @@
                       							<% } %>
                       	
                                             <td>
-                                            <p class="mb-0" style="border-bottom: 1px solid rgba(0, 0, 0, 1);"><%= board.getBoardTitle() %></p>
+                                            <% String ctitle = board.getBoardTitle();
+                                            	if(ctitle.length()>20){
+                                            		ctitle = ctitle.substring(0, 19);
+                                            	}
+                                            %>
+                                            <p class="mb-0" style="border-bottom: 1px solid rgba(0, 0, 0, 1);"><%= ctitle %></p>
                                             </td>
                                         </tr>
                                         

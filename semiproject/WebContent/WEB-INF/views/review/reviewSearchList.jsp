@@ -142,19 +142,33 @@
 
 
                     <!--하단-->
-                    <div id="bottom-bar" class="row">
-                    <form class="col-4 text-center" method="GET" action="searchList" id="searchForm">
-                      <select class="custom-select" name="searchKey" style="font-size: 12px;">
-                        <option value="title" selected>제목</option>
-                        <option value="content">내용</option>
-                        <option value="titcont">제목+내용</option>
-                        <option value="writer">작성자</option>
-                      </select>
-                      <input id="text-tt" type="text" name="searchValue">
-                      <button type="submit">검색</button>
-                      </form>
-                      <div id="num" class="col-3">
-                        <ul class="pagination">
+                    <div class="row">
+                  <div class="col-10">
+                   <div class="row">
+                    <div class="col-md-12">
+	                    <div class="float-left m-2">
+	                        <form class="input-group" method="GET" action="searchList" id="searchForm">
+	                            <select class="form-control label" name="searchKey">
+	                                <option value="title">제목</option>
+	                                <option value="content">내용</option>
+	                                <option value="titcont">제목+내용</option>
+	                                <option value="writer">작성자</option>
+	                            </select>
+	                            <input type="text" name="searchValue">
+	                            <button class="btn btn-primary">검색</button>
+	                        </form>
+	                    </div>
+                    
+                    <% if(loginMember != null) {%>
+                    <div class="float-right m-2">
+                        <button type="button" class="btn btn-primary" id="insertBtn" onclick="location.href = 'reviewInsert';">글쓰기</button>
+                    </div>
+	        		<% } %>
+    
+                </div>
+                
+                <div class="col-md-12">
+                        <ul class="pagination justify-content-center">
                           <% if(currentPage > 1) { %>
                          	 <li class="page-item">
                           	  	<%-- <a class="page-link" href="<%= request.getContextPath() %>/review/reviewList?currentPage=1">&laquo;</a> --%>
@@ -189,13 +203,10 @@
                           </li>
                           <% } %>
                         </ul>
-                      </div>
-                      <% if(loginMember != null) { %>
-                      <div id="bt-bt">
-                        <button type="button" class="btn btn-primary"><a href="<%= request.getContextPath() %>/review/reviewInsert">글쓰기</a></button>
-                      </div>
-					 <% } %>
-                    </div>
+                       </div>
+                 </div>
+                </div>
+               </div>
 
 
                   </section>

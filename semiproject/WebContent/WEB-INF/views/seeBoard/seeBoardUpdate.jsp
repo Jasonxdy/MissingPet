@@ -20,151 +20,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-.container{margin-bottom: 20px;}
-
-/*    --------------------------------------------------
-	:: General
-	-------------------------------------------------- */
-    
-    .content { min-width: 100%;}
-    
-    .content h1 {
-        text-align: center;
-    }
-    .content .content-footer p {
-        color: #6d6d6d;
-        font-size: 12px;
-        text-align: center;
-    }
-    .content .content-footer p a {
-        color: inherit;
-        font-weight: bold;
-    }
-    
-    /*	--------------------------------------------------
-        :: Table Filter
-        -------------------------------------------------- */
-  
-
-    #tb tr {
-        border-bottom: 1px solid lightgray;
-    }
-
-    #tb tr:last-child {
-        border-bottom: none;
-    }
-
-    #tb tr th{
-        padding-top: 15px;
-        padding-bottom: 15px;
-        color: cornflowerblue;
-       
-    }
-
-    #tb tr td{
-        padding-top: 15px;
-        padding-bottom: 15px;
-        width : 500px
-    }
-
-    #map {
-
-        width : 300px;
-        height: 300px;
-        background-color: lightpink;
-    }
-
-
-
-    #bottom-bt{
-        margin-top:100px;
-        margin-left: 45px; 
-    }
-
-    .btn {
-
-        width : 200px;
-        height: 50px;
-    }
-
-    b {
-        color:cornflowerblue;
-    }
-
-
-    #yes{ background-color: #5cb85c;
-        border-radius: 3mm; 
-        width:100px;
-        margin-top: 5px;
-        margin-left: 25px; 
-        text-align: center;
-        color:white;
-   }
-
-   #title-top{
-
-    margin-bottom: 30px;
-   }
-
-   #title-top a{ 
-        color: black;
-        text-decoration: none;
-        font-weight: bold;
-       }
-
-    #panelwrap{
-    width: 70%;
-        float:left;}
-    
-  
-
-    #right-ban{
-        width: 30%;
-        float:left;
-        margin-top: 10px;
-        
-
-    }
-
-    #table-r{
-        padding : 5px 5px 5px 5px;
-    }
-
-.custom-select{
-    width : 80px;
-    display: inline-block;
-}
-
-#text-tt{
-    width: 150px;
-    display: inline-block;
-    margin-left: 10px; 
-    height: 35px;
- 
-} 
-#num {
-    display: inline-block;
-    margin-left: 50px;
-}
-
-#check {
-    display: inline-block;
-    margin-left: 80px;
-}
-
-#bt-bt{ 
-     display: inline-block;
-    margin-left: 30px;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-</style>
+<title>봤어요 글수정</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/insert.css" type="text/css"/>
 </head>
 <body>
 
@@ -225,7 +82,7 @@ input::-webkit-inner-spin-button {
                           </tr>
 
                           <tr>
-                            <th><label>실종일</label></th>
+                            <th><label>발견일시</label></th>
                             <td><input type="date" name="missingDate" id="missingDate" value="<%= seeBoard.getsBoardDate() %>"></td>
                           </tr>
 							
@@ -234,7 +91,7 @@ input::-webkit-inner-spin-button {
 							%>
 							
                           <tr>
-                            <th><label>실종장소</label></th>
+                            <th><label>발견장소</label></th>
                             <td>
                               <select name="place1" id="place1"></select>
                               &nbsp;
@@ -521,12 +378,33 @@ $("#phone3").on("input",function(){
      $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
 	}
 });
+
+<%
+if(files!=null){
+	int i = 1;
+	String src = null;
+	for(Attachment file : files){
+		src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();%>
+		
+		<% if(file.getFileLevel() == 0){
+			i--;%>
+		
+			$("#titleImg").attr("src", "<%= src %>");
+		<% }else{ %>
+			$("#contentImg"+<%=i%>).attr("src", "<%= src %>");
+		<% } %>
+	<%i++;
+	} 
+}%>
+
+
+
 });
 
 
 
 
-$(function(){
+<%-- $(function(){
 	<%
 	if(files!=null){
 		int i = 1;
@@ -544,7 +422,7 @@ $(function(){
 		<%i++;
 		} 
 	}%>
-});
+}); --%>
 
 
 

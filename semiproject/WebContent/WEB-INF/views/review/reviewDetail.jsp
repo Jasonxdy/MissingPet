@@ -96,10 +96,15 @@
                       	<% if(imgs != null) { %>
 	                      	<% for(Img img : imgs) { %>
 	                      		<img style="display: block; max-width:400px;"  alt="" src="<%= request.getContextPath()%>/resources/uploadImages/<%= img.getImgChangeName() %>">
+	                      		<br>
 	                      	<% } %>
 	                   <% } %>   	
 	                      	<%= review.getBoardContent() %>
                       </div>
+                      <div class="col-12">
+                      <input type="text" value="<%= review.getBoardUrl() %>"  readonly>
+                      </div>
+                      
                       <div class="row">
                         <div class="col-8"></div>
                         <div class="col-4 text-center" >
