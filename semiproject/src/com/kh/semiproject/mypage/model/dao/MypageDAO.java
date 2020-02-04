@@ -87,7 +87,8 @@ public class MypageDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, member.getMemberPhone());
 			pstmt.setString(2, member.getMemberProImg());
-			pstmt.setString(3, member.getMemberId());
+			pstmt.setString(3, member.getMemberEmail());
+			pstmt.setString(4, member.getMemberId());
 			
 			result = pstmt.executeUpdate();
 			

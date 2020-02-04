@@ -225,7 +225,7 @@ input::-webkit-inner-spin-button {
                           </tr>
 
                           <tr>
-                            <th><label>실종일</label></th>
+                            <th><label>발견일시</label></th>
                             <td><input type="date" name="missingDate" id="missingDate" value="<%= seeBoard.getsBoardDate() %>"></td>
                           </tr>
 							
@@ -234,7 +234,7 @@ input::-webkit-inner-spin-button {
 							%>
 							
                           <tr>
-                            <th><label>실종장소</label></th>
+                            <th><label>발견장소</label></th>
                             <td>
                               <select name="place1" id="place1"></select>
                               &nbsp;
@@ -338,8 +338,8 @@ input::-webkit-inner-spin-button {
 						</div>
 						
                       <br><br>
-                      <label><b>지도표시(임시)</b></label>
-                      <input type="text" size="10" name="spot" value="<%= seeBoard.getsBoardMap() %>">
+                      <label><b>지도표시</b></label>
+                      <input type="hidden" size="10" name="spot" value="<%= seeBoard.getsBoardMap() %>">
                       <% if(request.getAttribute("map") != null) { %>
 							<input id="latitude" name="latitude" style="display:none;" value="<%=map.getMapLatitude()%>">
 							<input id="longitude" name="longitude" style="display:none;" value="<%=map.getMapLongitude()%>">
@@ -521,12 +521,33 @@ $("#phone3").on("input",function(){
      $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
 	}
 });
+
+<%
+if(files!=null){
+	int i = 1;
+	String src = null;
+	for(Attachment file : files){
+		src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();%>
+		
+		<% if(file.getFileLevel() == 0){
+			i--;%>
+		
+			$("#titleImg").attr("src", "<%= src %>");
+		<% }else{ %>
+			$("#contentImg"+<%=i%>).attr("src", "<%= src %>");
+		<% } %>
+	<%i++;
+	} 
+}%>
+
+
+
 });
 
 
 
 
-$(function(){
+<%-- $(function(){
 	<%
 	if(files!=null){
 		int i = 1;
@@ -544,7 +565,7 @@ $(function(){
 		<%i++;
 		} 
 	}%>
-});
+}); --%>
 
 
 

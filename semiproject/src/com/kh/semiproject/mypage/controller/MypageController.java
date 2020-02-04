@@ -111,8 +111,12 @@ public class MypageController extends HttpServlet {
  				// 전화번호를 - 와 함께 합침
  		 		String memberPhone = phone1 + "-" + phone2+ "-" + phone3;
  		 		
+ 		 		// 이메일 저장
+ 		 		String memberEmail = multiRequest.getParameter("email");
+ 		 		
+ 		 		
  		 		// 전달받은 파라미터를 Member 객체에 저장
- 		 		Member member = new Member(loginMember.getMemberId(), loginMember.getMemberName(), memberPhone, memberProImg);
+ 		 		Member member = new Member(loginMember.getMemberId(), loginMember.getMemberName(), memberEmail, memberPhone, memberProImg);
  			
  		 		int result = mypageService.updateMember(member);
  		 		

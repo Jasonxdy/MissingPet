@@ -284,7 +284,7 @@ input::-webkit-inner-spin-button {
                       <br>
                       <label><b>영상 첨부</b></label>
                       <br>
-                      <input type="text" size="30" name="videoURL" id="videoURL" value="URL">
+                      <input type="text" size="30" name="videoURL" id="videoURL" value="https://">
                       <br><br>
                       <!-- <label><b>사진 첨부</b></label>
 
@@ -325,8 +325,8 @@ input::-webkit-inner-spin-button {
 						</div>
 						
                       <br><br>
-                      <label><b>지도표시(임시)</b></label>
-                      <input type="text" size="10" name="spot" id="spot" value="no">
+                      <label><b>지도표시</b></label>
+                      <input type="hidden" size="10" name="spot" id="spot" value="no">
                       <div id="map">
                       	<%@ include file="/WEB-INF/views/map/insertMap.jsp"%>
                       </div>

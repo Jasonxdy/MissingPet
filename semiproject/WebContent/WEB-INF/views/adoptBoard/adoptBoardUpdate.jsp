@@ -351,8 +351,8 @@ input::-webkit-inner-spin-button {
 						</div>
 						
                       <br><br>
-                      <label><b>지도표시(임시)</b></label>
-                      <input type="text" size="10" name="spot" value="no">
+                      <label><b>지도표시</b></label>
+                      <input type="hidden" size="10" name="spot" value="no">
                       <% if(request.getAttribute("map") != null) { %>
 							<input id="latitude" name="latitude" style="display:none;" value="<%=map.getMapLatitude()%>">
 							<input id="longitude" name="longitude" style="display:none;" value="<%=map.getMapLongitude()%>">
@@ -534,12 +534,32 @@ $("#phone3").on("input",function(){
      $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
 	}
 });
+
+<%
+if(files!=null){
+	int i = 1;
+	String src = null;
+	for(Attachment file : files){
+		src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();%>
+		
+		<% if(file.getFileLevel() == 0){
+			i--;%>
+		
+			$("#titleImg").attr("src", "<%= src %>");
+		<% }else{ %>
+			$("#contentImg"+<%=i%>).attr("src", "<%= src %>");
+		<% } %>
+	<%i++;
+	} 
+}%>
+
+
 });
 
 
 
 
-$(function(){
+<%-- $(function(){
 	<%
 	if(files!=null){
 		int i = 1;
@@ -557,7 +577,7 @@ $(function(){
 		<%i++;
 		} 
 	}%>
-});
+}); --%>
 
 
 

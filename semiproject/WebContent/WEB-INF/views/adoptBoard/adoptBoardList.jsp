@@ -166,7 +166,7 @@
                       <!--오른쪽 배너-->
                       <div id="right-ban" class="">
                         <a href="#">
-                          <img src="<%= request.getContextPath() %>/img/banner.PNG" alt="배너" width="190px" height="550px">
+                          <img src="<%= request.getContextPath() %>/img/배너5.jpg" alt="배너" width="190px" height="550px">
                         </a>
                       </div>
                       
@@ -182,9 +182,9 @@
                             <input type="text" name="searchValue">
                             <button class="btn btn-primary">검색</button>
                             <input type="hidden" name="doneCheck1">
-                            <input type="checkbox" name="cdoneCheck1" checked>분양중
+                            <input class="ml-1" type="checkbox" name="cdoneCheck1" checked>분양중
                             <input type="hidden" name="doneCheck2">
-                            <input type="checkbox" name="cdoneCheck2" checked>분양완료
+                            <input class="ml-1" type="checkbox" name="cdoneCheck2" checked>분양완료
                            <!--  <input type="text" name="doneCheck1">
                             <input type="text" name="doneCheck2"> -->
                             <!-- <input type="hidden" name="doneCheck1" value="N">

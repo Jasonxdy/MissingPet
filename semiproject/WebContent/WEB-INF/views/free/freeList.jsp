@@ -97,12 +97,12 @@ int endPage = pInf.getEndPage();
                           </thead>
                           <tbody>
                             <tr>
-                              <td><b>104</b></td>
+                              <td><b>189</b></td>
                               <td><b>공지</b></td>
                               <td><b>미씽펫 오픈했습니다</b></td>
-                              <td><b>관리자</b></td>
+                              <td><b>admin</b></td>
                               <td><b>1000</b></td>
-                              <td><b>2020-01-01</b></td>
+                              <td><b>2020-02-04</b></td>
                             </tr>
                           
                            <% if(blist.isEmpty() && flist.isEmpty()) {%>
@@ -137,7 +137,7 @@ int endPage = pInf.getEndPage();
                     <!--오른쪽 배너-->
                     <div id="right-ban">
                       <a href="#">
-                        <img src="<%= request.getContextPath() %>/img/배너.PNG" alt="배너" width="190px" height="600px">
+                        <img src="<%= request.getContextPath() %>/img/배너4.jpg" alt="배너" width="190px" height="600px">
                       </a>
                     </div>
 
