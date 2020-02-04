@@ -56,7 +56,9 @@
                 <div class="row">
 
                   <section class="content">
-                    <h2 id="title-top"><a href="#">분양합니다</a></h2>
+                    <h2 id="title-top"><a href="#">분양합니다
+                    <img src="<%= request.getContextPath() %>/img/분양합니다logo.png" style="widht : 50px; height:50px; display:inline-block">
+                    </a></h2>
                     <hr>
                     <div class="col-md-12 col-md-offset-2" id="panelwrap">
                       <div class="panel panel-default" style="min-height:600px;">
@@ -164,7 +166,7 @@
                       <!--오른쪽 배너-->
                       <div id="right-ban" class="">
                         <a href="#">
-                          <img src="<%= request.getContextPath() %>/img/banner.PNG" alt="배너" width="190px" height="550px">
+                          <img src="<%= request.getContextPath() %>/img/배너5.jpg" alt="배너" width="190px" height="550px">
                         </a>
                       </div>
                       

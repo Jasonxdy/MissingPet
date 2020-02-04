@@ -144,7 +144,6 @@ public class FindBoardService {
 		Connection conn = getConnection();
 		
 		int result = new BoardDao().deleteBoard(conn, no);
-		
 		if(result>0) {
 			result = 0;
 			
@@ -154,15 +153,11 @@ public class FindBoardService {
 				
 				result = new FindBoardDao().deleteFindAnimal(conn, no);
 				if(result>0) {
-					result = 0;
-					
-					result = new BoardDao().deleteComment(conn, no);
-					
+					new BoardDao().deleteComment(conn, no);
 					if(result > 0) {
 						commit(conn);
 					}
 				} 
-				
 			}
 		} else {
 			rollback(conn);

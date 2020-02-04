@@ -625,7 +625,7 @@ public class FreeController extends HttpServlet {
 			    			  int result = FreeService.updateFree(board,fList,free,beforeImg);
 			    				
 			    				
-			    				if(result > 0) msg = "게시글 등록 성공";
+			    				if(result >= 0) msg = "게시글 등록 성공";
 			    				else           msg = "게시글 등록 실패";	
 			    				
 			    				request.getSession().setAttribute("msg", msg);

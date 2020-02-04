@@ -40,7 +40,9 @@
                       <div class="container-fluid mt-3">
                           <div class="row">
                               <div class="col-md-12">
-                                  <h3>봤어요</h3>
+                                  <h2><b>봤어요</b>
+                                  <img src="<%= request.getContextPath() %>/img/봤어요logo.png" style="widht : 50px; height:50px; display:inline-block">
+                                  </h2>
                                   <hr>
                               </div>
                           </div>
@@ -64,7 +66,7 @@
                                     <div class="" style="height: 13rem;">
                                         <a class="text-muted">
                                         	<%
-                                        		String src = request.getContextPath()+"/resources/uploadImages/noimage.png";
+                                        		String src = request.getContextPath()+"/resources/uploadImages/noImage.png";
                                         		for(Attachment file : aList ){
                                         			if(file.getBoardNo() == board.getBoardNo() && file.getFileLevel()==0 && file.getFileStatus().equals("N")){
                                         				src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();
