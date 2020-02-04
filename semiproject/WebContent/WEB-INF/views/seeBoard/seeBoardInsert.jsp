@@ -283,7 +283,7 @@ input::-webkit-inner-spin-button {
                       <br>
                       <label><b>영상 첨부</b></label>
                       <br>
-                      <input type="text" size="30" name="videoURL" id="videoURL" value="URL">
+                      <input type="text" size="30" name="videoURL" id="videoURL" value="https://">
                       <br><br>
                       <!-- <label><b>사진 첨부</b></label>
 
