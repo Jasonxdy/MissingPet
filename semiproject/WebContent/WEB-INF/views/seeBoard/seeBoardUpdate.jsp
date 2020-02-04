@@ -338,8 +338,8 @@ input::-webkit-inner-spin-button {
 						</div>
 						
                       <br><br>
-                      <label><b>지도표시(임시)</b></label>
-                      <input type="text" size="10" name="spot" value="<%= seeBoard.getsBoardMap() %>">
+                      <label><b>지도표시</b></label>
+                      <input type="hidden" size="10" name="spot" value="<%= seeBoard.getsBoardMap() %>">
                       <% if(request.getAttribute("map") != null) { %>
 							<input id="latitude" name="latitude" style="display:none;" value="<%=map.getMapLatitude()%>">
 							<input id="longitude" name="longitude" style="display:none;" value="<%=map.getMapLongitude()%>">
