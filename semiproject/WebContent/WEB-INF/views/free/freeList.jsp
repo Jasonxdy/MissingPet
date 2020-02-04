@@ -137,7 +137,7 @@ int endPage = pInf.getEndPage();
                     <!--오른쪽 배너-->
                     <div id="right-ban">
                       <a href="#">
-                        <img src="<%= request.getContextPath() %>/img/배너.PNG" alt="배너" width="190px" height="600px">
+                        <img src="<%= request.getContextPath() %>/img/배너4.jpg" alt="배너" width="190px" height="600px">
                       </a>
                     </div>
 

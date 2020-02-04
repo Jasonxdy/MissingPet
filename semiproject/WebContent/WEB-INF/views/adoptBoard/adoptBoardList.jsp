@@ -166,7 +166,7 @@
                       <!--오른쪽 배너-->
                       <div id="right-ban" class="">
                         <a href="#">
-                          <img src="<%= request.getContextPath() %>/img/banner.PNG" alt="배너" width="190px" height="550px">
+                          <img src="<%= request.getContextPath() %>/img/배너5.jpg" alt="배너" width="190px" height="550px">
                         </a>
                       </div>
                       
