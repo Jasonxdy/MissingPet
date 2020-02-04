@@ -23,7 +23,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
+<!-- <style>
 
 
 .container{margin-bottom: 20px;}
@@ -292,7 +292,8 @@
     border-radius: 20px;
     margin-bottom: 20px;
 }
-</style>
+</style> -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/copy4.css" type="text/css"/>
 </head>
 <body>
 <div class="container-fluid">

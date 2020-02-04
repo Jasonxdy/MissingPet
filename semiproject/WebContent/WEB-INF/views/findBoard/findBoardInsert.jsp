@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
+<!-- <style>
 .container{margin-bottom: 20px;}
 
 /*    --------------------------------------------------
@@ -149,7 +149,8 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
-</style>
+</style> -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/insert.css" type="text/css"/>
 </head>
 <body>
 

@@ -21,8 +21,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.container{margin-bottom: 20px;}
+<!-- <style>
+/* .container{margin-bottom: 20px;}
 
 /*    --------------------------------------------------
 	:: General
@@ -163,8 +163,9 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
-}
-</style>
+} */
+</style> -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/insert.css" type="text/css"/>
 </head>
 <body>
 
