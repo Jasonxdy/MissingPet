@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>봤어요 글쓰기</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/insert.css" type="text/css"/>
 </head>
 <body>
