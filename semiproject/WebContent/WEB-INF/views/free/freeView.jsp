@@ -130,7 +130,7 @@ String currentPage = request.getParameter("currentPage");
 
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="float-right">
+                      <div class="float-right" id="right2">
                       <% if(loginMember != null && (board.getMemId().equals(loginMember.getMemberId()))) {%>
                       <a href="updateForm?no=<%=board.getBoardNo() %>" class="btn btn-warning id="updateBtn">수정</a>
                         <button type="button" class="btn btn-primary m-3 mr-5" id="deleteBtn">삭제</button>
@@ -144,7 +144,7 @@ String currentPage = request.getParameter("currentPage");
 
 
                        		 
-                       		  <div id="pic" class="col-12 p-4">
+                       		  <div id="pic" class="col-11 p-4">
 	                     <%=board.getBoardContent() %> 
 	                       <br>
                         <br>
