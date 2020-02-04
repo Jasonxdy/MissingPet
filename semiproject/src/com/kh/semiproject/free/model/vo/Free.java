@@ -16,7 +16,7 @@ public class Free {
 		this.freeCategory = freeCategory;
 	}
 	
-	
+	 
 
 	
 	
