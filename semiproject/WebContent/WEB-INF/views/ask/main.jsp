@@ -19,7 +19,19 @@
 <meta charset="UTF-8">
 <title>Q & A</title>
 
+<!-- 구글 폰트 추가 -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
+
+<style>
+
+.card : hover{
+	
+
+}
+
+
+</style>
 </head>
 <body>
 
@@ -27,7 +39,7 @@
     <div class="row" id="row">
     	<%@ include file="../common/sidebar.jsp"%>
     	
-    	<div class="container-fluid pl-5 pr-5 pb-3" style="min-height: 89.3vh; margin-left:300px ">
+    	<div class="container-fluid pl-5 pr-5 pb-3" style="min-height: 89.3vh; margin-left:300px; font-family: 'Noto Sans KR', sans-serif;">
         <div class="row card bg-light">
 
 			 <div class="col-md-12">
@@ -156,7 +168,7 @@
 	   var $container = $("<div>").prop("class", "container");
 	   var $questionRow = $('<div class="row card">');
 	   var $questionCol = $('<div class="col-md-12 card-body p-2 clickShow" style="cursor: pointer;">');
-	   var $question = $('<p class="mb-0">').html("<strong>Q. " + "<%= qa.getQaTitle()%></strong>");
+	   var $question = $('<p class="mb-0">').html("<strong>Q. &nbsp;&nbsp;" + "<%= qa.getQaTitle()%></strong>");
 	   var $answerRow = $('<div class="row">');
 	   var $answerCol = $('<div class="col-md-12 bg-white" id="bb" style="display: none;">');
 	   var $answer = $('<p class="mb-0">').html("<%= qa.getQaContent()%>");

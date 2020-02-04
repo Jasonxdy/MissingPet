@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/mypage-header.css">
 
-
+<!-- 구글 폰트 추가 -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 </head>
 <body>
