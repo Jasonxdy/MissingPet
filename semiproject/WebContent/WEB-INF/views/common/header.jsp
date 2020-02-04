@@ -14,7 +14,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -28,7 +29,7 @@
 	      </button>
 	      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="dropdown-menu" style ="z-index:1030">
 	
-	        <div class="dropdown-item  text-center">
+	        <div class="dropdown-item  text-center" style="font-family: 'Noto Sans KR', sans-serif;">
 	          알림 내역이 없습니다 :)
 	        </div>
 	        </div>
@@ -39,11 +40,11 @@
 	      </button>
 	      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="dropdown-menu" style ="z-index:1030">
 	
-	        <div class="dropdown-item  text-center">
-	          <h6 class="alertOFF"> 알람설정 수정하기
+	        <div class="dropdown-item  text-center" style="font-family: 'Noto Sans KR', sans-serif;">
+	          <h6 class="alertOFF mt-2" style="font-family: 'Noto Sans KR', sans-serif;"> 알림 설정
 	            <a href="<%= request.getContextPath() %>/mypage/notification">
 	              <!-- 톱니바퀴 이미지 누를 시 알람설정 페이지로 이동 -->
-	              <img src="<%= request.getContextPath() %>/img/alarmoff.png" width="30" height="30">
+	              <img src="<%= request.getContextPath() %>/img/alarmoff.png" width="30" height="30" style="padding-bottom: 3px;">
 	            </a>
 	          </h6>
 	            알림 내역이 없습니다 :)
@@ -51,28 +52,32 @@
 	        </div>
 	
 	<% } else { %>
-		<button class="btn btn-secondary dropdown-toggle btn-sm bg-transparent fixed-top" type="button"
+		<button class="btn btn-secondary btn-sm bg-transparent fixed-top" type="button"
 	        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	        <img src="<%= request.getContextPath() %>/img/alertOn.png" width="50" style ="z-index:1030">
 	      </button>
 	      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="dropdown-menu" style ="z-index:1030">
 	
 	        <div class="dropdown-item  text-center">
-	          <h6 class="alertOFF"> 알람설정 수정하기
+	          <h6 class="alertOFF mt-2" style="font-family: 'Noto Sans KR', sans-serif;"> 알림 설정
 	            <a href="<%= request.getContextPath() %>/mypage/notification">
 	              <!-- 톱니바퀴 이미지 누를 시 알람설정 페이지로 이동 -->
-	              <img src="<%= request.getContextPath() %>/img/alarmoff.png" width="30" height="30">
+	              <img src="<%= request.getContextPath() %>/img/alarmoff.png" width="30" height="30" style="padding-bottom: 3px;">
 	            </a>
 	          </h6>
 	          
 	          
 	           <% for(Alert alert : alertList) {%>
-			<div class="container mt-3">
+			<div class="container mt-3" style="font-family: 'Noto Sans KR', sans-serif;">
 				<div class="media border p-3">
 					<div class="media-body">
 					<% if(alert.getAlertType().equals("B")) { %>
-						<a style="text-decoration: none; color: orange; cursor:pointer;" onclick="deleteAlert('<%= alert.getAlertURL() %>');">
-						<b><%= alert.getAlertContent() %></b></a> 게시글에 댓글이 달렸습니다.
+					<% String alertContent = alert.getAlertContent();
+                      if(alertContent.length()>12){
+                   	   alertContent = alertContent.substring(0, 11) + "...";
+                      } %>
+						<a style="text-decoration: none; color: orange; cursor:pointer;" href="<%= alert.getAlertURL() %>">
+						<b><%= alertContent %></b></a> 게시글에 댓글이 달렸습니다.
 					<% } else { %>
 						<a href="<%= request.getContextPath() %>/mypage/askList" style="text-decoration: none; color: orange;" onclick="deleteAlert();">
 						<b>작성하신 1:1 문의에 답변이 작성되었습니다.</b></a>
