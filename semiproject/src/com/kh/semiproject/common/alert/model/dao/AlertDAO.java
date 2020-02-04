@@ -78,14 +78,14 @@ private Properties prop = null;
 	 * @return memberWebTell
 	 * @throws Exception
 	 */
-	public String selectMemberWebTell(Connection conn, String memberId) throws Exception{
+	public String []selectMemberWebTell(Connection conn, String memberId) throws Exception{
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String query = prop.getProperty("selectMemberWebTell");
 		
-		String memberWebTell = null;
+		String memberWebTell[] = new String[3];
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -94,7 +94,9 @@ private Properties prop = null;
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				memberWebTell = rset.getString(1);
+				memberWebTell[0] = rset.getString("MEM_WEB_TELL");
+				memberWebTell[1] = rset.getString("MEM_COMMENT_TELL");
+				memberWebTell[2] = rset.getString("MEM_ASK_TELL");
 			}
 			
 		} finally {

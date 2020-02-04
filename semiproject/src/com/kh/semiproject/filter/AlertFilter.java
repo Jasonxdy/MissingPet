@@ -41,13 +41,14 @@ public class AlertFilter implements Filter {
 		if (member != null) { // 로그인이 되어있는 경우
 			try {
 				
-				String memberWebTell = alertService.selectMemberWebTell(member.getMemberId());
+				String[] memberWebTell = alertService.selectMemberWebTell(member.getMemberId());
 				
-				if (memberWebTell.equals("Y")) {
+				if (memberWebTell[0].equals("Y")) {
 					alertList = alertService.selectAlert(member.getMemberId());
 				}
 
 				((HttpServletRequest)request).getSession().setAttribute("alertList", alertList);
+				((HttpServletRequest)request).getSession().setAttribute("memberWebTell", memberWebTell);
 
 			} catch (Exception e) {
 				ExceptionForward.errorPage((HttpServletRequest)request, (HttpServletResponse)response, "웹페이지 알림 조회", e);

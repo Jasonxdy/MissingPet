@@ -6,6 +6,7 @@
 <%
 	
 	List<Alert> alertList = (List<Alert>)request.getSession().getAttribute("alertList");
+	String[] memberWebTell = (String[])request.getSession().getAttribute("memberWebTell");
 	
 %>
     
@@ -68,24 +69,29 @@
 	          
 	          
 	           <% for(Alert alert : alertList) {%>
+					<% if(alert.getAlertType().equals("B") && memberWebTell[1].equals("Y")) { %>
 			<div class="container mt-3" style="font-family: 'Noto Sans KR', sans-serif;">
 				<div class="media border p-3">
 					<div class="media-body">
-					<% if(alert.getAlertType().equals("B")) { %>
 					<% String alertContent = alert.getAlertContent();
                       if(alertContent.length()>12){
                    	   alertContent = alertContent.substring(0, 11) + "...";
                       } %>
 						<a style="text-decoration: none; color: orange; cursor:pointer;" href="<%= alert.getAlertURL() %>">
 						<b><%= alertContent %></b></a> 게시글에 댓글이 달렸습니다.
-					<% } else { %>
-						<a href="<%= request.getContextPath() %>/mypage/askList" style="text-decoration: none; color: orange;" onclick="deleteAlert();">
-						<b>작성하신 1:1 문의에 답변이 작성되었습니다.</b></a>
-					<% } %>
-						<a href="#" style="display:none"><%= alert.getAlertNo() %></a>
 					</div>
 				</div>
 			</div>
+					<% } else if (alert.getAlertType().equals("A") && memberWebTell[2].equals("Y")){ %>
+			<div class="container mt-3" style="font-family: 'Noto Sans KR', sans-serif;">
+				<div class="media border p-3">
+					<div class="media-body">
+						<a href="<%= request.getContextPath() %>/mypage/askList" style="text-decoration: none; color: orange;" onclick="deleteAlert();">
+						<b>작성하신 1:1 문의에 답변이 작성되었습니다.</b></a>
+					</div>
+				</div>
+			</div>
+					<% } %>
 
 			<% } %>
 	          
@@ -94,7 +100,7 @@
 	        
 	        
 	        <script>
-	        	function deleteAlert(alertUrl) {
+	        	<%-- function deleteAlert(alertUrl) {
 	        		var alertNo = $(this).next().text();
 	        		var deleteNo = "<%= request.getContextPath()%>" + "/review/deleteAlert";
 	        		
@@ -124,7 +130,7 @@
 	        		return false;
 	        		
 	        		
-	        	}
+	        	} --%>
 	        	
 	        
 	        </script>

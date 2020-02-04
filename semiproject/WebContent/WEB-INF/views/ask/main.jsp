@@ -24,12 +24,15 @@
 
 
 <style>
-
-.card : hover{
-	
-
+/* 
+.card:hover{
+	background-color : #dc3545;
 }
 
+.card{
+	transition-duration: 0.5s;
+}
+ */
 
 </style>
 </head>

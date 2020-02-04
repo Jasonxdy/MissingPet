@@ -23,7 +23,7 @@ public class AlertService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String selectMemberWebTell(String memberId) throws Exception {
+	public String[] selectMemberWebTell(String memberId) throws Exception {
 		Connection conn = getConnection();
 		return new AlertDAO().selectMemberWebTell(conn, memberId);
 	}
