@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>분양합니다 글수정</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/insert.css" type="text/css"/>
 </head>
 <body>
