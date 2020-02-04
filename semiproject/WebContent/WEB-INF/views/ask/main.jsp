@@ -27,13 +27,16 @@
     <div class="row" id="row">
     	<%@ include file="../common/sidebar.jsp"%>
     	
-    	<div class="container-fluid pl-5 pr-5 pb-3" style="min-height: 89.3vh; margin-left:300px">
+    	<div class="container-fluid pl-5 pr-5 pb-3" style="min-height: 89.3vh; margin-left:300px ">
         <div class="row card bg-light">
 
 			 <div class="col-md-12">
-                <div class="container-fluid mt-3">
+                <div class="container-fluid mt-4">
                     <div class="container">
-                            <h3>Q & A</h3>
+                            <h2>
+                            Q & A 
+                            <img src="<%= request.getContextPath() %>/img/물음표.jpg" style="widht : 40px; height:40px; display:inline-block" class="pb-2 pl-3">
+                            </h2>
                             <hr>
                     </div>
                 </div>
