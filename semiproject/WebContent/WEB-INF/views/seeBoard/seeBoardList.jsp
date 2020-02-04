@@ -40,7 +40,9 @@
                       <div class="container-fluid mt-3">
                           <div class="row">
                               <div class="col-md-12">
-                                  <h3>봤어요</h3>
+                                  <h2><b>봤어요</b>
+                                  <img src="<%= request.getContextPath() %>/img/봤어요logo.png" style="widht : 50px; height:50px; display:inline-block">
+                                  </h2>
                                   <hr>
                               </div>
                           </div>

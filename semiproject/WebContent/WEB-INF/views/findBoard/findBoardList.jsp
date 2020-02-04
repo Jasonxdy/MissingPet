@@ -41,9 +41,9 @@
                       <div class="container-fluid mt-3">
                           <div class="row">
                               <div class="col-md-12">
-                                  <h3>찾아주세요
+                                  <h2><b>찾아주세요</b>
                                    <img src="<%= request.getContextPath() %>/img/찾아주세요logo.png" style="widht : 50px; height:50px; display:inline-block">
-                                  </h3>
+                                  </h2>
                                   <hr>
                               </div>
                           </div>
