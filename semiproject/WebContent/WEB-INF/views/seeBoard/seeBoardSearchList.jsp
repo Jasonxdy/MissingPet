@@ -106,7 +106,12 @@
                       							<% } %>
                       	
                                             <td>
-                                            <p class="mb-0" style="border-bottom: 1px solid rgba(0, 0, 0, 1);"><%= board.getBoardTitle() %></p>
+                                            <% String ctitle = board.getBoardTitle();
+                                            	if(ctitle.length()>20){
+                                            		ctitle = ctitle.substring(0, 19);
+                                            	}
+                                            %>
+                                            <p class="mb-0" style="border-bottom: 1px solid rgba(0, 0, 0, 1);"><%= ctitle %></p>
                                             </td>
                                         </tr>
                                         

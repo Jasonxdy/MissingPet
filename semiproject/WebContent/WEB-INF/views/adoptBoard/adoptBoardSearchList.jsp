@@ -52,7 +52,7 @@
               <!-- 이 안에다가 작성하세요!!!!!!!! -->
 
 
-              <div class="container" style="margin-left:20rem;">
+              <div class="container">
                 <div class="row">
 
                   <section class="content">
@@ -72,8 +72,9 @@
                               		<td> <h2>존재하는 게시글이 없습니다.</h2>
                               	</tr>
                               <% } else {
+                            	  int rCount = 0;
                             	for(BoardHJ board : bList){
-                              	 int rCount = 0; %>
+                              	  %>
                               	   
                               	   
                                 <tr>

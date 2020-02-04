@@ -233,7 +233,7 @@
 								</tr>
 								<tr>
 									<th>예방접종 여부</th>
-									<td><%= adoptBoard.getaBoardNeutral() %></td>
+									<td><%= adoptBoard.getaBoardVac() %></td>
 								</tr>
 								<tr>
 									<th>건강상태</th>
