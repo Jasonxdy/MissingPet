@@ -44,7 +44,8 @@ public class QnABoardService {
 		
 		Connection conn = getConnection();
 		
-		QnAContent.replace("\r\n", "<br>");
+		QnAContent = QnAContent.replace("\r\n", "<br>");
+		QnAContent = QnAContent.replaceAll(System.getProperty("line.separator"), " ");
 		
 		int result = new QnABoardDao().insertQnA(conn, QnATitle, QnAContent);
 		

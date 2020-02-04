@@ -332,7 +332,7 @@ input::-webkit-inner-spin-button {
                       <br>
                       <div id="bottom-bt">
                         <button type="submit" class="btn btn-primary m-2">등록하기</button>
-                        <button type="submit" class="btn btn-primary m-2">취소</button>
+                        <a href="boardList" class="btn btn-primary m-2">취소</a>
                         
                         
                       </div>
