@@ -521,12 +521,33 @@ $("#phone3").on("input",function(){
      $(this).val($(this).val().slice(0, $(this).prop("maxLength")));
 	}
 });
+
+<%
+if(files!=null){
+	int i = 1;
+	String src = null;
+	for(Attachment file : files){
+		src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();%>
+		
+		<% if(file.getFileLevel() == 0){
+			i--;%>
+		
+			$("#titleImg").attr("src", "<%= src %>");
+		<% }else{ %>
+			$("#contentImg"+<%=i%>).attr("src", "<%= src %>");
+		<% } %>
+	<%i++;
+	} 
+}%>
+
+
+
 });
 
 
 
 
-$(function(){
+<%-- $(function(){
 	<%
 	if(files!=null){
 		int i = 1;
@@ -544,7 +565,7 @@ $(function(){
 		<%i++;
 		} 
 	}%>
-});
+}); --%>
 
 
 
