@@ -96,6 +96,7 @@
                       	<% if(imgs != null) { %>
 	                      	<% for(Img img : imgs) { %>
 	                      		<img style="display: block; max-width:400px;"  alt="" src="<%= request.getContextPath()%>/resources/uploadImages/<%= img.getImgChangeName() %>">
+	                      		<br>
 	                      	<% } %>
 	                   <% } %>   	
 	                      	<%= review.getBoardContent() %>

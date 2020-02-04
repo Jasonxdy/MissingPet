@@ -103,7 +103,7 @@
                       
                       <div id="top-bt">
                         <button type="submit" class="btn btn-primary mr-5" onclick='return saveContent();'>작성완료</button>
-                        <button type="button" class="btn btn-primary ml-5">취소</button>
+                        <button type="button" class="btn btn-primary ml-5" onclick="history.back(-1);">취소</button>
                       </div>
                       
                     </div>

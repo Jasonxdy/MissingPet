@@ -205,12 +205,12 @@ public class MemberService {
 					Session session = Session.getInstance(props, new Authenticator() {
 						@Override
 						protected PasswordAuthentication getPasswordAuthentication() {
-							return new PasswordAuthentication("kkndbabo@gmail.com", "dkdiskal!2");
+							return new PasswordAuthentication("missingpetkh@gmail.com", "ehdgus12");
 							//return new PasswordAuthentication("발신gmail계정주소", "앱비밀번호");
 						}
 					});
 					
-					InternetAddress from = new InternetAddress("kkndbabo@gmail.com");
+					InternetAddress from = new InternetAddress("missingpetkh@gmail.com");
 					//InternetAddress from = new InternetAddress("발신gmail계정주소", "표시할발신자명");
 					
 					Message message = new MimeMessage(session);
@@ -285,12 +285,12 @@ public class MemberService {
 					Session session = Session.getInstance(props, new Authenticator() {
 						@Override
 						protected PasswordAuthentication getPasswordAuthentication() {
-							return new PasswordAuthentication("kkndbabo@gmail.com", "dkdiskal!2");
+							return new PasswordAuthentication("missingpetkh@gmail.com", "ehdgus12");
 							//return new PasswordAuthentication("발신gmail계정주소", "앱비밀번호");
 						}
 					});
 					
-					InternetAddress from = new InternetAddress("kkndbabo@gmail.com");
+					InternetAddress from = new InternetAddress("missingpetkh@gmail.com");
 					//InternetAddress from = new InternetAddress("발신gmail계정주소", "표시할발신자명");
 					
 					Message message = new MimeMessage(session);
