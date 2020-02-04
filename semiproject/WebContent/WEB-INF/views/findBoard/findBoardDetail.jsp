@@ -22,7 +22,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>찾아주세요 글읽기</title>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/copy4.css" type="text/css"/>
 </head>
 <body>
