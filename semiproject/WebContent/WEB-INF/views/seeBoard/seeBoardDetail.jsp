@@ -384,7 +384,7 @@
 								</ol>
 								<div class="carousel-inner" style="height:110%">
 									<% 
-										String src = request.getContextPath()+"/resources/uploadImages/noimage.png";
+										String src = request.getContextPath()+"/resources/uploadImages/noImage.png";
 										for(Attachment file : files){
 											src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();
 											if(file.getFileLevel()==0){
@@ -423,7 +423,7 @@
 								</ol>
 								<div class="carousel-inner" style="height:110%">
 												<div class="carousel-item active h-100">
-													<img src="<%=request.getContextPath() %>/resources/uploadImages/noimage.png" class="d-block w-100 h-100" alt="...">
+													<img src="<%=request.getContextPath() %>/resources/uploadImages/noImage.png" class="d-block w-100 h-100" alt="...">
 												</div>
 								</div>
 								

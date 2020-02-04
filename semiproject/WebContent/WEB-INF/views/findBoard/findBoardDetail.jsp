@@ -392,7 +392,7 @@
 								</ol>
 								<div class="carousel-inner" style="height:110%">
 									<% 
-										String src = request.getContextPath()+"/resources/uploadImages/noimage.png";
+										String src = request.getContextPath()+"/resources/uploadImages/noImage.png";
 										for(Attachment file : files){
 											src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();
 											if(file.getFileLevel()==0){

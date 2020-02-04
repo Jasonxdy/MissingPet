@@ -65,7 +65,7 @@
                                     <div class="" style="height: 13rem;">
                                         <a class="text-muted">
                                         	<%
-                                        		String src = request.getContextPath()+"/resources/uploadImages/noimage.png";
+                                        		String src = request.getContextPath()+"/resources/uploadImages/noImage.png";
                                         		for(Attachment file : aList ){
                                         			if(file.getBoardNo() == board.getBoardNo() && file.getFileLevel()==0 && file.getFileStatus().equals("N")){
                                         				src = request.getContextPath()+"/resources/uploadImages/"+file.getFileChangeName();
