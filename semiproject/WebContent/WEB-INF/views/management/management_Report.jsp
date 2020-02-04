@@ -152,6 +152,7 @@ h5{
                 
 
 			<%@include file="../common/footer.jsp" %>
+			 
 			
 	<script>
 		// 게시글 상세보기 기능 (jquery를 통해 작업)
@@ -160,7 +161,8 @@ h5{
 				var boardNo = $(this).parent().parent().children().eq(0).prop("id");
 				// 쿼리스트링을 이용하여 get 방식으로 글 번호를 server로 전달
 				var boardName = $(this).val();
-				location.href="<%= request.getContextPath() +boardName%>?no="+boardNo + "&currentPage=1";
+				
+				location.href="<%= request.getContextPath()%>" + boardName + "?no=" +boardNo + "&currentPage=1";
 			
 			}).mouseenter(function(){
 				$(this).parent().css("cursor", "pointer");
