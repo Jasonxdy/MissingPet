@@ -218,15 +218,12 @@ public class AdoptBoardService {
 		Connection conn = getConnection();
 		
 		int result = new BoardDao().deleteBoard(conn, no);
-		
 		if(result>0) {
 			result = 0;
 			
-			result = new BoardDao().deleteAttachment(conn, no);
+			result = new AdoptBoardDao().adoptDeleteAnimal(conn, no);
 			if(result>0) {
-				result = 0;
-				
-				result = new AdoptBoardDao().adoptDeleteAnimal(conn, no);
+				new BoardDao().deleteAttachment(conn, no);
 				if(result>0) {
 					new BoardDao().deleteComment(conn, no);
 					

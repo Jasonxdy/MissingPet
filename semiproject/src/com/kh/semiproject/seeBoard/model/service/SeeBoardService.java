@@ -225,11 +225,9 @@ public class SeeBoardService {
 		if(result>0) {
 			result = 0;
 			
-			result = new BoardDao().deleteAttachment(conn, no);
+			result = new SeeBoardDao().seeDeleteAnimal(conn, no);
 			if(result>0) {
-				result = 0;
-				
-				result = new SeeBoardDao().seeDeleteAnimal(conn, no);
+				new BoardDao().deleteAttachment(conn, no);
 				if(result>0) {
 					new BoardDao().deleteComment(conn, no);
 					
