@@ -45,7 +45,7 @@
 	          <h6 class="alertOFF mt-2" style="font-family: 'Noto Sans KR', sans-serif;"> 알림 설정
 	            <a href="<%= request.getContextPath() %>/mypage/notification">
 	              <!-- 톱니바퀴 이미지 누를 시 알람설정 페이지로 이동 -->
-	              <img src="<%= request.getContextPath() %>/img/alarmoff.png" width="30" height="30" style="padding-bottom: 3px;">
+	              <img src="<%= request.getContextPath() %>/img/mainview/img/alarmoff.png" width="30" height="30" style="padding-bottom: 3px;">
 	            </a>
 	          </h6>
 	            알림 내역이 없습니다 :)
@@ -63,7 +63,7 @@
 	          <h6 class="alertOFF mt-2" style="font-family: 'Noto Sans KR', sans-serif;"> 알림 설정
 	            <a href="<%= request.getContextPath() %>/mypage/notification">
 	              <!-- 톱니바퀴 이미지 누를 시 알람설정 페이지로 이동 -->
-	              <img src="<%= request.getContextPath() %>/img/alarmoff.png" width="30" height="30" style="padding-bottom: 3px;">
+	              <img src="<%= request.getContextPath() %>/img/mainview/img/alarmoff.png" width="30" height="30" style="padding-bottom: 3px;">
 	            </a>
 	          </h6>
 	          
