@@ -50,7 +50,9 @@
                 <div class="row">
 
                   <section class="content">
-                    <h2 id="title-top"><a href="#">만남 그 후</a></h2>
+                    <h2 id="title-top"><a href="#">만남 그 후
+                    <img src="<%= request.getContextPath() %>/img/만남그후logo.png" style="widht : 50px; height:50px; display:inline-block">
+                    </a></h2>
                     <hr>
                     <div class="col-md-12 col-md-offset-2" id="panelwrap">
                       <div class="panel panel-default">
