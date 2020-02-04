@@ -225,7 +225,7 @@ input::-webkit-inner-spin-button {
                           </tr>
 
                           <tr>
-                            <th><label>실종일</label></th>
+                            <th><label>발견일시</label></th>
                             <td><input type="date" name="missingDate" id="missingDate" value="<%= seeBoard.getsBoardDate() %>"></td>
                           </tr>
 							
@@ -234,7 +234,7 @@ input::-webkit-inner-spin-button {
 							%>
 							
                           <tr>
-                            <th><label>실종장소</label></th>
+                            <th><label>발견장소</label></th>
                             <td>
                               <select name="place1" id="place1"></select>
                               &nbsp;
