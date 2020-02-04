@@ -154,14 +154,14 @@ sidebar-heading{
 }
 
 #dropdownMenuButton{
-  left: 88%;
+  left: 92%;
 }
 
 #dropdown-menu{
     opacity: 0.8;
     size:10px;
     font-family: 'Noto Sans KR', sans-serif;
-    width: 400px;
+    /* width: 400px; */
 }
 
 

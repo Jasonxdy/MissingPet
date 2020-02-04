@@ -54,7 +54,7 @@
             <div class="row mt-2">
               <div class="col-md-10">
                 <div class="row file-field">
-                  <div class="mb-4 col-md-2">
+                  <div class="mt-2 mb-4 col-md-2" style="margin-left:15px;">
                  		 <%
 							String src = request.getContextPath() + "/resources/upProfileImage/" + member.getMemberProImg();
 						%>
@@ -63,8 +63,9 @@
                       id="imagePreview" accept="image/*">
                   </div>
                   <div class="d-flex justify-content-center col-md-2" id="profile-image-input">
-                    <div class="btn btn-mdb-color btn-rounded float-left">
-                      <input type="file" id="imageUpload" name="imageUpload" style="width: 300px">
+                    <div class="float-left mt-2">
+                    <!-- <div class="btn btn-mdb-color btn-rounded float-left"> -->
+                      <input type="file" id="imageUpload" name="imageUpload" style="width: 300px; margin-left: 25px">
                     </div>
                   </div>
                 </div>
